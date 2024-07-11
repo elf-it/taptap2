@@ -35,7 +35,7 @@ function App() {
 
   const profitPerHour = 125500;
 
-  const [dailyRewardTimeLeft, setDailyRewardTimeLeft] = useState("");
+  //const [dailyRewardTimeLeft, setDailyRewardTimeLeft] = useState("");
   const [dailyCipherTimeLeft, setDailyCipherTimeLeft] = useState("");
   const [dailyComboTimeLeft, setDailyComboTimeLeft] = useState("");
 
@@ -171,7 +171,7 @@ function App() {
                 <div className='dot'></div>
                 <img src={dailyReward} alt='Daily Reward' className='mx-auto w-12 h-12' />
                 <p className='text-[10px] text-center text-white mt-1'>Daily reward</p>
-                <p className='text-[10px] font-medium text-center text-gray-400 mt-2'>{dailyRewardTimeLeft}</p>
+                <p className='text-[10px] font-medium text-center text-gray-400 mt-2'></p>
               </div>
               <div className='bg-[#272a2f] rounded-lg px-4 py-2 w-full relative'>
                 <div className='dot'></div>
