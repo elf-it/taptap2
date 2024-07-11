@@ -106,6 +106,24 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    const currentLevelMin = levelMinPoints[levelIndex];
+    const nextLevelMin = levelMinPoints[levelIndex + 1];
+    if(points >= nextLevelMin && levelIndex < levelNames.length - 1){
+      setLevelIndex(levelIndex + 1);
+    }else if(points < currentLevelMin && levelIndex > 0){
+      setLevelIndex(levelIndex - 1);
+    }
+  }, [points, levelIndex, levelMinPoints, levelNames.length]);
+
+  useEffect(() => {
+    const pointsPerSecond = Math.floor(profitPerHour / 3600);
+    const interval = setInterval(() => {
+      setPoints(prevPoints => prevPoints + pointsPerSecond);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [profitPerHour]);
+
   return (
     <div className='bg-black flex justify-center'>
       <div className='w-full bg-[url("./images/bg-2.png")] bg-cover text-white h-screen font-bold flex flex-col max-w-xl'>
@@ -207,18 +225,28 @@ function App() {
         </div>
       </div>
       {clicks.map((click) => (
+      <div key={click.id} onAnimationEnd={() => handleAnimationEnd(click.id)}>
         <div
-          key={click.id}
           className='absolute text-5xl font-bold opacity-0 text-white pointer-events-none'
           style={{
             top: `${click.y - 42}px`,
             left: `${click.x - 28}px`,
-            animation: `float 1s ease-out`
+            animation: `float1 1s ease-out`
           }}
-          onAnimationEnd={() => handleAnimationEnd(click.id)}>
+          >
           {pointsToAdd}
         </div>
-      ))}
+        <div
+          className='absolute text-5xl font-bold opacity-0 text-white pointer-events-none'
+          style={{
+            top: `${click.y - 42}px`,
+            left: `${click.x + 28}px`,
+            animation: `float2 1s ease-out`
+          }}
+          >
+          {pointsToAdd}
+        </div>
+      </div>))}
     </div>
   )
 }

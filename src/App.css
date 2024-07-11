@@ -20,7 +20,7 @@
   }
 }
 
-@keyframes float {
+@keyframes float1 {
   0% {
     opacity: 1;
     transform: translateY(0);
@@ -28,7 +28,19 @@
 
   100% {
     opacity: 0;
-    transform: translateY(-50px);
+    transform: translateY(-50px) translateX(-50px);
+  }
+}
+
+@keyframes float2 {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-50px) translateX(50px);
   }
 }
 
