@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: "ComicSansMS-Bold";
+    src: local("ComicSansMS-Bold"),
+    url("./fonts/ComicSansMS-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "ComicSansMS";
+    src: local("ComicSansMS"),
+    url("./fonts/ComicSansMS.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "PottaOne-Regular";
+    src: local("PottaOne-Regular"),
+    url("./fonts/PottaOne-Regular.ttf") format("truetype");
+}
+
+body{
+    font-family: "ComicSansMS";
+}
