@@ -21,10 +21,6 @@ function App() {
     "ultima"
   ];
 
-  const onClose = () => {
-    tg.close();
-  }
-
   const levelMinPoints = [
     3,
     600,
@@ -140,7 +136,7 @@ function App() {
               <Mamont size={36} className='text-[#d4d4d4]' />
             </div>
             <div>
-              <p className='text-sm'>Sergey</p>
+              <p className='text-sm'>{tg.initData}</p>
             </div>
           </div>
           <div className='flex items-center justify-between space-x-4 mt-1'>
@@ -210,9 +206,9 @@ function App() {
         </div>
       </div>
       <div className='fixed bottom-0 left-1/2 transform -translate-x-1/2 w-[calc(100%-2rem)] max-w-xl bg-[#272a2f] flex justify-around items-center z-50 rounded-3xl text-xs'>
-        <div onClick={onClose} className='text-center text-[#85827d] w-1/5 bg-[#1c1f24] m-1 p-2 rounded-2xl'>
+        <div className='text-center text-[#85827d] w-1/5 bg-[#1c1f24] m-1 p-2 rounded-2xl'>
           <img src={binanceLogo} alt='Exchange' className='w-8 h-8 mx-auto' />
-          <p className='mt-1'>Close</p>
+          <p className='mt-1'>Exchange</p>
         </div>
         <div className='text-center text-[#85827d] w-1/5 m-1 p-2 rounded-2xl'>
           <Mine className='w-8 h-8 mx-auto' />
