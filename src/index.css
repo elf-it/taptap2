@@ -2,24 +2,77 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --gradient-start-color:#C1FFEC;
+    --gradient-end-color:#45E9B8;
+    --bg-color-green: rgba(69, 233, 184, 0.19);
+    --bg-color-violet: rgba(204, 146, 255, 0.19);
+    --bg-color-blue: rgba(130, 188, 255, 0.19);
+    --bg-color-yellow:rgba(255, 205, 86,0.19);
+    --bg-color-pink:rgba(245, 130, 255, 0.19);
+  }
+  
 @font-face {
-    font-family: "ComicSansMS-Bold";
-    src: local("ComicSansMS-Bold"),
-    url("./fonts/ComicSansMS-Bold.ttf") format("truetype");
+    font-family: 'ComicSansMS';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('./fonts/ComicSansMS.ttf') format('ttf');
 }
 
 @font-face {
-    font-family: "ComicSansMS";
-    src: local("ComicSansMS"),
-    url("./fonts/ComicSansMS.ttf") format("truetype");
+    font-family: 'ComicSansMS';
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: url('./fonts/ComicSansMS-Bold.ttf') format('ttf');
 }
 
 @font-face {
-    font-family: "PottaOne-Regular";
-    src: local("PottaOne-Regular"),
-    url("./fonts/PottaOne-Regular.ttf") format("truetype");
+    font-family: 'PottaOne-Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('./fonts/PottaOne-Regular.ttf') format('ttf');
 }
 
-body{
-    font-family: "ComicSansMS";
+.text-gradient {
+    @apply bg-gradient-to-b from-gradientStartColor to-gradientEndColor bg-clip-text text-transparent
+}
+.elem-bg_green {
+    @apply bg-bgColorGreen backdrop-blur-sm
+}
+
+.elem-bg_violet{
+    @apply bg-bgColorViolet backdrop-blur-sm
+}
+
+.elem-bg_blue{
+    @apply bg-bgColorBlue backdrop-blur-sm
+}
+
+.elem-bg_yellow{
+    @apply bg-bgColorYellow backdrop-blur-sm
+}
+
+.elem-bg_pink{
+    @apply bg-bgColorPink backdrop-blur-sm
+}
+  
+  
+body {
+    margin: 0;
+    background-color: black;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    height: 100vh;
+}
+
+#root{
+height: 100%;
+}
+
+p,h1,h2,h3,h4,h5,h6,span,ul,li{
+margin: 0;
+padding: 0;
 }
