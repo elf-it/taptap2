@@ -2,7 +2,7 @@ import './App.css';
 import Guide from './pages/Guide';
 import Main from './pages/Main';
 import Dashboard from './pages/Dashboard';
-import { TonConnectUIProvider } from '@tonconnect/ui-react';
+import { TonConnectUIProvider, TonConnectButton } from '@tonconnect/ui-react';
 import { useState } from 'react';
 
 function App() {

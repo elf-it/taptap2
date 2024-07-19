@@ -7,7 +7,6 @@ import Settings from '../icons/Settings';
 import Friends from '../icons/Friends';
 import Mine from '../icons/Mine';
 import Coins from '../icons/Coins';
-import { TonConnectButton } from '@tonconnect/ui-react';
 
 const tg = window.Telegram.WebApp;
 
