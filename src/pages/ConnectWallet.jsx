@@ -16,6 +16,8 @@ export default function ConnectWallet() {
     const userFriendlyAddress = useTonAddress();
     const rawAddress = useTonAddress(false);
 
+    const wallet = useTonWallet();
+
     return(
         <div>
             <TonConnectButton style={{float: "right"}} />
