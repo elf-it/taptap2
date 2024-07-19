@@ -1,4 +1,4 @@
-import { TonConnectButton, useTonConnectUI } from "@tonconnect/ui-react";
+import { TonConnectButton, useTonConnectUI, useTonAddress } from "@tonconnect/ui-react";
 
 
 export default function ConnectWallet() {
@@ -13,11 +13,20 @@ export default function ConnectWallet() {
 
     const [tonConnectUI, setOptions] = useTonConnectUI();
 
+    const userFriendlyAddress = useTonAddress();
+    const rawAddress = useTonAddress(false);
+
     return(
         <div>
             <TonConnectButton style={{float: "right"}} />
             <div>
                 <button className="w-full text-white" onClick={() => tonConnectUI.sendTransaction(transaction)}>Buy</button>
+                userFriendlyAddress && (
+                    <div>
+                        <span>User-friendly address: {userFriendlyAddress}</span>
+                        <span>Raw address: {rawAddress}</span>
+                    </div>
+                )
             </div>
         </div>
     );
