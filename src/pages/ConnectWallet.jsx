@@ -5,7 +5,7 @@ export default function ConnectWallet() {
     const transaction = {
         messages: [
             {
-                address: "1:e4ced2de3d61c81e73a3214eb3725ce23405d172136d65940c7f52ce5a413871",
+                address: "-1:e4ced2de3d61c81e73a3214eb3725ce23405d172136d65940c7f52ce5a413871",
                 amount: "20000000"
             }
         ]
