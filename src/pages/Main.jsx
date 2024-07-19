@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import '../App.css';
 import Mamont from '../icons/Mamont'
-import { binanceLogo, dailyCipher, dailyCombo, dailyReward, dollarCoin, hamsterCoin, mamont } from '../images';
+import { binanceLogo, dailyCipher, dailyCombo, dailyReward, dollarCoin, mamont } from '../images';
 import Info from '../icons/Info';
 import Settings from '../icons/Settings';
-import Friends from '../icons/Friends';
-import Mine from '../icons/Mine';
-import Coins from '../icons/Coins';
 
 const tg = window.Telegram.WebApp;
 

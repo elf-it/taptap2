@@ -4,6 +4,10 @@ import Main from './pages/Main';
 import Dashboard from './pages/Dashboard';
 import { TonConnectUIProvider, TonConnectButton } from '@tonconnect/ui-react';
 import { useState } from 'react';
+import Friends from '../icons/Friends';
+import Mine from '../icons/Mine';
+import Coins from '../icons/Coins';
+import { binanceLogo } from '../images';
 
 function App() {
 
