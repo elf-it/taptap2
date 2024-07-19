@@ -15,9 +15,9 @@ export default function ConnectWallet() {
 
     return(
         <div>
-            <TonConnectButton />
+            <TonConnectButton style={{float: "right"}} />
             <div>
-                <button onClick={() => tonConnectUI.sendTransaction(transaction)}>Buy</button>
+                <button className="w-full text-white" onClick={() => tonConnectUI.sendTransaction(transaction)}>Buy</button>
             </div>
         </div>
     );

@@ -8,7 +8,7 @@ import Friends from './icons/Friends';
 import Mine from './icons/Mine';
 import Coins from './icons/Coins';
 import { binanceLogo } from './images';
-import AutoFarm from './pages/ConnectWallet';
+import AutoFarm from './pages/AutoFarm';
 import ConnectWallet from './pages/ConnectWallet';
 
 function App() {
