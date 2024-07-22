@@ -5,7 +5,7 @@ import { binanceLogo, dailyCipher, dailyCombo, dailyReward, dollarCoin, mamont }
 import Info from '../icons/Info';
 import Settings from '../icons/Settings';
 
-export default function Main(username){
+export default function Main({username}){
   const levelNames = [
     "begin",
     "silver",
@@ -90,7 +90,6 @@ export default function Main(username){
   };
 
   useEffect(() => {
-    tg.ready();
     const updateCountdowns = () => {
       setDailyCipherTimeLeft(calculateTimeLeft(0));
       setDailyCipherTimeLeft(calculateTimeLeft(19));

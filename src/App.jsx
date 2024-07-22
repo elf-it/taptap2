@@ -21,9 +21,11 @@ function App() {
 
   const [person, setPerson] = useState(null);
 
+  const [load, setLoad] = useState(true);
+
   const pages = [
     <Guide />,
-    <Main username={person.username} />,
+    <Main username={person?.username} />,
     <Dashboard />,
     <AutoFarm />,
     <ConnectWallet />,
@@ -31,21 +33,28 @@ function App() {
   ];
 
   const auth = async () => {
-    const response = await getPerson({tid: "00000000", username: "sergey"})
+    const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
     if(response.error){
       console.log(response.error)
+      setPerson(null);
     }else{
       setPerson({tid: response.tid, username: response.username})
     }
+    setLoad(false);
   };
 
   useEffect(() => {
+    tg.ready();
     auth()
   }, []);
 
   return (
     <>
-    {"sergey" != undefined ?
+    {tg.initDataUnsafe?.user?.id != undefined ?
+      <>
+      {load ?
+      <></>
+      :
       <>
       { person ?
         <TonConnectUIProvider manifestUrl='https://hammerhead-app-lqwus.ondigitalocean.app/tonconnect-manifest.json'>
@@ -79,8 +88,10 @@ function App() {
         <div className="bg-bgMain h-full bg-cover overflow-hidden"><Guide /></div>
       }
       </>
+      }
+      </>
       :
-      <div className="bg-bgMain h-full bg-cover overflow-hidden"><a href="https://t.me/mamontenokBot_bot/Mamontenok">View app in telegram</a></div>
+      <div className="bg-bgMain h-full bg-cover overflow-hidden"><a className='text-white' href="https://t.me/mamontenokBot_bot/Mamontenok">View app in telegram</a></div>
     }
     </>
   )

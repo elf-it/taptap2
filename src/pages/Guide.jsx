@@ -54,6 +54,9 @@ export default function Guide() {
         return prev + 1;
       }
     });
+    if(currentStep == pages.length - 1){
+      auth()
+    }
   };
 
   return (
