@@ -50,10 +50,11 @@ function App() {
 
   return (
     <>
+    <div className="bg-bgMain h-full bg-cover overflow-hidden"><a className='text-white' href="https://t.me/mamontenokBot_bot/Mamontenok">{tg.initDataUnsafe?.user?.id}</a></div>
     {tg.initDataUnsafe?.user?.id != undefined ?
       <>
       {load ?
-      <></>
+        <></>
       :
       <>
       { person ?
