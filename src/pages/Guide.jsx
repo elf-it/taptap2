@@ -33,8 +33,8 @@ export default function Guide() {
   ];
 
   const auth = async () => {
-    if("399847443" != "undefined"){
-      const response = await registration({tid: "399847443", username: "four"})
+    if(tg.initDataUnsafe?.user?.id != undefined){
+      const response = await registration({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
 
       if(response.error){
         console.log(response.error)
