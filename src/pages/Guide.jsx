@@ -50,9 +50,11 @@ export default function Guide({tid, username}) {
   const increaseStep = () => {
     setCurrentStep((prev) => {
       if (prev + 1 > pages.length - 1) {
+        return prev;
+      } else if(prev == pages.length - 1){
         auth();
         return prev;
-      } else {
+      }else {
         return prev + 1;
       }
     });
