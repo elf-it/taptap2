@@ -8,7 +8,7 @@ export default function Data() {
         <div className='px-4 z-10'>
           <div className='flex items-center space-x-2 pt-4'>
             <div>
-              <p className='text-sm'>{tg.initDataUnsafe?.user}</p>
+              <p className='text-sm'>{JSON.stringify(tg.initDataUnsafe?.user)}</p>
             </div>
           </div>
         </div>
