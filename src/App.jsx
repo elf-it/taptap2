@@ -33,7 +33,8 @@ function App() {
   ];
 
   const auth = async () => {
-    const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
+    const response = await getPerson({tid: "399847443", username: "four"})
+    //const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
     if(response.error){
       console.log(response.error)
     }else{
