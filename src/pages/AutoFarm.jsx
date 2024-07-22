@@ -27,7 +27,7 @@ export default function AutoFarm({setNumPage}) {
 
   const firstCardClick = (data) => {
     const tonAddress = useTonAddress()
-    if(tonAddress){
+    if(tonAddress != ""){
       setModalInfo(data)
       setShowModal(true)
     }else{
