@@ -31,7 +31,7 @@ function App() {
   ];
 
   const auth = async () => {
-    const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
+    const response = await getPerson({tid: "00000000", username: "sergey"})
     if(response.error){
       console.log(response.error)
     }else{
@@ -45,7 +45,7 @@ function App() {
 
   return (
     <>
-    {tg.initDataUnsafe?.user?.username != undefined ?
+    {"sergey" != undefined ?
       <>
       { person ?
         <TonConnectUIProvider manifestUrl='https://hammerhead-app-lqwus.ondigitalocean.app/tonconnect-manifest.json'>
