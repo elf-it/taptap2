@@ -131,7 +131,7 @@ export default function Main(){
               <Mamont size={36} className='text-[#d4d4d4]' />
             </div>
             <div>
-              <p className='text-sm'>{tg.initDataUnsafe?.user?.username}</p>
+              <p className='text-sm'>{tg.initDataUnsafe?.user?.username ? tg.initDataUnsafe?.user?.username : tg.initDataUnsafe?.user?.first_name}</p>
             </div>
           </div>
           <div className='flex items-center justify-between space-x-4 mt-1'>
