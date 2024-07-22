@@ -29,7 +29,7 @@ function App() {
 
   return (
     <>
-    {tg.initDataUnsafe?.user?.username != undefined ?
+    {tg.initDataUnsafe?.user?.username == undefined ?
       <TonConnectUIProvider manifestUrl='https://hammerhead-app-lqwus.ondigitalocean.app/tonconnect-manifest.json'>
 
         <div className="bg-bgMain h-full bg-cover overflow-hidden">{pages[numPage]}</div>

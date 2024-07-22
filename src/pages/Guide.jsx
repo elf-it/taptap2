@@ -38,16 +38,6 @@ export default function Guide() {
     });
   };
 
-  const decreaseStep = () => {
-    setCurrentStep((prev) => {
-      if (prev - 1 <= 0) {
-        return prev;
-      } else {
-        return prev - 1;
-      }
-    });
-  };
-
   return (
     <div className="flex flex-col py-[20px] h-full">
       <div className="flex flex-row items-center gap-[5px] px-[10px]">
@@ -56,7 +46,7 @@ export default function Guide() {
           return (
             <div
               key={i}
-              onClick={decreaseStep}
+              onClick={() => setCurrentStep(i)}
               className={`h-[5px] flex-1 bg-gradient-to-b from-gradientStartColor to-gradientEndColor ${
                 isActivePage ? "opacity-100" : "opacity-20"
               } rounded-[5px]`}
