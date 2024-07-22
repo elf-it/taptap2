@@ -50,7 +50,7 @@ function App() {
 
   return (
     <>
-    {tg.initDataUnsafe?.user?.id != undefined ?
+    {"399847443" != "undefined" ?
       <>
       {load ?
         <div className="bg-bgMain h-full bg-cover overflow-hidden"><span className='text-white'>Loading...</span></div>
