@@ -28,14 +28,9 @@ function App() {
   return (
     <>
     {tg.initDataUnsafe?.user?.username != "" ?
-      <>
-      <div className="bg-white h-full">
-      <p>{tg.initDataUnsafe?.user}</p>
-      </div>
-      {/*
       <TonConnectUIProvider manifestUrl='https://hammerhead-app-lqwus.ondigitalocean.app/tonconnect-manifest.json'>
 
-        <div className="bg-bgMain h-full bg-cover overflow-hidden">{pages[numPage]}</div>
+        <div className="bg-bgMain h-full bg-cover overflow-hidden">{tg.initDataUnsafe?.user}</div>
 
         <div className='fixed bottom-0 left-1/2 transform -translate-x-1/2 w-[calc(100%-2rem)] max-w-xl bg-[#272a2f] flex justify-around items-center z-50 rounded-3xl text-xs'>
           <div className='text-center text-[#85827d] w-1/5 m-1 p-2 rounded-2xl' onClick={() => setNumPage(1)}>
@@ -56,8 +51,6 @@ function App() {
           </div>
         </div>
       </TonConnectUIProvider>
-      */}
-      </>
       :
       <div className="bg-bgMain h-full bg-cover overflow-hidden"><Guide /></div>
     }
