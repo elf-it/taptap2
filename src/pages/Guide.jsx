@@ -82,7 +82,7 @@ export default function Guide({tid, username}) {
           onClick={increaseStep}
           className={`font-comic text-sm text-black py-[15px] rounded-xl w-full flex flex-row items-center justify-center gap-[10px] bg-gradient-to-b from-gradientStartColor to-gradientEndColor`}
         >
-          Далее
+          Далее ({pages.length} - {currentStep})
         </button>
       </div>
     </div>
