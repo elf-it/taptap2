@@ -19,14 +19,20 @@ import star4 from "../assets/icons/icon__star4.svg";
 import star5 from "../assets/icons/icon__star5.svg";
 import BuyCardModal from "../component/BuyCardModal";
 import { createPortal } from "react-dom";
+import { useTonAddress } from "@tonconnect/ui-react";
 
-export default function AutoFarm() {
+export default function AutoFarm({setNumPage}) {
   const [showModal, setShowModal] = useState(false);
   const [modalInfo, setModalInfo] = useState(null);
 
   const firstCardClick = (data) => {
-    setModalInfo(data)
-    setShowModal(true)
+    const tonAddress = useTonAddress()
+    if(tonAddress){
+      setModalInfo(data)
+      setShowModal(true)
+    }else{
+      setNumPage(4)
+    }
   };
 
   useEffect(() => {

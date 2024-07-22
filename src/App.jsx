@@ -27,7 +27,7 @@ function App() {
     <Guide />,
     <Main />,
     <Dashboard />,
-    <AutoFarm />,
+    <AutoFarm setNumPage={setNumPage} />,
     <ConnectWallet />,
     <Data />
   ];
