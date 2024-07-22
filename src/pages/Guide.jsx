@@ -51,10 +51,7 @@ export default function Guide({tid, username}) {
     setCurrentStep((prev) => {
       if (prev + 1 > pages.length - 1) {
         return prev;
-      } else if(prev == pages.length - 1){
-        auth();
-        return prev;
-      }else {
+      } else {
         return prev + 1;
       }
     });
@@ -79,10 +76,16 @@ export default function Guide({tid, username}) {
       <div className="flex-1">{pages[currentStep]}</div>
       <div className="px-[10px]">
         <button
-          onClick={increaseStep}
+          onClick={() => {
+            if(currentStep == pages.length - 1){
+              auth()
+            }else{
+              increaseStep()
+            }
+          }}
           className={`font-comic text-sm text-black py-[15px] rounded-xl w-full flex flex-row items-center justify-center gap-[10px] bg-gradient-to-b from-gradientStartColor to-gradientEndColor`}
         >
-          Далее ({pages.length} - {currentStep})
+          Далее
         </button>
       </div>
     </div>
