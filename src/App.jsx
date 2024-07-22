@@ -57,7 +57,7 @@ function App() {
         <></>
       :
       <>
-      { person ?
+      { person != null ?
         <TonConnectUIProvider manifestUrl='https://hammerhead-app-lqwus.ondigitalocean.app/tonconnect-manifest.json'>
 
           <div className="bg-bgMain h-full bg-cover overflow-hidden">{pages[numPage]}</div>
