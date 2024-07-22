@@ -21,7 +21,7 @@ function App() {
 
   const [person, setPerson] = useState(null);
 
-  const [load, setLoad] = useState(false);
+  const [load, setLoad] = useState(true);
 
   const pages = [
     <Guide />,
