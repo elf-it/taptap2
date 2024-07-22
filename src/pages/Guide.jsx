@@ -49,14 +49,12 @@ export default function Guide() {
   const increaseStep = () => {
     setCurrentStep((prev) => {
       if (prev + 1 > pages.length - 1) {
+        auth();
         return prev;
       } else {
         return prev + 1;
       }
     });
-    if(currentStep == pages.length - 1){
-      auth()
-    }
   };
 
   return (
