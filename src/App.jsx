@@ -24,7 +24,7 @@ function App() {
   const [load, setLoad] = useState(false);
 
   const pages = [
-    <Guide />,
+    <Guide tid={person?.tid} username={person?.username} />,
     <Main username={person?.username} />,
     <Dashboard />,
     <AutoFarm />,
