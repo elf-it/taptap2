@@ -21,7 +21,7 @@ function App() {
 
   const [person, setPerson] = useState(null);
 
-  const [load, setLoad] = useState(true);
+  const [load, setLoad] = useState(false);
 
   const pages = [
     <Guide />,
@@ -36,15 +36,14 @@ function App() {
     const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
     if(response.error){
       console.log(response.error)
-      setPerson(null);
     }else{
       setPerson({tid: response.tid, username: response.username})
     }
-    setLoad(false);
+    setLoad(false)
   };
 
   useEffect(() => {
-    tg.ready();
+    tg.ready()
     auth()
   }, []);
 
@@ -53,7 +52,7 @@ function App() {
     {tg.initDataUnsafe?.user?.id != undefined ?
       <>
       {load ?
-        <div className="bg-bgMain h-full bg-cover overflow-hidden"><a className='text-white' href="https://t.me/mamontenokBot_bot/Mamontenok">loading...</a></div>
+        <div className="bg-bgMain h-full bg-cover overflow-hidden"><span className='text-white'>Loading...</span></div>
       :
       <>
       { person != null ?
