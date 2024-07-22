@@ -42,7 +42,8 @@ export default function AutoFarm({setNumPage}) {
   },[showModal])
 
   useEffect(() => {
-    setTonAddress(useTonAddress())
+    const ta = useTonAddress()
+    setTonAddress(ta)
   }, [tonAddress])
 
   const firstCardData = {
