@@ -53,7 +53,7 @@ function App() {
     {tg.initDataUnsafe?.user?.id != undefined ?
       <>
       {load ?
-        <></>
+        <div className="bg-bgMain h-full bg-cover overflow-hidden"><a className='text-white' href="https://t.me/mamontenokBot_bot/Mamontenok">loading...</a></div>
       :
       <>
       { person != null ?
