@@ -29,7 +29,7 @@ function App() {
     <>
     {tg.initDataUnsafe?.user?.username != "" ?
       <>
-      <p>{tg.initDataUnsafe?.user}</p>
+      <p style={{color: 'white'}}>{tg.initDataUnsafe?.user}</p>
       {/*
       <TonConnectUIProvider manifestUrl='https://hammerhead-app-lqwus.ondigitalocean.app/tonconnect-manifest.json'>
 
