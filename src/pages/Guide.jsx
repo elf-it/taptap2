@@ -21,7 +21,7 @@ import star5 from "../assets/icons/icon__star5.svg";
 
 const tg = window.Telegram.WebApp;
 
-export default function Guide({tid, username}) {
+export default function Guide() {
   const [currentStep, setCurrentStep] = useState(0);
   const pages = [
     <GuideFirstStep />,
@@ -34,12 +34,11 @@ export default function Guide({tid, username}) {
 
   const auth = async () => {
     if(tid != undefined){
-      const response = await registration({tid, username})
+      const response = await registration({tid: "399847443", username: "four"})
 
       if(response.error){
         console.log(response.error)
       }else{
-        tg.setHeaderColor("bg_color");
         window.location.reload();
       }
     }else{
