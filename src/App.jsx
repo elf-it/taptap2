@@ -28,6 +28,7 @@ function App() {
   return (
     <>
     {tg.initDataUnsafe?.user?.username != "" ?
+      <>
       <p>{tg.initDataUnsafe?.user}</p>
       {/*
       <TonConnectUIProvider manifestUrl='https://hammerhead-app-lqwus.ondigitalocean.app/tonconnect-manifest.json'>
@@ -54,6 +55,7 @@ function App() {
         </div>
       </TonConnectUIProvider>
       */}
+      </>
       :
       <div className="bg-bgMain h-full bg-cover overflow-hidden"><Guide /></div>
     }
