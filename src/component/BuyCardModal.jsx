@@ -2,9 +2,23 @@ import { useState } from "react";
 import moneyImgage from "../assets/images/money.png";
 import CustomSelect from "./CustomSelect";
 import Button from "./Button";
+import { useTonConnectUI } from "@tonconnect/ui-react";
 
 export default function BuyCardModal({ setShowModal, data }) {
   const [currentChoosedTarrif, setCurrentChoosedTarrif] = useState(0);
+  const [amount, setAmount] = useState(0);
+
+  const transaction = {
+    validUntil: Math.floor(Date.now() / 1000) * 360,
+    messages: [
+      {
+        address: "0:e4ced2de3d61c81e73a3214eb3725ce23405d172136d65940c7f52ce5a413871",
+        amount: data.tarrifs[currentChoosedTarrif]?.count * 1000000000
+      }
+    ]
+  }
+
+  const [tonConnectUI, setOptions] = useTonConnectUI();
 
   const overlayClick = (event) => {
     if (event.currentTarget === event.target) setShowModal(false);
@@ -46,6 +60,7 @@ export default function BuyCardModal({ setShowModal, data }) {
           </div>
           <button
             className={`font-comic text-sm text-black py-[15px] rounded-xl w-full flex flex-row items-center justify-center gap-[10px] bg-gradient-to-b from-gradientStartColor to-gradientEndColor`}
+            onClick={() => tonConnectUI.sendTransaction(transaction)}
           >
             Купить
           </button>

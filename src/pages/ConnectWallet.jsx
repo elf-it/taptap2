@@ -20,27 +20,6 @@ export default function ConnectWallet() {
     const wallet = useTonWallet();
 
     return(
-        <div>
-            <TonConnectButton style={{float: "right"}} />
-            <div>
-                <button className="w-full text-white" onClick={() => tonConnectUI.sendTransaction(transaction)}>Buy</button>
-                {
-                    userFriendlyAddress && (
-                        <div>
-                            <span>User-friendly address: {userFriendlyAddress}</span>
-                            <span>Raw address: {rawAddress}</span>
-                        </div>
-                    )
-                }
-                {
-                    wallet && (
-                        <div>
-                            <span>Connected wallet: {wallet.name}</span>
-                            <span>Device: {wallet.device.appName}</span>
-                        </div>
-                    )
-                }
-            </div>
-        </div>
+        <TonConnectButton className="w-full my-20px mt-50px" />
     );
 }
