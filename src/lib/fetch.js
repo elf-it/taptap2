@@ -1,5 +1,5 @@
 
-const ROUTE_URI = "http://139.59.167.207:4500";
+const ROUTE_URI = "https://srws.ru";
 
 export const getPerson = async (props) => {
     try {
