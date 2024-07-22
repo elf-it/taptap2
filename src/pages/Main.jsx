@@ -5,9 +5,7 @@ import { binanceLogo, dailyCipher, dailyCombo, dailyReward, dollarCoin, mamont }
 import Info from '../icons/Info';
 import Settings from '../icons/Settings';
 
-const tg = window.Telegram.WebApp;
-
-export default function Main(){
+export default function Main(username){
   const levelNames = [
     "begin",
     "silver",
@@ -132,7 +130,7 @@ export default function Main(){
               <Mamont size={36} className='text-[#d4d4d4]' />
             </div>
             <div>
-              <p className='text-sm'>{tg.initDataUnsafe?.user?.username}</p>
+              <p className='text-sm'>{username}</p>
             </div>
           </div>
           <div className='flex items-center justify-between space-x-4 mt-1'>

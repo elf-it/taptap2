@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import { registration } from "../lib/fetch";
+
 import mammothImage from "../assets/images/mammoth.png";
 import mammothWithMoneyImage from "../assets/images/mammoth-money.png";
 import case1 from "../assets/images/case-gradient.png";
@@ -17,6 +19,8 @@ import star3 from "../assets/icons/icon__star3.svg";
 import star4 from "../assets/icons/icon__star4.svg";
 import star5 from "../assets/icons/icon__star5.svg";
 
+const tg = window.Telegram.WebApp;
+
 export default function Guide() {
   const [currentStep, setCurrentStep] = useState(0);
   const pages = [
@@ -27,6 +31,20 @@ export default function Guide() {
     <GuideFifthStep />,
     <GuideSixthStep />
   ];
+
+  const auth = async () => {
+    if(tg.initDataUnsafe?.user?.username != undefined){
+      const response = await registration({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
+
+      if(response.error){
+          console.log(response.error)
+      }else{
+        window.location.reload(false);
+      }
+    }else{
+      console.log("no tg app")
+    }
+  };
 
   const increaseStep = () => {
     setCurrentStep((prev) => {
