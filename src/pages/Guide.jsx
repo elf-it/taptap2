@@ -25,7 +25,7 @@ export default function Guide() {
     <GuideThirdStep />,
     <GuideFourthStep />,
     <GuideFifthStep />,
-    <GuideSixthStep/>
+    <GuideSixthStep />
   ];
 
   const increaseStep = () => {
@@ -332,7 +332,7 @@ function GuideSixthStep() {
   
     return (
       <div className="flex flex-col items-center justify-center h-full px-[20px]">
-        <img className="w-[300px] h-[300px]" src={case4} alt="" />
+        <img className="w-[300px] h-[300px] mt-[-20px]" src={case4} alt="" />
         <div className="flex flex-col items-center mb-[40px] px-[10px] mt-[-50px]">
           <h3 className="text-[32px] font-comic text-white font-bold  w-full text-center">
           Лотерея
