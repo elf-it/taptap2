@@ -24,9 +24,9 @@ import { useTonAddress } from "@tonconnect/ui-react";
 export default function AutoFarm({setNumPage}) {
   const [showModal, setShowModal] = useState(false);
   const [modalInfo, setModalInfo] = useState(null);
+  const [tonAddress, setTonAddress] = useState("");
 
   const firstCardClick = (data) => {
-    const tonAddress = useTonAddress()
     if(tonAddress != ""){
       setModalInfo(data)
       setShowModal(true)
@@ -40,6 +40,10 @@ export default function AutoFarm({setNumPage}) {
         setModalInfo(null)
     }
   },[showModal])
+
+  useEffect(() => {
+    setTonAddress(useTonAddress())
+  }, [tonAddress])
 
   const firstCardData = {
     index: 0,
