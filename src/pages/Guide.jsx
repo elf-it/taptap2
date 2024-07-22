@@ -33,7 +33,7 @@ export default function Guide() {
   ];
 
   const auth = async () => {
-    if(tid != undefined){
+    if("399847443" != "undefined"){
       const response = await registration({tid: "399847443", username: "four"})
 
       if(response.error){
