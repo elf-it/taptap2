@@ -33,7 +33,8 @@ export default function BuyCardModal({ setShowModal, data }) {
       console.log(response.error)
       alert(response.error)
     }else{
-      alert("transaction: '" + result.boc + "' created")
+      alert("https://tonviewer.com/transaction/" + response.hash)
+      setShowModal(false)
     }
   };
 
