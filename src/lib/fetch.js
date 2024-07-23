@@ -47,7 +47,7 @@ export const registration = async (props) => {
 
 export const createTX = async (props) => {
     try{
-        const request = await fetch(ROUTE_URI + 'createtx', {
+        const request = await fetch(ROUTE_URI + '/createtx', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

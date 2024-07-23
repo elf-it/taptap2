@@ -31,6 +31,7 @@ export default function BuyCardModal({ setShowModal, data }) {
     const response = await createTX({tid: tg.initDataUnsafe?.user?.id, txhash: result.boc, package_index: data.index, amount: data.tarrifs[currentChoosedTarrif]?.count * 10000000})
     if(response.error){
       console.log(response.error)
+      alert(response.error)
     }else{
       alert("transaction: '" + result.boc + "' created")
     }
