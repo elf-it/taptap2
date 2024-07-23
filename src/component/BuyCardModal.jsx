@@ -72,7 +72,7 @@ export default function BuyCardModal({ setShowModal, data }) {
           </div>
           <button
             className={`font-comic text-sm text-black py-[15px] rounded-xl w-full flex flex-row items-center justify-center gap-[10px] bg-gradient-to-b from-gradientStartColor to-gradientEndColor`}
-            onClick={() => tonConnectUI.sendTransaction(transaction)}
+            onClick={sendTransaction}
           >
             Купить
           </button>
