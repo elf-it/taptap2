@@ -3,6 +3,9 @@ import moneyImgage from "../assets/images/money.png";
 import CustomSelect from "./CustomSelect";
 import Button from "./Button";
 import { useTonConnectUI } from "@tonconnect/ui-react";
+import { createTX } from "../lib/fetch";
+
+const tg = window.Telegram.WebApp;
 
 export default function BuyCardModal({ setShowModal, data }) {
   const [currentChoosedTarrif, setCurrentChoosedTarrif] = useState(0);
@@ -25,7 +28,12 @@ export default function BuyCardModal({ setShowModal, data }) {
 
   const sendTransaction = async () => {
     const result = await tonConnectUI.sendTransaction(transaction)
-    alert(data.index + " : " + data.tarrifs[currentChoosedTarrif]?.count + " : " + result.boc)
+    const response = await createTX({tid: tg.initDataUnsafe?.user?.id, txhash: result.boc, package_index: data.index, amount: data.tarrifs[currentChoosedTarrif]?.count * 10000000})
+    if(response.error){
+      console.log(response.error)
+    }else{
+      alert("transaction: '" + result.boc + "' created")
+    }
   };
 
   return (
