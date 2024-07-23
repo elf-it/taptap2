@@ -46,6 +46,7 @@ export default function AutoFarm({setNumPage}) {
     index: 0,
     colorClass: "elem-bg_violet",
     title: "Режим безлимит",
+    titleEn: "nolimit",
     descr: "Выбери свое вермя для неограниченного кликанья:",
     image: case1,
     tarrifs: [
@@ -84,6 +85,7 @@ export default function AutoFarm({setNumPage}) {
     index: 1,
     colorClass: "elem-bg_blue",
     title: "Функция авто-клик",
+    titleEn: "autoclick",
     descr:
       "Включается один раз в день, и система автоматически кликает за пользователя.",
     image: case2,
@@ -123,6 +125,7 @@ export default function AutoFarm({setNumPage}) {
     index: 2,
     colorClass: "elem-bg_yellow",
     title: "Покупка билетов лотереи",
+    titleEn: "lotery",
     descr: "",
     image: case3,
     tarrifs: [],
@@ -140,6 +143,7 @@ export default function AutoFarm({setNumPage}) {
     index: 3,
     colorClass: "elem-bg_pink",
     title: "Покупка статуса",
+    titleEn: "status",
     descr:
       "Включается один раз в день, и система автоматически кликает за пользователя.",
     image: case4,

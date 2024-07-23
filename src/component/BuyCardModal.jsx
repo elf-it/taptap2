@@ -3,17 +3,24 @@ import moneyImgage from "../assets/images/money.png";
 import CustomSelect from "./CustomSelect";
 import Button from "./Button";
 import { useTonConnectUI } from "@tonconnect/ui-react";
+import { toNano, beginCell } from "@ton/ton";
 
 export default function BuyCardModal({ setShowModal, data }) {
   const [currentChoosedTarrif, setCurrentChoosedTarrif] = useState(0);
   const [amount, setAmount] = useState(0);
+
+  const body = beginCell()
+  .storeUint(0, 32)
+  .storeStringTail(data.titleEn)
+  .endCell();
 
   const transaction = {
     validUntil: Math.floor(Date.now() / 1000) * 360,
     messages: [
       {
         address: "0:e4ced2de3d61c81e73a3214eb3725ce23405d172136d65940c7f52ce5a413871",
-        amount: data.tarrifs[currentChoosedTarrif]?.count * 1000000000
+        amount: toNano(data.tarrifs[currentChoosedTarrif]?.count),
+        payload: body.toBoc().toString("base64")
       }
     ]
   }
@@ -22,6 +29,11 @@ export default function BuyCardModal({ setShowModal, data }) {
 
   const overlayClick = (event) => {
     if (event.currentTarget === event.target) setShowModal(false);
+  };
+
+  const sendTransaction = async () => {
+    const result = await tonConnectUI.sendTransaction(transaction)
+    alert(data.index + " : " + data.tarrifs[currentChoosedTarrif]?.count + " : " + result.boc)
   };
 
   return (
