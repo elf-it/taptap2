@@ -12,8 +12,7 @@ export default function BuyCardModal({ setShowModal, data }) {
     messages: [
       {
         address: "0:e4ced2de3d61c81e73a3214eb3725ce23405d172136d65940c7f52ce5a413871",
-        amount: data.tarrifs[currentChoosedTarrif]?.count * 1000000000,
-        payload: body.toBoc().toString("base64")
+        amount: data.tarrifs[currentChoosedTarrif]?.count * 1000000000
       }
     ]
   }
