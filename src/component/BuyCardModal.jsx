@@ -3,12 +3,13 @@ import moneyImgage from "../assets/images/money.png";
 import CustomSelect from "./CustomSelect";
 import Button from "./Button";
 import { useTonConnectUI } from "@tonconnect/ui-react";
-import { createTX } from "../lib/fetch";
+import { createTX, getAutoclick } from "../lib/fetch";
 
 const tg = window.Telegram.WebApp;
 
 export default function BuyCardModal({ setShowModal, data }) {
   const [currentChoosedTarrif, setCurrentChoosedTarrif] = useState(0);
+  const [disabled, setDisabled] = useState(false);
 
   const transaction = {
     validUntil: Math.floor(Date.now() / 1000) * 360,
@@ -24,6 +25,17 @@ export default function BuyCardModal({ setShowModal, data }) {
 
   const overlayClick = (event) => {
     if (event.currentTarget === event.target) setShowModal(false);
+  };
+
+  const getAutoclickT = async () => {
+    const response = await getAutoclick({tid: tg.initDataUnsafe?.user?.id})
+    if(response.error){
+      console.log(response.error)
+    }else{
+      if(response.index == data.tarrifs[currentChoosedTarrif]?.count - 1 && response.status){
+        setDisabled(true)
+      }
+    }
   };
 
   const sendTransaction = async () => {
@@ -73,6 +85,7 @@ export default function BuyCardModal({ setShowModal, data }) {
             </p>
           </div>
           <button
+            disabled={disabled}
             className={`font-comic text-sm text-black py-[15px] rounded-xl w-full flex flex-row items-center justify-center gap-[10px] bg-gradient-to-b from-gradientStartColor to-gradientEndColor`}
             onClick={sendTransaction}
           >
