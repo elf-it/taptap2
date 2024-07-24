@@ -33,7 +33,7 @@ export default function BuyCardModal({ setShowModal, data }) {
       console.log(response.error)
     }else{
       if(response.index == data.tarrifs[currentChoosedTarrif]?.count - 1 && response.status){
-        setDisabled(true)
+        setDisabled(true);
       }
     }
   };
