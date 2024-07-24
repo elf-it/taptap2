@@ -4,6 +4,7 @@ import Mamont from '../icons/Mamont'
 import { binanceLogo, dailyCipher, dailyCombo, dailyReward, dollarCoin, mamont } from '../images';
 import Info from '../icons/Info';
 import Settings from '../icons/Settings';
+import { getAutoclick } from '../lib/fetch';
 
 const tg = window.Telegram.WebApp;
 
@@ -36,6 +37,7 @@ export default function Main(){
   //const [dailyRewardTimeLeft, setDailyRewardTimeLeft] = useState("");
   const [dailyCipherTimeLeft, setDailyCipherTimeLeft] = useState("");
   const [dailyComboTimeLeft, setDailyComboTimeLeft] = useState("");
+  const [autoclick, setAutoclick] = useState(false);
 
   const calculateProgress = () => {
     if(levelIndex >= levelNames.length - 1){
@@ -91,6 +93,15 @@ export default function Main(){
     setClicks((prevClicks) => prevClicks.filter(click => click.id !== id));
   };
 
+  const getAutoclickT = async () => {
+    const response = await getAutoclick({tid: tg.initDataUnsafe?.user?.id})
+    if(response.error){
+      console.log(response.error);
+    }else{
+      setAutoclick(response.status);
+    }
+  };
+
   useEffect(() => {
     const updateCountdowns = () => {
       setDailyCipherTimeLeft(calculateTimeLeft(0));
@@ -102,6 +113,7 @@ export default function Main(){
 
       return () => clearInterval(interval);
     }
+    getAutoclickT()
   }, []);
 
   useEffect(() => {
@@ -168,8 +180,8 @@ export default function Main(){
               <div className='bg-[#272a2f] rounded-lg px-4 py-2 w-full relative'>
                 <div className='dot'></div>
                 <img src={dailyReward} alt='Daily Reward' className='mx-auto w-12 h-12' />
-                <p className='text-[10px] text-center text-white mt-1'>Daily reward</p>
-                <p className='text-[10px] font-medium text-center text-gray-400 mt-2'></p>
+                <p className='text-[10px] text-center text-white mt-1'>Autoclick</p>
+                <p className='text-[10px] font-medium text-center text-gray-400 mt-2'>{autoclick ? "On" : "Off"}</p>
               </div>
               <div className='bg-[#272a2f] rounded-lg px-4 py-2 w-full relative'>
                 <div className='dot'></div>
