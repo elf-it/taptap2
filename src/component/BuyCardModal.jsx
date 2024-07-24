@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import moneyImgage from "../assets/images/money.png";
 import CustomSelect from "./CustomSelect";
 import Button from "./Button";
@@ -49,6 +49,10 @@ export default function BuyCardModal({ setShowModal, data }) {
       setShowModal(false)
     }
   };
+
+  useEffect(() => {
+    getAutoclickT()
+  }, [])
 
   return (
     <div
