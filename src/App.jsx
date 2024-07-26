@@ -70,7 +70,7 @@ function App() {
         <div className="bg-bgMain h-full bg-cover overflow-hidden"><span className='text-white'>Loading...</span></div>
       :
       <>
-      { person != null ?
+      { person == null ?
         <TonConnectUIProvider manifestUrl='https://hammerhead-app-lqwus.ondigitalocean.app/tonconnect-manifest.json'>
 
           {numPage == 4 ?
