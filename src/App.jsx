@@ -54,7 +54,7 @@ function App() {
       console.log(response.error)
     }else{
       setPerson({tid: response.tid, username: response.username})
-      console.log(person)
+      console.log("person: ", person)
     }
     setLoad(false)
   };
