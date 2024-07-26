@@ -23,7 +23,7 @@ function App() {
   const routes = [
     {
       path: "/",
-      element: <Main />,
+      element: <Main setNumPage={setNumPage} />,
       label: "Games",
       icon: "mamoth"
     },
@@ -50,6 +50,12 @@ function App() {
       element: <ConnectWallet />,
       label: "Кошелек",
       icon: "Wallet",
+    },
+    {
+      path: "/guide",
+      element: <Guide />,
+      label: "Гид",
+      icon: "Guid",
     },
   ];
 
