@@ -45,18 +45,6 @@ function App() {
       label: "Лоторея",
       icon: "lottery",
     },
-    {
-      path: "/lottery",
-      element: <ConnectWallet />,
-      label: "Кошелек",
-      icon: "Wallet",
-    },
-    {
-      path: "/guide",
-      element: <Guide />,
-      label: "Гид",
-      icon: "Guid",
-    },
   ];
 
   const auth = async () => {
@@ -102,7 +90,7 @@ function App() {
                     className={
                       "font-comic text-gradient text-sm flex-1 flex flex-col items-center justify-end gap-[4px] z-10 mb-[8px]"
                     }
-                    onClick={() => setNumPage(i + 1)}
+                    onClick={() => setNumPage(i)}
                   >
                     {({ isActive }) => {
                       const normalOpacity = isActive || link.icon === "mamoth";
