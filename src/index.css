@@ -76,3 +76,23 @@ p,h1,h2,h3,h4,h5,h6,span,ul,li{
 margin: 0;
 padding: 0;
 }
+
+button:active{
+    transform: scale(0.95);
+    transition: transform .07s ease-in-out;
+}
+
+@keyframes float {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(0) rotate(-90deg);
+    }
+    70% {
+        opacity: 1;
+        transform: translateY(-70px) scale(1) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100px) scale(1) rotate(0deg);
+    }
+}
