@@ -11,7 +11,7 @@ export default function ConnectWallet() {
         <>
             <TonConnectButton className="my-20px mt-50px" />
             <p className="text-white">network: {network ? network === CHAIN.MAINNET ? "mainnet" : "testnet" : "N/A"}</p>
-            <p className="text-white">wallet: {wallet ? Address.parse(wallet as string).toString() : "Loading"}</p>
+            <p className="text-white">wallet: {wallet ? Address.parse(wallet).toString() : "Loading..."}</p>
         </>
     );
 }
