@@ -4,7 +4,7 @@ import ControlPanel from "../component/ControlPanel";
 
 import Clicker from "../component/Clicker";
 
-export default function Main({setNumPage}) {
+export default function Main({setNumPage, person}) {
   const [count, setCount] = useState(100000);
   const step = 15;
 
@@ -14,7 +14,7 @@ export default function Main({setNumPage}) {
 
   return (
     <div className=" py-[24px] px-[17px] flex flex-col items-center gap-[8px] pb-[100px] h-full overflow-hidden">
-      <MainPageHeader setNumPage={setNumPage} />
+      <MainPageHeader setNumPage={setNumPage} person={person} />
       <ControlPanel count={count} />
       <Clicker handleClick={incrementCount} />
     </div>

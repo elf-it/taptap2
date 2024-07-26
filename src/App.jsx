@@ -24,7 +24,7 @@ function App() {
   const routes = [
     {
       path: "/",
-      element: <Main setNumPage={setNumPage} />,
+      element: <Main setNumPage={setNumPage} person={person} />,
       label: "Games",
       icon: "mamoth"
     },
@@ -54,7 +54,6 @@ function App() {
       console.log(response.error)
     }else{
       setPerson({tid: response.tid, username: response.username})
-      alert("person: ", person.username)
     }
     setLoad(false)
   };
