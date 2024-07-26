@@ -1,4 +1,4 @@
-import { TonConnectButton } from "@tonconnect/ui-react";
+import { CHAIN, TonConnectButton } from "@tonconnect/ui-react";
 import { useTonConnect } from "../hooks/useTonConnect";
 
 
@@ -9,7 +9,7 @@ export default function ConnectWallet() {
     return(
         <>
             <TonConnectButton className="w-full my-20px mt-50px" />
-            <p>{network}</p>
+            <p className="text-white">{network ? network === CHAIN.MAINNET ? "mainnet" : "testnet" : "N/A"}</p>
         </>
     );
 }
