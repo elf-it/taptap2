@@ -19,7 +19,7 @@ function App() {
 
   const [person, setPerson] = useState(null);
 
-  const [load, setLoad] = useState(false);
+  const [load, setLoad] = useState(true);
 
   const routes = [
     {
@@ -54,6 +54,7 @@ function App() {
       console.log(response.error)
     }else{
       setPerson({tid: response.tid, username: response.username})
+      console.log(person)
     }
     setLoad(false)
   };
@@ -71,7 +72,7 @@ function App() {
         <div className="bg-bgMain h-full bg-cover overflow-hidden"><span className='text-white'>Loading...</span></div>
       :
       <>
-      { person == null ?
+      { person != null ?
         <TonConnectUIProvider manifestUrl='https://hammerhead-app-lqwus.ondigitalocean.app/tonconnect-manifest.json'>
 
           <div className="bg-bgMain h-full bg-cover overflow-hidden">{routes[numPage].element}</div>
