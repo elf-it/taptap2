@@ -10,9 +10,9 @@ function MainPageHeader({setNumPage, person}) {
         </div>
         <p className="text-sm text-white font-comic">{person.username}</p>
       </div>
-      <div className="flex flex-row items-center justify-between gap-[10px] mb-[25px] elem-bg_green py-[7px] px-[10px] rounded-[10px]">
+      <button onClick={() => setNumPage(4)} className="flex flex-row items-center justify-between gap-[10px] mb-[25px] elem-bg_green py-[7px] px-[10px] rounded-[10px]">
         <Icon name={'wallet'} size={24}/>
-      </div>
+      </button>
       <button onClick={() => setNumPage(5)} className="flex flex-row items-center justify-between gap-[10px] mb-[25px] elem-bg_green py-[7px] px-[10px] rounded-[10px]">
         <Icon name={'info'} size={24}/>
       </button>

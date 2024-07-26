@@ -9,7 +9,6 @@ import AutoFarm from './pages/AutoFarm';
 import ConnectWallet from './pages/ConnectWallet';
 import { getPerson } from './lib/fetch';
 import { Icon } from './component/IconSprite';
-import { NavLink } from 'react-router-dom';
 
 const tg = window.Telegram.WebApp;
 
@@ -74,7 +73,17 @@ function App() {
       { person != null ?
         <TonConnectUIProvider manifestUrl='https://hammerhead-app-lqwus.ondigitalocean.app/tonconnect-manifest.json'>
 
-          <div className="bg-bgMain h-full bg-cover overflow-hidden">{routes[numPage].element}</div>
+          {numPage == 4 ?
+            <div className="bg-bgMain h-full bg-cover overflow-hidden"><ConnectWallet /></div>
+          :
+          <>
+          {numPage == 5 ?
+            <div className="bg-bgMain h-full bg-cover overflow-hidden"><Guide /></div>
+          :
+            <div className="bg-bgMain h-full bg-cover overflow-hidden">{routes[numPage].element}</div>
+          }
+          </>
+          }
 
           <div className="absolute bottom-[10px] left-[17px] right-[17px]">
             <nav className="bg-bgColorGreen backdrop-blur-xl h-[76px] rounded-[15px] w-full relative">
