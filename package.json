@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
     "@orbs-network/ton-access": "^2.3.3",
     "@tonconnect/ui-react": "^2.0.6",
     "@types/telegram-web-app": "^7.3.1",
@@ -17,8 +18,10 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.25.1",
+    "rollup-plugin-polyfill-node": "^0.13.0",
     "ton": "^13.9.0",
-    "ton-core": "^0.53.0"
+    "ton-core": "^0.53.0",
+    "ton-crypto": "^3.2.0"
   },
   "devDependencies": {
     "@types/node-telegram-bot-api": "^0.64.7",

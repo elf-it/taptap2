@@ -8,7 +8,7 @@ function MainPageHeader({setNumPage, person}) {
         <div className="elem-bg_green p-[5px] rounded-full ">
           <Icon name="mamoth" size={20} />
         </div>
-        <p className="text-sm text-white font-comic">{person.username}</p>
+        <p className="text-sm text-white font-comic">{person?.username}</p>
       </div>
       <button onClick={() => setNumPage(4)} className="flex flex-row items-center justify-between gap-[10px] mb-[25px] elem-bg_green py-[7px] px-[10px] rounded-[10px]">
         <Icon name={'wallet'} size={24}/>
