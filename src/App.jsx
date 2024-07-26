@@ -9,6 +9,7 @@ import AutoFarm from './pages/AutoFarm';
 import ConnectWallet from './pages/ConnectWallet';
 import { getPerson } from './lib/fetch';
 import { Icon } from './component/IconSprite';
+import Button from './component/Button';
 
 const tg = window.Telegram.WebApp;
 
@@ -85,7 +86,7 @@ function App() {
               </div>
               <ul className="flex flex-row justify-between gap-[2px] h-full">
                 {routes.map((link, i) => (
-                  <button
+                  <Button
                     key={i}
                     className={
                       "font-comic text-gradient text-sm flex-1 flex flex-col items-center justify-end gap-[4px] z-10 mb-[8px]"
@@ -106,7 +107,7 @@ function App() {
                         </>
                       );
                     }}
-                  </button>
+                  </Button>
                 ))}
               </ul>
             </nav>
