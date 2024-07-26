@@ -2,7 +2,6 @@ import './App.css';
 import Guide from './pages/Guide';
 import Main from './pages/Main';
 import Dashboard from './pages/Dashboard';
-import BottomNav from './component/BottomNav';
 import { TonConnectUIProvider } from '@tonconnect/ui-react';
 import { useEffect, useState } from 'react';
 import Friends from './icons/Friends';
@@ -13,24 +12,49 @@ import AutoFarm from './pages/AutoFarm';
 import ConnectWallet from './pages/ConnectWallet';
 import Data from './pages/Data';
 import { getPerson } from './lib/fetch';
+import { Icon } from './component/IconSprite';
 
 const tg = window.Telegram.WebApp;
 
 function App() {
 
-  const [numPage, setNumPage] = useState(1);
+  const [numPage, setNumPage] = useState(0);
 
   const [person, setPerson] = useState(null);
 
   const [load, setLoad] = useState(true);
 
-  const pages = [
-    <Guide />,
-    <Main />,
-    <Dashboard />,
-    <AutoFarm setNumPage={setNumPage} />,
-    <ConnectWallet />,
-    <Data />
+  const routes = [
+    {
+      path: "/",
+      element: <Main />,
+      label: "Games",
+      icon: "mamoth"
+    },
+    {
+      path: "/dashboard",
+      element: <Dashboard />,
+      label: "Дашборд",
+      icon:"dashboard"
+    },
+    {
+      path: "/auto-farm",
+      element: <AutoFarm setNumPage={setNumPage} />,
+      label: "Auto Farm",
+      icon:"autofarm"
+    },
+    {
+      path: "/lottery",
+      element: <Lottery />,
+      label: "Лоторея",
+      icon: "lottery",
+    },
+    {
+      path: "/lottery",
+      element: <ConnectWallet />,
+      label: "Кошелек",
+      icon: "Wallet",
+    },
   ];
 
   const auth = async () => {
@@ -50,7 +74,7 @@ function App() {
 
   return (
     <>
-    {"399847443" != "undefined" ?
+    {person.tid != "undefined" ?
       <>
       {load ?
         <div className="bg-bgMain h-full bg-cover overflow-hidden"><span className='text-white'>Loading...</span></div>
@@ -59,9 +83,44 @@ function App() {
       { person != null ?
         <TonConnectUIProvider manifestUrl='https://hammerhead-app-lqwus.ondigitalocean.app/tonconnect-manifest.json'>
 
-          <div className="bg-bgMain h-full bg-cover overflow-hidden">{pages[numPage]}</div>
+          <div className="bg-bgMain h-full bg-cover overflow-hidden">{routes[numPage].element}</div>
 
-          <BottomNav />
+          <div className="absolute bottom-[10px] left-[17px] right-[17px]">
+            <nav className="bg-bgColorGreen backdrop-blur-xl h-[76px] rounded-[15px] w-full relative">
+              <div
+                style={{ width: "25%", left: `${numPage * 25}%` }}
+                className=" absolute h-full z-0 p-[4px] transition-all"
+              >
+                <div className="elem-bg_green h-full w-full rounded-[12px]"></div>
+              </div>
+              <ul className="flex flex-row justify-between gap-[2px] h-full">
+                {routes.map((link, i) => (
+                  <button
+                    key={i}
+                    className={
+                      "font-comic text-gradient text-sm flex-1 flex flex-col items-center justify-end gap-[4px] z-10 mb-[8px]"
+                    }
+                    onClick={() => setNumPage(i + 1)}
+                  >
+                    {({ isActive }) => {
+                      const normalOpacity = isActive || link.icon === "mamoth";
+                      return (
+                        <>
+                          <Icon
+                            styles={{ opacity: normalOpacity ? 1 : 0.3 }}
+                            name={link.icon}
+                            size={link.icon === "mamoth" ? 38 : 24}
+                            color={isActive ? "#79F2CE" : "#fff"}
+                          />
+                          {link.label}
+                        </>
+                      );
+                    }}
+                  </button>
+                ))}
+              </ul>
+            </nav>
+          </div>
 
           {/*<div className='fixed bottom-0 left-1/2 transform -translate-x-1/2 w-[calc(100%-2rem)] max-w-xl bg-[#272a2f] flex justify-around items-center z-50 rounded-3xl text-xs'>
             <div className='text-center text-[#85827d] w-1/5 m-1 p-2 rounded-2xl' onClick={() => setNumPage(1)}>
