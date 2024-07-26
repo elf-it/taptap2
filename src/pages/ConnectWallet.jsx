@@ -1,7 +1,11 @@
 import { TonConnectButton, useTonConnectUI, useTonAddress, useTonWallet } from "@tonconnect/ui-react";
+import { useTonConnect } from "../hooks/useTonConnect";
 
 
 export default function ConnectWallet() {
+
+    const {network} = useTonConnect();
+
     const transaction = {
         validUntil: Math.floor(Date.now() / 1000) * 360,
         messages: [
@@ -20,6 +24,9 @@ export default function ConnectWallet() {
     const wallet = useTonWallet();
 
     return(
-        <TonConnectButton className="w-full my-20px mt-50px" />
+        <>
+            <TonConnectButton className="w-full my-20px mt-50px" />
+            <p>{network}</p>
+        </>
     );
 }

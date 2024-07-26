@@ -34,7 +34,7 @@ export default function BuyCardModal({ setShowModal, data }) {
     }else{
       alert(response.index + " : " + data.tarrifs[currentChoosedTarrif]?.count)
       if(response.index == data.tarrifs[currentChoosedTarrif]?.count - 1 && response.status){
-        //setDisabled(true);
+        setDisabled(true);
       }
     }
   };
@@ -52,7 +52,7 @@ export default function BuyCardModal({ setShowModal, data }) {
   };
 
   useEffect(() => {
-    getAutoclickT()
+    //getAutoclickT()
   }, [])
 
   return (
