@@ -34,12 +34,12 @@ export default function BuyCardModal({ setShowModal, data }) {
     }else{
       if(response.index == data.tarrifs[currentChoosedTarrif]?.count - 1 && response.status){
         setDisabled(true);
+        alert("disable")
       }
     }
   };
 
   const sendTransaction = async () => {
-    alert("123")
     const result = await tonConnectUI.sendTransaction(transaction)
     const response = await createTX({tid: tg.initDataUnsafe?.user?.id, txhash: result.boc, package_index: data.index, amount: data.tarrifs[currentChoosedTarrif]?.count * 10000000})
     if(response.error){
