@@ -2,6 +2,7 @@ import './App.css';
 import Guide from './pages/Guide';
 import Main from './pages/Main';
 import Dashboard from './pages/Dashboard';
+import BottomNav from './component/BottomNav';
 import { TonConnectUIProvider } from '@tonconnect/ui-react';
 import { useEffect, useState } from 'react';
 import Friends from './icons/Friends';
@@ -60,7 +61,9 @@ function App() {
 
           <div className="bg-bgMain h-full bg-cover overflow-hidden">{pages[numPage]}</div>
 
-          <div className='fixed bottom-0 left-1/2 transform -translate-x-1/2 w-[calc(100%-2rem)] max-w-xl bg-[#272a2f] flex justify-around items-center z-50 rounded-3xl text-xs'>
+          <BottomNav />
+
+          {/*<div className='fixed bottom-0 left-1/2 transform -translate-x-1/2 w-[calc(100%-2rem)] max-w-xl bg-[#272a2f] flex justify-around items-center z-50 rounded-3xl text-xs'>
             <div className='text-center text-[#85827d] w-1/5 m-1 p-2 rounded-2xl' onClick={() => setNumPage(1)}>
               <Mine className='w-8 h-8 mx-auto' />
               <p className='mt-1'>Main</p>
@@ -81,7 +84,7 @@ function App() {
               <Coins className='w-8 h-8 mx-auto' />
               <p className='mt-1'>Data</p>
             </div>
-          </div>
+          </div>*/}
         </TonConnectUIProvider>
       :
         <div className="bg-bgMain h-full bg-cover overflow-hidden"><Guide /></div>
