@@ -39,6 +39,9 @@
 .text-gradient {
     @apply bg-gradient-to-b from-gradientStartColor to-gradientEndColor bg-clip-text text-transparent
 }
+.text-gradient_red {
+    @apply bg-gradient-to-b from-gradientStartColor via-[#FF5252] to-[#FF5252] bg-clip-text text-transparent
+  }
 .elem-bg_green {
     @apply bg-bgColorGreen backdrop-blur-sm
 }
