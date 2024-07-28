@@ -15,7 +15,7 @@ export default function ConnectWallet() {
             <p className="text-white">network: {network ? network === CHAIN.MAINNET ? "mainnet" : "testnet" : "N/A"}</p>
             <p className="text-white">wallet: {wallet ? Address.parse(wallet).toString() : "Loading..."}</p>
             <p className="text-white">user ref balance: {user ?? "Loading..."}</p>
-            <button disabled={!connected} onClick={buy(new Address(""), new Address(""), new Address(""), new Address(""), new Address(""), new Address(""), "1")}>buy</button>
+            <button disabled={!connected} onClick={buy("", "", "", "", "", "", "1")}>buy</button>
         </>
     );
 }
