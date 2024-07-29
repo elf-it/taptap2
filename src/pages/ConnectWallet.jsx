@@ -93,7 +93,7 @@ export default function Wallet() {
               <button
                 className={`font-comic text-sm text-black py-[15px] rounded-xl w-full flex flex-row items-center justify-center gap-[10px] bg-gradient-to-b from-gradientStartColor to-gradientEndColor`}
                 disabled={!connected}
-                onClick={() => wallet()}
+                onClick={() => withdraw()}
               >
                 Получить бонус
                 <img className="w-[32px]" src={coinsSvg} alt="" />

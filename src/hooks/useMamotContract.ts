@@ -32,7 +32,7 @@ export function useMamotContract(){
 
     return {
         user: user,
-        buy: (ref1: Address, ref2: Address, ref3: Address, ref4: Address, ref5: Address, ref6: Address, value: string) => {
+        buy: async (ref1: Address, ref2: Address, ref3: Address, ref4: Address, ref5: Address, ref6: Address, value: string) => {
             const referrers = Dictionary.empty(Dictionary.Keys.BigInt(32), Dictionary.Values.Address());
 
             referrers.set(0n, ref1);
@@ -46,9 +46,10 @@ export function useMamotContract(){
                 referrers
             }
 
-            mamotContract?.send(sender, {
+            const res = mamotContract?.send(sender, {
                 value: toNano(value)
             }, message);
+            return await res?.finally()
         },
         withdraw: () => {
             mamotContract?.send(sender, {

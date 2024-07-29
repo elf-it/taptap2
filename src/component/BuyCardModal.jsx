@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react";
 import moneyImgage from "../assets/images/money.png";
 import CustomSelect from "./CustomSelect";
-import Button from "./Button";
 import { useTonConnectUI } from "@tonconnect/ui-react";
 import { createTX, getAutoclick } from "../lib/fetch";
+import { Address } from "ton-core";
+import { useMamotContract } from "../hooks/useMamotContract";
+import { useTonConnect } from "../hooks/useTonConnect";
+
 
 const tg = window.Telegram.WebApp;
 
 export default function BuyCardModal({ setShowModal, data }) {
   const [currentChoosedTarrif, setCurrentChoosedTarrif] = useState(0);
   const [disabled, setDisabled] = useState(false);
+
+  const {network, wallet, connected} = useTonConnect();
+  const {user, buy} = useMamotContract();
 
   const transaction = {
     validUntil: Math.floor(Date.now() / 1000) * 360,
@@ -40,8 +46,12 @@ export default function BuyCardModal({ setShowModal, data }) {
   };
 
   const sendTransaction = async () => {
-    const result = await tonConnectUI.sendTransaction(transaction)
-    const response = await createTX({tid: tg.initDataUnsafe?.user?.id, txhash: result.boc, package_index: data.index, amount: data.tarrifs[currentChoosedTarrif]?.count * 10000000})
+    const res = await buy(Address.parse("UQDs-xDFMg033y71LR8n3ImXIjXD5U79a0nVf3PXUycFRKVo"), Address.parse("UQDs-xDFMg033y71LR8n3ImXIjXD5U79a0nVf3PXUycFRKVo"), Address.parse("UQDs-xDFMg033y71LR8n3ImXIjXD5U79a0nVf3PXUycFRKVo"), Address.parse("UQDs-xDFMg033y71LR8n3ImXIjXD5U79a0nVf3PXUycFRKVo"), Address.parse("UQDs-xDFMg033y71LR8n3ImXIjXD5U79a0nVf3PXUycFRKVo"), Address.parse("UQDs-xDFMg033y71LR8n3ImXIjXD5U79a0nVf3PXUycFRKVo"), "0.5")
+
+    console.log(res);
+
+    //const response = await createTX({tid: tg.initDataUnsafe?.user?.id, txhash: result.boc, package_index: data.index, amount: data.tarrifs[currentChoosedTarrif]?.count * 10000000})
+    /*
     if(response.error){
       console.log(response.error)
       alert(response.error)
@@ -49,6 +59,7 @@ export default function BuyCardModal({ setShowModal, data }) {
       alert("https://tonviewer.com/transaction/" + response.hash)
       setShowModal(false)
     }
+    */
   };
 
   useEffect(() => {
