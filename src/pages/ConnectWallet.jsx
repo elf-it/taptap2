@@ -32,7 +32,7 @@ import lock from "../assets/images/wallet-lock.png";
 import { Icon } from "../component/IconSprite";
 import coinsSvg from "../assets/icons/icon__coins.svg";
 
-export default function Wallet() {
+export default function ConnectWallet() {
 
   const [tonConnectUI, setOptions] = useTonConnectUI();
   const {network, wallet, connected} = useTonConnect();
