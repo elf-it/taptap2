@@ -67,11 +67,11 @@ function App() {
     <>
     {"399847443" != "undefined" ?
       <>
-      {!load ?
+      {load ?
         <div className="bg-bgMain h-full bg-cover overflow-hidden"><Loading /></div>
       :
       <>
-      { person == null ?
+      { person != null ?
         <TonConnectUIProvider manifestUrl='https://hammerhead-app-lqwus.ondigitalocean.app/tonconnect-manifest.json'>
 
           {numPage == 4 ?

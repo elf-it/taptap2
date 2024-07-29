@@ -8,6 +8,7 @@ import CopyToClipboard from "react-copy-to-clipboard";
 
 const tg = window.Telegram.WebApp;
 const myLink = "http://t.me/mamontenokBot_bot/Mamontenok?startapp=" + tg.initDataUnsafe?.user?.id;
+const shareLink = "t.me/share?url=http://t.me/mamontenokBot_bot/Mamontenok?startapp=" + tg.initDataUnsafe?.user?.id
 
 export default function Dashboard() {
 
@@ -146,7 +147,7 @@ export default function Dashboard() {
 
           <div className="w-full flex flex-row items-center gap-[8px]">
             <button className="flex-1 py-[16px] bg-gradient-to-b from-gradientStartColor to-gradientEndColor rounded-[13px]">
-              <a href={myLink} className="font-comic text-sm">Пригласить друга</a>
+              <a href={shareLink} className="font-comic text-sm">Пригласить друга</a>
             </button>
             <CopyToClipboard text={myLink}
               onCopy={() => setState(true)}>
