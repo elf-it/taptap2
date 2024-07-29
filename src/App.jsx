@@ -110,7 +110,7 @@ function App() {
           :
           <>
           {numPage == 5 ?
-            <div className="bg-bgMain h-full bg-cover overflow-hidden"><Guide /></div>
+            <div className="bg-bgMain h-full bg-cover overflow-hidden">{tg.initDataUnsafe?.start_param}</div>
           :
           <>
             <div className="bg-bgMain h-full bg-cover overflow-hidden">{routes[numPage].element}</div>
