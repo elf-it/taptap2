@@ -14,7 +14,6 @@ import coin10 from "../assets/coins/coin10.png";
 import coin11 from "../assets/coins/coin11.png";
 import coin12 from "../assets/coins/coin12.png";
 import Coin from "./Coin";
-import CoinWeight from "./CoinWeight";
 
 function Clicker({ handleClick }) {
   const [showedCoins, setShowedCoins] = useState([]);
@@ -34,26 +33,48 @@ function Clicker({ handleClick }) {
     coin12,
   ];
 
-  const mamothClick = (e) => {
-    const clickBoxSize = e.target.getBoundingClientRect();
-    const randomImageIndex = Math.floor(Math.random() * coins.length);
-    const randomYPosition = Math.floor(
-      Math.random() * (clickBoxSize.height - 200) + 200
-    );
-    const randomXPosition = Math.floor(
-      Math.random() * (clickBoxSize.width - 100) + 50
-    );
+  const circleRandomCoordinates = (e, i) => {
+    const sign = i % 2 === 0 ? -1 : 1;
 
-    handleClick();
+    const halfCircle = Math.PI / 180;
+    const elWidth = e.target.getBoundingClientRect().width;
+    const elHalfWidth = elWidth / 2;
+
+    const randomAngel = Math.floor(Math.random() * 90);
+    const randomDistance = Math.floor(Math.random() * 15 + elHalfWidth);
+
+    const x = elHalfWidth + randomDistance * Math.cos(randomAngel * halfCircle) * sign;
+    const y = elWidth - randomDistance * Math.sin(randomAngel * halfCircle);
+
+    return [x, y];
+  };
+
+  const generateNewCoin = (e, i) => {
+    const randomImageIndex = Math.floor(Math.random() * coins.length);
+    const [x, y] = circleRandomCoordinates(e, i);
+
     const newCoin = {
-      id: Date.now(),
+      id: String(Date.now() * (x / (i + 1)) + y),
       position: {
-        x: randomXPosition,
-        y: randomYPosition,
+        x,
+        y,
       },
       img: coins[randomImageIndex],
     };
-    setShowedCoins((prevCoins) => [...prevCoins, newCoin]);
+
+    return newCoin;
+  };
+
+  const mamothClick = (e) => {
+    const newCoins = [];
+
+    handleClick();
+
+    for (let i = 0; i < 5; i++) {
+      newCoins.push(generateNewCoin(e, i));
+    }
+
+    setShowedCoins((prevCoins) => [...prevCoins, ...newCoins]);
   };
 
   const handleAnimationEnd = (id) => {
@@ -61,23 +82,16 @@ function Clicker({ handleClick }) {
   };
 
   return (
-    <button onClick={mamothClick} className="flex-1 relative">
-      {showedCoins.map((coin) => <Coin
-            key={coin.id}
-            id={coin.id}
-            position={coin.position}
-            img={coin.img}
-            onAnimationEnd={handleAnimationEnd}
-          />
-      )}
-      {showedCoins.map((coin) => <CoinWeight
-            key={coin.id}
-            id={coin.id}
-            position={coin.position}
-            count={15}
-          />
-      )}
-      
+    <button onClick={mamothClick} className="flex-1 relative active:scale-[.98] duration-[0]">
+      {showedCoins.map((coin) => (
+        <Coin
+          key={coin.id}
+          id={coin.id}
+          position={coin.position}
+          img={coin.img}
+          onAnimationEnd={handleAnimationEnd}
+        />
+      ))}
       <Icon name={"big-mamoth"} size={"100%"} />
     </button>
   );
