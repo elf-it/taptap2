@@ -30,7 +30,7 @@ function App() {
     },
     {
       path: "/",
-      element: <Dashboard />,
+      element: <Dashboard person={person} />,
       label: "Дашборд",
       icon:"dashboard"
     },

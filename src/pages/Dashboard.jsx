@@ -11,7 +11,7 @@ const tg = window.Telegram.WebApp;
 const myLink = "https://t.me/mamontenokBot_bot/Mamontenok?startapp=" + tg.initDataUnsafe?.user?.id;
 const shareLink = "https://t.me/share/url?url=http://t.me/mamontenokBot_bot/Mamontenok?startapp=" + tg.initDataUnsafe?.user?.id
 
-export default function Dashboard() {
+export default function Dashboard({person}) {
 
   const [state, setState] = useState(false);
   const [referals, setReferals] = useState([]);
@@ -73,7 +73,7 @@ export default function Dashboard() {
         <div className="elem-bg_green px-[8px] rounded-[40px] w-auto flex flex-row items-center gap-[8px]">
           <img src={crownSvg} alt="" />
           <p className="font-comic text-gradient font-bold text-sm">
-            Gold Status
+            {person.status}
           </p>
         </div>
 
