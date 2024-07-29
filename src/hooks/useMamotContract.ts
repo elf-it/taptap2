@@ -13,7 +13,7 @@ export function useMamotContract(){
     const mamotContract = useAsyncInitialize(async () => {
         if(!client) return;
 
-        const contract = Mamotic.fromAddress(Address.parse("EQDXKbu2XD0kjO6OmT70rBdRQUYvm9fr_SCOHhsfdA0o49zX"));
+        const contract = Mamotic.fromAddress(Address.parse("EQCga9E2Wy7iWMyFf0X8ttbvOnfBEM025UtzO2YwOU0NPX7c"));
 
         return client.open(contract) as OpenedContract<Mamotic>;
     }, [client]);
@@ -29,18 +29,6 @@ export function useMamotContract(){
 
         getUser();
     }, [mamotContract])
-    /*
-    mamotContract.send(
-        userS.getSender(),
-        {
-            value: toNano("4")
-        },
-        {
-            $$type: "Buy",
-            referrers
-        }
-    );
-    */
 
     return {
         user: user,
