@@ -8,7 +8,7 @@ import CopyToClipboard from "react-copy-to-clipboard";
 
 const tg = window.Telegram.WebApp;
 const myLink = "http://t.me/mamontenokBot_bot/Mamontenok?startapp=" + tg.initDataUnsafe?.user?.id;
-const shareLink = "t.me/share?url=http://t.me/mamontenokBot_bot/Mamontenok?startapp=" + tg.initDataUnsafe?.user?.id
+const shareLink = "t.me/share/url?url=http://t.me/mamontenokBot_bot/Mamontenok?startapp=" + tg.initDataUnsafe?.user?.id
 
 export default function Dashboard() {
 
