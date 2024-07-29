@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import crownSvg from "../assets/icons/icon__crown.svg";
 import coinsSvg from "../assets/icons/icon__coins.svg";
 import ticketSvg from "../assets/icons/icon__ticket.svg";
 import userImage from "../assets/images/user-image.png";
 import copySvg from "../assets/icons/icon__copy.svg";
 
+const tg = window.Telegram.WebApp;
+const myLink = "http://t.me/mamontenokBot_bot/Mamontenok?startapp=" + tg.initDataUnsafe?.user?.id;
+
 export default function Dashboard() {
+
+  const [state, setState] = useState(false);
+
   const fakeData = [
     {
       name: "Pepe",
@@ -138,11 +144,12 @@ export default function Dashboard() {
 
           <div className="w-full flex flex-row items-center gap-[8px]">
             <button className="flex-1 py-[16px] bg-gradient-to-b from-gradientStartColor to-gradientEndColor rounded-[13px]">
-              <p className="font-comic text-sm">Пригласить друга</p>
+              <a href={myLink} className="font-comic text-sm">Пригласить друга</a>
             </button>
-            <button className="p-[16px] elem-bg_green rounded-[13px] overflow-hidden">
-              <img src={copySvg} alt="" />
-            </button>
+            <CopyToClipboard text={myLink}
+              onCopy={() => setState(true)}>
+              <button className="p-[16px] elem-bg_green rounded-[13px] overflow-hidden"><img src={copySvg} alt="" /></button>
+            </CopyToClipboard>
           </div>
 
           <div className="flex flex-col w-full">
