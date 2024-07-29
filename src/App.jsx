@@ -53,7 +53,7 @@ function App() {
     if(response.error){
       console.log(response.error)
     }else{
-      setPerson({tid: response.tid, username: response.username})
+      setPerson({tid: response.tid, username: response.username, status: response.status})
     }
     setLoad(false)
   };
