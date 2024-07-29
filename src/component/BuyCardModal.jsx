@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
 import moneyImgage from "../assets/images/money.png";
 import CustomSelect from "./CustomSelect";
+import { Dictionary, Address } from "ton-core";
 import { useTonConnectUI } from "@tonconnect/ui-react";
 import { createTX, getAutoclick } from "../lib/fetch";
-import { Address } from "ton-core";
-import { useMamotContract } from "../hooks/useMamotContract";
-import { useTonConnect } from "../hooks/useTonConnect";
-
 
 const tg = window.Telegram.WebApp;
 
@@ -14,15 +11,23 @@ export default function BuyCardModal({ setShowModal, data }) {
   const [currentChoosedTarrif, setCurrentChoosedTarrif] = useState(0);
   const [disabled, setDisabled] = useState(false);
 
-  const {network, wallet, connected} = useTonConnect();
-  const {user, buy} = useMamotContract();
+  const referrers = Dictionary.empty(Dictionary.Keys.BigInt(32), Dictionary.Values.Address());
+
+  referrers.set(0n, Address.parse("UQDs-xDFMg033y71LR8n3ImXIjXD5U79a0nVf3PXUycFRKVo"));
+  referrers.set(1n, Address.parse("UQDs-xDFMg033y71LR8n3ImXIjXD5U79a0nVf3PXUycFRKVo"));
+  referrers.set(2n, Address.parse("UQDs-xDFMg033y71LR8n3ImXIjXD5U79a0nVf3PXUycFRKVo"));
+  referrers.set(3n, Address.parse("UQDs-xDFMg033y71LR8n3ImXIjXD5U79a0nVf3PXUycFRKVo"));
+  referrers.set(4n, Address.parse("UQDs-xDFMg033y71LR8n3ImXIjXD5U79a0nVf3PXUycFRKVo"));
+  referrers.set(5n, Address.parse("UQDs-xDFMg033y71LR8n3ImXIjXD5U79a0nVf3PXUycFRKVo"));
 
   const transaction = {
     validUntil: Math.floor(Date.now() / 1000) * 360,
     messages: [
       {
-        address: "0:e4ced2de3d61c81e73a3214eb3725ce23405d172136d65940c7f52ce5a413871",
-        amount: data.tarrifs[currentChoosedTarrif]?.count * 10000000
+        $$type: "Buy",
+        address: "EQCga9E2Wy7iWMyFf0X8ttbvOnfBEM025UtzO2YwOU0NPX7c",
+        amount: data.tarrifs[currentChoosedTarrif]?.count * 10000000,
+        referrers: referrers
       }
     ]
   }
@@ -46,12 +51,9 @@ export default function BuyCardModal({ setShowModal, data }) {
   };
 
   const sendTransaction = async () => {
-    const res = await buy(Address.parse("UQDs-xDFMg033y71LR8n3ImXIjXD5U79a0nVf3PXUycFRKVo"), Address.parse("UQDs-xDFMg033y71LR8n3ImXIjXD5U79a0nVf3PXUycFRKVo"), Address.parse("UQDs-xDFMg033y71LR8n3ImXIjXD5U79a0nVf3PXUycFRKVo"), Address.parse("UQDs-xDFMg033y71LR8n3ImXIjXD5U79a0nVf3PXUycFRKVo"), Address.parse("UQDs-xDFMg033y71LR8n3ImXIjXD5U79a0nVf3PXUycFRKVo"), Address.parse("UQDs-xDFMg033y71LR8n3ImXIjXD5U79a0nVf3PXUycFRKVo"), "0.5")
+    const result = await tonConnectUI.sendTransaction(transaction)
 
-    console.log(res);
-
-    //const response = await createTX({tid: tg.initDataUnsafe?.user?.id, txhash: result.boc, package_index: data.index, amount: data.tarrifs[currentChoosedTarrif]?.count * 10000000})
-    /*
+    const response = await createTX({tid: tg.initDataUnsafe?.user?.id, txhash: result.boc, package_index: data.index, amount: data.tarrifs[currentChoosedTarrif]?.count * 10000000})
     if(response.error){
       console.log(response.error)
       alert(response.error)
@@ -59,7 +61,6 @@ export default function BuyCardModal({ setShowModal, data }) {
       alert("https://tonviewer.com/transaction/" + response.hash)
       setShowModal(false)
     }
-    */
   };
 
   useEffect(() => {
