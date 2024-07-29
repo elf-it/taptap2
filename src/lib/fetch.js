@@ -23,6 +23,27 @@ export const getPerson = async (props) => {
     }
 }
 
+export const getReferals = async (props) => {
+    try {
+        const request = await fetch(ROUTE_URI + '/getreferals', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                "Accept": "*/*"
+            },
+            body: JSON.stringify({
+                key: "123",
+                tid: props.tid
+            })
+        })
+
+        return await request.json()
+    } catch (error) {
+        console.log("Error during getreferals: ", error)
+        return null
+    }
+}
+
 export const getAutoclick = async (props) => {
     try {
         const request = await fetch(ROUTE_URI + '/getautoclick', {

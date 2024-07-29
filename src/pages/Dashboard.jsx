@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import crownSvg from "../assets/icons/icon__crown.svg";
 import coinsSvg from "../assets/icons/icon__coins.svg";
 import ticketSvg from "../assets/icons/icon__ticket.svg";
 import userImage from "../assets/images/user-image.png";
 import copySvg from "../assets/icons/icon__copy.svg";
 import CopyToClipboard from "react-copy-to-clipboard";
+import { getReferals } from "../lib/fetch";
 
 const tg = window.Telegram.WebApp;
 const myLink = "https://t.me/mamontenokBot_bot/Mamontenok?startapp=" + tg.initDataUnsafe?.user?.id;
@@ -13,6 +14,7 @@ const shareLink = "https://t.me/share/url?url=http://t.me/mamontenokBot_bot/Mamo
 export default function Dashboard() {
 
   const [state, setState] = useState(false);
+  const [referals, setReferals] = useState([]);
 
   const fakeData = [
     {
@@ -47,38 +49,24 @@ export default function Dashboard() {
     },
   ];
 
-  const fakeData2 = [
-    {
-      name: "Pepe",
-      coins: "70,00",
-      status: "Gold Status",
-    },
-    {
-      name: "Pepe",
-      coins: "70,00",
-      status: "Gold Status",
-    },
-    {
-      name: "Pepe",
-      coins: "70,00",
-      status: "Gold Status",
-    },
-    {
-      name: "Pepe",
-      coins: "70,00",
-      status: "Gold Status",
-    },
-    {
-      name: "Pepe",
-      coins: "70,00",
-      status: "Gold Status",
-    },
-    {
-      name: "Pepe",
-      coins: "70,00",
-      status: "Gold Status",
-    },
-  ];
+  const nGetReferals = async () => {
+    if("358929635" != undefined){
+      const response = await getReferals({tid: "358929635"})
+
+      if(response.error){
+        console.log(response.error)
+      }else{
+        setReferals(response.referals);
+        console.log(referals);
+      }
+    }else{
+      console.log("no tg app")
+    }
+  };
+
+  useEffect(() => {
+    nGetReferals();
+  }, []);
 
   return (
     
@@ -156,10 +144,10 @@ export default function Dashboard() {
           </div>
 
           <div className="flex flex-col w-full">
-            {fakeData2.map((user, i) => (
+            {referals.map((user, i) => (
               <div
                 className={`py-[5px] flex flex-row items-center justify-between w-full ${
-                  i !== fakeData.length - 1 ? "border-b" : ""
+                  i !== referals.length - 1 ? "border-b" : ""
                 } border-white/20`}
               >
                 <div className="flex flex-col">
