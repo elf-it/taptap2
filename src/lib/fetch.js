@@ -55,7 +55,8 @@ export const registration = async (props) => {
             body: JSON.stringify({
                 key: "123",
                 tid: props.tid,
-                username: props.username
+                username: props.username,
+                referrer: props?.referrer
             })
         })
 
