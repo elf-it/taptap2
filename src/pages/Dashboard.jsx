@@ -65,7 +65,7 @@ export default function Dashboard({person}) {
 
   useEffect(() => {
     nGetReferals();
-  }, [referals]);
+  }, []);
 
   return (
     
