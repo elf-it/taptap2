@@ -80,7 +80,7 @@ function App() {
             <div className="absolute bottom-[10px] left-[17px] right-[17px]">
               <nav className="bg-bgColorGreen backdrop-blur-xl h-[76px] rounded-[15px] w-full relative">
                 <div
-                  style={{ width: "25%", left: `${numPage * 25}%` }}
+                  style={{ width: "25%", left: `${0 * 25}%` }}
                   className=" absolute h-full z-0 p-[4px] transition-all"
                 >
                   <div className="elem-bg_green h-full w-full rounded-[12px]"></div>
