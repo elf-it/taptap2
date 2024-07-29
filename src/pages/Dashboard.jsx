@@ -147,7 +147,7 @@ export default function Dashboard() {
 
           <div className="w-full flex flex-row items-center gap-[8px]">
             <button className="flex-1 py-[16px] bg-gradient-to-b from-gradientStartColor to-gradientEndColor rounded-[13px]">
-              <p onclick={window.location='tg://msg?text='+encodeURIComponent(myLink)} className="font-comic text-sm">Пригласить друга</p>
+              <p onclick={tg.openTelegramLink('tg://msg?text='+encodeURIComponent(myLink))} className="font-comic text-sm">Пригласить друга</p>
             </button>
             <CopyToClipboard text={myLink}
               onCopy={() => setState(true)}>
