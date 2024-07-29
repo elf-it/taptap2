@@ -4,6 +4,7 @@ import coinsSvg from "../assets/icons/icon__coins.svg";
 import ticketSvg from "../assets/icons/icon__ticket.svg";
 import userImage from "../assets/images/user-image.png";
 import copySvg from "../assets/icons/icon__copy.svg";
+import CopyToClipboard from "react-copy-to-clipboard";
 
 const tg = window.Telegram.WebApp;
 const myLink = "http://t.me/mamontenokBot_bot/Mamontenok?startapp=" + tg.initDataUnsafe?.user?.id;
@@ -109,6 +110,7 @@ export default function Dashboard() {
           </h3>
           {fakeData.map((user, i) => (
             <div
+            key={i}
               className={`py-[10px] flex flex-row items-center justify-between w-full ${
                 i !== fakeData.length - 1 ? "border-b" : ""
               } border-white/20`}
