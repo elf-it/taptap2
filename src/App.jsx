@@ -9,6 +9,7 @@ import AutoFarm from './pages/AutoFarm';
 import ConnectWallet from './pages/ConnectWallet';
 import { getPerson } from './lib/fetch';
 import { Icon } from './component/IconSprite';
+import Loading from './pages/Loading';
 
 const tg = window.Telegram.WebApp;
 
@@ -67,7 +68,7 @@ function App() {
     {"399847443" != "undefined" ?
       <>
       {load ?
-        <div className="bg-bgMain h-full bg-cover overflow-hidden"><span className='text-white'>Loading...</span></div>
+        <div className="bg-bgMain h-full bg-cover overflow-hidden"><Loading /></div>
       :
       <>
       { person != null ?

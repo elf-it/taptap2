@@ -1,6 +1,6 @@
 # TACT Compilation Report
 Contract: Mamotic
-BOC Size: 2173 bytes
+BOC Size: 2246 bytes
 
 # Types
 Total Types: 8
@@ -38,9 +38,11 @@ TLB: `withdraw#ede3a95b address:address = Withdraw`
 Signature: `Withdraw{address:address}`
 
 # Get Methods
-Total Get Methods: 2
+Total Get Methods: 3
 
 ## balance
+
+## id
 
 ## user
 Argument: addr

@@ -211,8 +211,8 @@ forall X0, X1 -> (X0, X1) __tact_tuple_destroy_2(tuple v) asm "2 UNTUPLE";
     send_raw_message($c, $params'mode);
 }
 
-((slice, slice, int, int, cell, cell, int, slice), ()) $Mamotic$_fun_forward((slice, slice, int, int, cell, cell, int, slice) $self, slice $to, cell $body, int $bounce, tuple $init) impure inline_ref {
-    var (($self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner)) = $self;
+((int, slice, slice, int, int, cell, cell, int, slice), ()) $Mamotic$_fun_forward((int, slice, slice, int, int, cell, cell, int, slice) $self, slice $to, cell $body, int $bounce, tuple $init) impure inline_ref {
+    var (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner)) = $self;
     var ($init) = $init;
     cell $code = null();
     cell $data = null();
@@ -228,21 +228,21 @@ forall X0, X1 -> (X0, X1) __tact_tuple_destroy_2(tuple v) asm "2 UNTUPLE";
         if (($balanceBeforeMessage < 0)) {
             raw_reserve(0, 0);
             $global_send($SendParameters$_constructor_bounce_to_value_mode_body_code_data($bounce, $to, 0, 130, $body, $code, $data));
-            return (($self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner), ());
+            return (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner), ());
         }
     }
     $global_send($SendParameters$_constructor_bounce_to_value_mode_body_code_data($bounce, $to, 0, 66, $body, $code, $data));
-    return (($self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner), ());
+    return (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner), ());
 }
 
-((slice, slice, int, int, cell, cell, int, slice), ()) $Mamotic$_fun_reply((slice, slice, int, int, cell, cell, int, slice) $self, cell $body) impure inline {
-    var (($self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner)) = $self;
-    ($self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner)~$Mamotic$_fun_forward(__tact_context_get_sender(), $body, true, null());
-    return (($self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner), ());
+((int, slice, slice, int, int, cell, cell, int, slice), ()) $Mamotic$_fun_reply((int, slice, slice, int, int, cell, cell, int, slice) $self, cell $body) impure inline {
+    var (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner)) = $self;
+    ($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner)~$Mamotic$_fun_forward(__tact_context_get_sender(), $body, true, null());
+    return (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner), ());
 }
 
-((slice, slice, int, int, cell, cell, int, slice), ()) $Mamotic$_fun_notify((slice, slice, int, int, cell, cell, int, slice) $self, cell $body) impure inline {
-    var (($self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner)) = $self;
-    ($self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner)~$Mamotic$_fun_forward(__tact_context_get_sender(), $body, false, null());
-    return (($self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner), ());
+((int, slice, slice, int, int, cell, cell, int, slice), ()) $Mamotic$_fun_notify((int, slice, slice, int, int, cell, cell, int, slice) $self, cell $body) impure inline {
+    var (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner)) = $self;
+    ($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner)~$Mamotic$_fun_forward(__tact_context_get_sender(), $body, false, null());
+    return (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner), ());
 }

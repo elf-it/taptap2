@@ -70,10 +70,10 @@ cell $DeployOk$_store_cell((int) v) inline;
 (slice, ((cell))) $Buy$_load(slice sc_0) inline;
 
 ;; $Mamotic$_store
-builder $Mamotic$_store(builder build_0, (slice, slice, int, int, cell, cell, int, slice) v) inline;
+builder $Mamotic$_store(builder build_0, (int, slice, slice, int, int, cell, cell, int, slice) v) inline;
 
 ;; $Mamotic$_load
-(slice, ((slice, slice, int, int, cell, cell, int, slice))) $Mamotic$_load(slice sc_0) inline;
+(slice, ((int, slice, slice, int, int, cell, cell, int, slice))) $Mamotic$_load(slice sc_0) inline;
 
 ;; $StateInit$_not_null
 ((cell, cell)) $StateInit$_not_null(tuple v) inline;
@@ -85,34 +85,37 @@ _ $Context$_get_value((int, slice, int, slice) v) inline;
 (slice, ((slice, slice, int, int))) $Mamotic$init$_load(slice sc_0) inline;
 
 ;; $Mamotic$_contract_init
-(slice, slice, int, int, cell, cell, int, slice) $Mamotic$_contract_init(slice $payeer, slice $comission, int $percentPayeer, int $percentComission) impure inline_ref;
+(int, slice, slice, int, int, cell, cell, int, slice) $Mamotic$_contract_init(slice $payeer, slice $comission, int $percentPayeer, int $percentComission) impure inline_ref;
 
 ;; $Mamotic$_contract_load
-(slice, slice, int, int, cell, cell, int, slice) $Mamotic$_contract_load() impure inline_ref;
+(int, slice, slice, int, int, cell, cell, int, slice) $Mamotic$_contract_load() impure inline_ref;
 
 ;; $Mamotic$_contract_store
-() $Mamotic$_contract_store((slice, slice, int, int, cell, cell, int, slice) v) impure inline;
+() $Mamotic$_contract_store((int, slice, slice, int, int, cell, cell, int, slice) v) impure inline;
 
 ;; $global_send
 () $global_send((int, slice, int, int, cell, cell, cell) $params) impure inline_ref;
 
 ;; $Mamotic$_fun_balance
-((slice, slice, int, int, cell, cell, int, slice), int) $Mamotic$_fun_balance((slice, slice, int, int, cell, cell, int, slice) $self) impure inline_ref;
+((int, slice, slice, int, int, cell, cell, int, slice), int) $Mamotic$_fun_balance((int, slice, slice, int, int, cell, cell, int, slice) $self) impure inline_ref;
+
+;; $Mamotic$_fun_id
+((int, slice, slice, int, int, cell, cell, int, slice), int) $Mamotic$_fun_id((int, slice, slice, int, int, cell, cell, int, slice) $self) impure inline_ref;
 
 ;; $Mamotic$_fun_user
-((slice, slice, int, int, cell, cell, int, slice), int) $Mamotic$_fun_user((slice, slice, int, int, cell, cell, int, slice) $self, slice $addr) impure inline_ref;
+((int, slice, slice, int, int, cell, cell, int, slice), int) $Mamotic$_fun_user((int, slice, slice, int, int, cell, cell, int, slice) $self, slice $addr) impure inline_ref;
 
 ;; $SendParameters$_constructor_bounce_to_value_mode_body_code_data
 ((int, slice, int, int, cell, cell, cell)) $SendParameters$_constructor_bounce_to_value_mode_body_code_data(int bounce, slice to, int value, int mode, cell body, cell code, cell data) inline;
 
 ;; $Mamotic$_fun_forward
-((slice, slice, int, int, cell, cell, int, slice), ()) $Mamotic$_fun_forward((slice, slice, int, int, cell, cell, int, slice) $self, slice $to, cell $body, int $bounce, tuple $init) impure inline_ref;
+((int, slice, slice, int, int, cell, cell, int, slice), ()) $Mamotic$_fun_forward((int, slice, slice, int, int, cell, cell, int, slice) $self, slice $to, cell $body, int $bounce, tuple $init) impure inline_ref;
 
 ;; $Mamotic$_fun_reply
-((slice, slice, int, int, cell, cell, int, slice), ()) $Mamotic$_fun_reply((slice, slice, int, int, cell, cell, int, slice) $self, cell $body) impure inline;
+((int, slice, slice, int, int, cell, cell, int, slice), ()) $Mamotic$_fun_reply((int, slice, slice, int, int, cell, cell, int, slice) $self, cell $body) impure inline;
 
 ;; $Mamotic$_fun_notify
-((slice, slice, int, int, cell, cell, int, slice), ()) $Mamotic$_fun_notify((slice, slice, int, int, cell, cell, int, slice) $self, cell $body) impure inline;
+((int, slice, slice, int, int, cell, cell, int, slice), ()) $Mamotic$_fun_notify((int, slice, slice, int, int, cell, cell, int, slice) $self, cell $body) impure inline;
 
 ;; $SendParameters$_constructor_to_bounce_value_mode
 ((int, slice, int, int, cell, cell, cell)) $SendParameters$_constructor_to_bounce_value_mode(slice to, int bounce, int value, int mode) inline;

@@ -13,7 +13,7 @@ export function useMamotContract(){
     const mamotContract = useAsyncInitialize(async () => {
         if(!client) return;
 
-        const contract = Mamotic.fromAddress(Address.parse(""));
+        const contract = Mamotic.fromAddress(Address.parse("EQDXKbu2XD0kjO6OmT70rBdRQUYvm9fr_SCOHhsfdA0o49zX"));
 
         return client.open(contract) as OpenedContract<Mamotic>;
     }, [client]);
@@ -44,15 +44,15 @@ export function useMamotContract(){
 
     return {
         user: user,
-        buy: (ref1: string, ref2: string, ref3: string, ref4: string, ref5: string, ref6: string, value: string) => {
+        buy: (ref1: Address, ref2: Address, ref3: Address, ref4: Address, ref5: Address, ref6: Address, value: string) => {
             const referrers = Dictionary.empty(Dictionary.Keys.BigInt(32), Dictionary.Values.Address());
 
-            referrers.set(0n, Address.parse(ref1));
-            referrers.set(1n, Address.parse(ref2));
-            referrers.set(2n, Address.parse(ref3));
-            referrers.set(3n, Address.parse(ref4));
-            referrers.set(4n, Address.parse(ref5));
-            referrers.set(5n, Address.parse(ref6));
+            referrers.set(0n, ref1);
+            referrers.set(1n, ref2);
+            referrers.set(2n, ref3);
+            referrers.set(3n, ref4);
+            referrers.set(4n, ref5);
+            referrers.set(5n, ref6);
             const message: Buy = {
                 $$type: "Buy",
                 referrers
@@ -61,6 +61,11 @@ export function useMamotContract(){
             mamotContract?.send(sender, {
                 value: toNano(value)
             }, message);
+        },
+        withdraw: () => {
+            mamotContract?.send(sender, {
+                value: toNano("0.02")
+            }, "withdraw percents");
         }
     }
 }

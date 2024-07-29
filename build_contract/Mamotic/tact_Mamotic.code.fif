@@ -31,6 +31,7 @@ PROGRAM{
   DECLPROC $Mamotic$_contract_store
   DECLPROC $global_send
   DECLPROC $Mamotic$_fun_balance
+  DECLPROC $Mamotic$_fun_id
   DECLPROC $Mamotic$_fun_user
   DECLPROC $SendParameters$_constructor_bounce_to_value_mode_body_code_data
   DECLPROC $Mamotic$_fun_forward
@@ -44,6 +45,7 @@ PROGRAM{
   DECLPROC $Mamotic$_internal_text_13e48137b7f3348da7feca8849f53d44200438fbc350bf54dd7718e5d4e4942c
   DECLPROC $Mamotic$_internal_binary_Deploy
   104128 DECLMETHOD %balance
+  105872 DECLMETHOD %id
   120162 DECLMETHOD %user
   113617 DECLMETHOD supported_interfaces
   121275 DECLMETHOD get_abi_ipfs
@@ -353,21 +355,29 @@ PROGRAM{
     SWAP
   }>
   $Mamotic$_store PROCINLINE:<{
-    s8 s7 XCHG2
+    s8 s9 XCHG2
+    257 PUSHINT
+    STIX
+    s0 s6 XCHG2
     __tact_store_address INLINECALLDICT
-    s0 s5 XCHG2
+    s0 s4 XCHG2
     __tact_store_address INLINECALLDICT
-    s1 s3 XCHG
-    32 STU
-    32 STU
-    STDICT
-    STDICT
     s1 s2 XCHG
+    32 STU
+    32 STU
+    STDICT
+    STDICT
     8 STU
-    SWAP
+    NEWC
+    ROT
     __tact_store_address INLINECALLDICT
+    ENDC
+    SWAP
+    STREF
   }>
   $Mamotic$_load PROCINLINE:<{
+    257 PUSHINT
+    LDIX
     __tact_load_address INLINECALLDICT
     SWAP
     __tact_load_address INLINECALLDICT
@@ -377,7 +387,12 @@ PROGRAM{
     LDDICT
     LDDICT
     8 LDU
+    LDREF
+    SWAP
+    CTOS
     __tact_load_address INLINECALLDICT
+    NIP
+    s1 s9 XCHG
     s1 s8 XCHG
     s1 s7 XCHG
     s1 s6 XCHG
@@ -412,8 +427,9 @@ PROGRAM{
     s3 s3 s0 XCHG3
   }>
   $Mamotic$_contract_init PROCREF:<{
-    PUSHNULL
     0 PUSHINT
+    PUSHNULL
+    OVER
     __tact_context_get_sender INLINECALLDICT
     PUSHNULL
     257 PUSHINT
@@ -435,6 +451,10 @@ PROGRAM{
       s0 s2 XCHG
       INC
     }>
+    s4 s8 XCHG
+    s4 s7 XCHG
+    s4 s6 XCHG
+    s4 s5 XCHG
     SWAP
   }>
   $Mamotic$_contract_load PROCREF:<{
@@ -447,7 +467,7 @@ PROGRAM{
     SWAP
     IFJMP:<{
       $Mamotic$_load INLINECALLDICT
-      1 8 BLKDROP2
+      1 9 BLKDROP2
     }>
     MYADDR
     11 PLDU
@@ -468,7 +488,7 @@ PROGRAM{
     TRUE
     SWAP
     1 STI
-    8 -ROLL
+    9 -ROLL
     $Mamotic$_store INLINECALLDICT
     ENDC
     c4 POP
@@ -577,6 +597,9 @@ PROGRAM{
   }>
   $Mamotic$_fun_balance PROCREF:<{
     __tact_my_balance INLINECALLDICT
+  }>
+  $Mamotic$_fun_id PROCREF:<{
+    s8 PUSH
   }>
   $Mamotic$_fun_user PROCREF:<{
     s4 PUSH
@@ -708,13 +731,13 @@ PROGRAM{
           __tact_dict_set_slice_int INLINECALLDICT
         }>
         s0 s6 XCHG
-        x{5b44454255475d2046696c6520636f6e7472616374735c6d616d6f7469632e746163743a35393a3137} PUSHSLICE
+        x{5b44454255475d2046696c6520636f6e7472616374735c6d616d6f7469632e746163743a36303a3137} PUSHSLICE
         __tact_debug_address INLINECALLDICT
       }>
       INC
     }>
     2DROP
-    TRUE
+    FALSE
     __tact_context_get INLINECALLDICT
     $Context$_get_value INLINECALLDICT
     s7 PUSH
@@ -723,10 +746,10 @@ PROGRAM{
     DIV
     s9 PUSH
     -ROT
-    2 PUSHINT
+    3 PUSHINT
     $SendParameters$_constructor_to_bounce_value_mode INLINECALLDICT
     $global_send INLINECALLDICT
-    TRUE
+    FALSE
     __tact_context_get INLINECALLDICT
     $Context$_get_value INLINECALLDICT
     s6 PUSH
@@ -735,7 +758,7 @@ PROGRAM{
     DIV
     s8 PUSH
     -ROT
-    2 PUSHINT
+    3 PUSHINT
     $SendParameters$_constructor_to_bounce_value_mode INLINECALLDICT
     $global_send INLINECALLDICT
     B{b5ee9c7241010101001400002400000000627579207375636365737366756cc8a3f2c1} B>boc PUSHREF
@@ -749,7 +772,12 @@ PROGRAM{
     THROWANYIFNOT
     __tact_context_get_sender INLINECALLDICT
     TRUE
-    0 PUSHINT
+    __tact_my_balance INLINECALLDICT
+    __tact_context_get INLINECALLDICT
+    $Context$_get_value INLINECALLDICT
+    SUB
+    100000000 PUSHINT
+    SUB
     2 PUSHINT
     $SendParameters$_constructor_to_bounce_value_mode INLINECALLDICT
     $global_send INLINECALLDICT
@@ -810,14 +838,19 @@ PROGRAM{
   %balance PROC:<{
     $Mamotic$_contract_load INLINECALLDICT
     $Mamotic$_fun_balance INLINECALLDICT
-    8 1 BLKDROP2
+    9 1 BLKDROP2
+  }>
+  %id PROC:<{
+    $Mamotic$_contract_load INLINECALLDICT
+    $Mamotic$_fun_id INLINECALLDICT
+    9 1 BLKDROP2
   }>
   %user PROC:<{
     __tact_verify_address INLINECALLDICT
     $Mamotic$_contract_load INLINECALLDICT
-    8 ROLL
+    9 ROLL
     $Mamotic$_fun_user INLINECALLDICT
-    8 1 BLKDROP2
+    9 1 BLKDROP2
   }>
   supported_interfaces PROC:<{
     123515602279859691144772641439386770278 PUSHINT
@@ -827,7 +860,7 @@ PROGRAM{
     209474421377847335869795010607481022628 PUSHINT
   }>
   get_abi_ipfs PROC:<{
-    x{697066733a2f2f516d5431567158474a7669795034486742766176624135366a7838474c3742774d366550627576635464334a4342} PUSHSLICE
+    x{697066733a2f2f516d617963774e5352696154446732616b444b6861314a6e7441456f75414d76717a476a38545131695251685438} PUSHSLICE
   }>
   lazy_deployment_completed PROC:<{
     c4 PUSH
@@ -926,7 +959,7 @@ PROGRAM{
     s0 s2 XCHG
     __tact_context_sender SETGLOB
     $Mamotic$_contract_load INLINECALLDICT
-    2 8 BLKSWAP
+    2 9 BLKSWAP
     $Mamotic$_contract_router_internal INLINECALLDICT
     130 THROWIFNOT
     $Mamotic$_contract_store INLINECALLDICT

@@ -81,8 +81,9 @@ cell $DeployOk$_store_cell((int) v) inline {
 ;; Type: Mamotic
 ;;
 
-builder $Mamotic$_store(builder build_0, (slice, slice, int, int, cell, cell, int, slice) v) inline {
-    var (v'payeer, v'comission, v'percentPayeer, v'percentComission, v'users, v'percentsReferals, v'countPercentsReferals, v'owner) = v;
+builder $Mamotic$_store(builder build_0, (int, slice, slice, int, int, cell, cell, int, slice) v) inline {
+    var (v'id, v'payeer, v'comission, v'percentPayeer, v'percentComission, v'users, v'percentsReferals, v'countPercentsReferals, v'owner) = v;
+    build_0 = build_0.store_int(v'id, 257);
     build_0 = __tact_store_address(build_0, v'payeer);
     build_0 = __tact_store_address(build_0, v'comission);
     build_0 = build_0.store_uint(v'percentPayeer, 32);
@@ -90,11 +91,14 @@ builder $Mamotic$_store(builder build_0, (slice, slice, int, int, cell, cell, in
     build_0 = build_0.store_dict(v'users);
     build_0 = build_0.store_dict(v'percentsReferals);
     build_0 = build_0.store_uint(v'countPercentsReferals, 8);
-    build_0 = __tact_store_address(build_0, v'owner);
+    var build_1 = begin_cell();
+    build_1 = __tact_store_address(build_1, v'owner);
+    build_0 = store_ref(build_0, build_1.end_cell());
     return build_0;
 }
 
-(slice, ((slice, slice, int, int, cell, cell, int, slice))) $Mamotic$_load(slice sc_0) inline {
+(slice, ((int, slice, slice, int, int, cell, cell, int, slice))) $Mamotic$_load(slice sc_0) inline {
+    var v'id = sc_0~load_int(257);
     var v'payeer = sc_0~__tact_load_address();
     var v'comission = sc_0~__tact_load_address();
     var v'percentPayeer = sc_0~load_uint(32);
@@ -102,8 +106,9 @@ builder $Mamotic$_store(builder build_0, (slice, slice, int, int, cell, cell, in
     var v'users = sc_0~load_dict();
     var v'percentsReferals = sc_0~load_dict();
     var v'countPercentsReferals = sc_0~load_uint(8);
-    var v'owner = sc_0~__tact_load_address();
-    return (sc_0, (v'payeer, v'comission, v'percentPayeer, v'percentComission, v'users, v'percentsReferals, v'countPercentsReferals, v'owner));
+    slice sc_1 = sc_0~load_ref().begin_parse();
+    var v'owner = sc_1~__tact_load_address();
+    return (sc_0, (v'id, v'payeer, v'comission, v'percentPayeer, v'percentComission, v'users, v'percentsReferals, v'countPercentsReferals, v'owner));
 }
 
 (slice, ((slice, slice, int, int))) $Mamotic$init$_load(slice sc_0) inline {
@@ -115,7 +120,7 @@ builder $Mamotic$_store(builder build_0, (slice, slice, int, int, cell, cell, in
     return (sc_0, (v'payeer, v'comission, v'percentPayeer, v'percentComission));
 }
 
-(slice, slice, int, int, cell, cell, int, slice) $Mamotic$_contract_load() impure inline_ref {
+(int, slice, slice, int, int, cell, cell, int, slice) $Mamotic$_contract_load() impure inline_ref {
     slice $sc = get_data().begin_parse();
     __tact_context_sys = $sc~load_ref();
     int $loaded = $sc~load_int(1);
@@ -130,7 +135,7 @@ builder $Mamotic$_store(builder build_0, (slice, slice, int, int, cell, cell, in
     }
 }
 
-() $Mamotic$_contract_store((slice, slice, int, int, cell, cell, int, slice) v) impure inline {
+() $Mamotic$_contract_store((int, slice, slice, int, int, cell, cell, int, slice) v) impure inline {
     builder b = begin_cell();
     b = b.store_ref(__tact_context_sys);
     b = b.store_int(true, 1);
