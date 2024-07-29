@@ -7,8 +7,8 @@ import copySvg from "../assets/icons/icon__copy.svg";
 import CopyToClipboard from "react-copy-to-clipboard";
 
 const tg = window.Telegram.WebApp;
-const myLink = "http://t.me/mamontenokBot_bot/Mamontenok?startapp=" + tg.initDataUnsafe?.user?.id;
-const shareLink = "t.me/share/url?url=http://t.me/mamontenokBot_bot/Mamontenok?startapp=" + tg.initDataUnsafe?.user?.id
+const myLink = "https://t.me/mamontenokBot_bot/Mamontenok?startapp=" + tg.initDataUnsafe?.user?.id;
+const shareLink = "https://t.me/share/url?url=http://t.me/mamontenokBot_bot/Mamontenok?startapp=" + tg.initDataUnsafe?.user?.id
 
 export default function Dashboard() {
 
@@ -147,7 +147,7 @@ export default function Dashboard() {
 
           <div className="w-full flex flex-row items-center gap-[8px]">
             <button className="flex-1 py-[16px] bg-gradient-to-b from-gradientStartColor to-gradientEndColor rounded-[13px]">
-              <p onclick={tg.openTelegramLink('tg://msg?text='+encodeURIComponent(myLink))} className="font-comic text-sm">Пригласить друга</p>
+              <p onclick={() => tg.openTelegramLink(shareLink)} className="font-comic text-sm">Пригласить друга</p>
             </button>
             <CopyToClipboard text={myLink}
               onCopy={() => setState(true)}>
