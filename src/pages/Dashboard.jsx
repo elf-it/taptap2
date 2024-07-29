@@ -57,7 +57,6 @@ export default function Dashboard() {
         console.log(response.error)
       }else{
         setReferals(response.referals);
-        console.log(referals);
       }
     }else{
       console.log("no tg app")
@@ -66,7 +65,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     nGetReferals();
-  }, []);
+  }, [referals]);
 
   return (
     
