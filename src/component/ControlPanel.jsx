@@ -4,7 +4,7 @@ import caseIcon from "../assets/icons/icon__case.svg";
 import walletIcon from "../assets/icons/icon__wallet.svg";
 import coinsIcon from "../assets/icons/icon__coins.svg";
 
-export default function ControlPanel({ count }) {
+export default function ControlPanel({ count, allSteps }) {
   const [unlimited, setUnlimited] = useState(false);
   const [autoFarm, setAutoFarm] = useState(false);
 
@@ -17,7 +17,7 @@ export default function ControlPanel({ count }) {
   const maxCount = 10000000;
 
   const formatCount = new Intl.NumberFormat("en-US").format(count); // форматирует число
-  const formatMaxCount = new Intl.NumberFormat("en-US").format(maxCount); // форматирует число
+  const formatMaxCount = new Intl.NumberFormat("en-US").format(allSteps); // форматирует число
 
   const countFontSize = calculateFontSize(formatCount, 50, 7); // динамически считает размер
   const smallCountFontSize = calculateFontSize(formatCount, 18, 7);
@@ -78,13 +78,13 @@ export default function ControlPanel({ count }) {
               style={{ fontSize: smallCountFontSize }}
               className="text-lg font-comic font-bold text-[#FFCC48]"
             >
-              {formatCount}
+              {formatMaxCount}
             </span>
             <span
               style={{ fontSize: maxCountFontSize }}
               className="text-sm font-comic font-bold text-[#9B9B9B]"
             >
-              /{formatMaxCount}
+              /{7000}
             </span>
           </p>
         </div>

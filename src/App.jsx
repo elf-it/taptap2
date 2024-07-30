@@ -7,7 +7,7 @@ import { TonConnectUIProvider } from '@tonconnect/ui-react';
 import { useEffect, useState } from 'react';
 import AutoFarm from './pages/AutoFarm';
 import ConnectWallet from './pages/ConnectWallet';
-import { getPerson } from './lib/fetch';
+import { getPerson, setMyCoins } from './lib/fetch';
 import { Icon } from './component/IconSprite';
 import Loading from './pages/Loading';
 
@@ -21,10 +21,22 @@ function App() {
 
   const [load, setLoad] = useState(true);
 
+  const [touchCoins, setTouchCoins] = useState(0)
+  const [allSteps, setAllSteps] = useState(0)
+  const [count, setCount] = useState(0)
+
+  const step = 10;
+
+  const addStep = () => {
+    setTouchCoins(touchCoins + step);
+    setCount(count + step);
+    setAllSteps(allSteps - step);
+  }
+
   const routes = [
     {
       path: "/",
-      element: <Main setNumPage={setNumPage} person={person} />,
+      element: <Main setNumPage={setNumPage} person={person} addStep={addStep} count={count} allSteps={allSteps} />,
       label: "Games",
       icon: "mamoth"
     },
@@ -50,7 +62,21 @@ function App() {
 
   const auth = async () => {
     const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
-    //const response = await getPerson({tid: "399847443", username: "Fourpro"})
+    //const response = await getPerson({tid: "358929635", username: "Fourpro"})
+
+    if(response.error){
+      console.log(response.error)
+    }else{
+      setPerson({tid: response.tid, username: response.username, status: response.status, bonuses: response.bonuses, myCoins: response.my_coins, autoCoins: response.auto_coins})
+      setCount(response.my_coins + response.auto_coins)
+      setAllSteps(response.my_coins_max)
+    }
+    setLoad(false)
+  };
+
+  const auth2 = async () => {
+    const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
+    //const response = await getPerson({tid: "358929635", username: "Fourpro"})
 
     if(response.error){
       console.log(response.error)
@@ -60,21 +86,36 @@ function App() {
     setLoad(false)
   };
 
+  const setCoins = async () => {
+    const response = await setMyCoins({tid: tg.initDataUnsafe?.user?.id, amount: touchCoins, max_amount: allSteps})
+    if(response.error){
+      console.log(response.error)
+    }else{
+      setCount(response.my_coins + response.auto_coins)
+      setAllSteps(response.my_coins_max)
+      setTouchCoins(0)
+    }
+  };
+
   useEffect(() => {
     tg.ready()
+    auth()
+  }, []);
 
+  useEffect(() => {
     const id = setInterval(() => {
-      auth()
+      auth2()
+      setCoins()
     }, 10000);
 
     return () => {
       clearInterval(id);
     };
-  }, []);
+  });
 
   return (
     <>
-    {"399847443" != "undefined" ?
+    {"358929635" != "undefined" ?
       <>
       {load ?
         <div className="bg-bgMain h-full bg-cover overflow-hidden"><Loading /></div>

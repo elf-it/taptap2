@@ -122,7 +122,8 @@ export const setMyCoins = async (props) => {
             body: JSON.stringify({
                 key: "123",
                 tid: props.tid,
-                amount: props.amount
+                amount: props.amount,
+                max_amount: props.max_amount
             })
         })
         return await request.json()
