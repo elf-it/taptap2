@@ -92,7 +92,7 @@ function App() {
       console.log(response.error)
     }else{
       setCount(response.my_coins + response.auto_coins)
-      setAllSteps(response.my_coins_max)
+      //setAllSteps(response.my_coins_max)
       setTouchCoins(0)
     }
   };
