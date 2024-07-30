@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { calculateFontSize } from "../helper/calculateFontSize";
 import caseIcon from "../assets/icons/icon__case.svg";
 import walletIcon from "../assets/icons/icon__wallet.svg";
@@ -33,10 +33,13 @@ export default function ControlPanel({ count, allSteps, person }) {
     if(response.error){
       console.log(response.error)
     }else{
-      alert(response.status)
       setAutoFarm(response.status)
     }
   };
+
+  useEffect(() => {
+    autoFarmClick();
+  }, []);
 
   return (
     <div className="flex flex-row items-center gap-[10px] justify-between w-full">
