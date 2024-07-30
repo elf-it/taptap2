@@ -60,7 +60,14 @@ function App() {
 
   useEffect(() => {
     tg.ready()
-    auth()
+
+    const id = setInterval(() => {
+      auth()
+    }, 10000);
+
+    return () => {
+      clearInterval(id);
+    };
   }, []);
 
   return (
