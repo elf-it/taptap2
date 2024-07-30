@@ -50,10 +50,12 @@ function App() {
 
   const auth = async () => {
     const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
+    //const response = await getPerson({tid: "399847443", username: "Fourpro"})
+
     if(response.error){
       console.log(response.error)
     }else{
-      setPerson({tid: response.tid, username: response.username, status: response.status, bonuses: response.bonuses, myCoins: response.my_coins, AutoCoins: response.auto_coins})
+      setPerson({tid: response.tid, username: response.username, status: response.status, bonuses: response.bonuses, myCoins: response.my_coins, autoCoins: response.auto_coins})
     }
     setLoad(false)
   };
