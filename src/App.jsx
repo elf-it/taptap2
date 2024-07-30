@@ -93,13 +93,13 @@ function App() {
     }else{
       setCount(response.my_coins + response.auto_coins)
       setAllSteps(response.my_coins_max)
-      
       setTouchCoins(0)
     }
   };
 
   useEffect(() => {
     tg.ready()
+    tg.enableClosingConfirmation()
     auth()
   }, []);
 
