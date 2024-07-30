@@ -33,6 +33,7 @@ export default function ControlPanel({ count, allSteps, person }) {
     if(response.error){
       console.log(response.error)
     }else{
+      alert(response.status)
       setAutoFarm(response.status)
     }
   };
