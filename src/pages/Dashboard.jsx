@@ -11,14 +11,16 @@ const tg = window.Telegram.WebApp;
 const myLink = "https://t.me/mamontenokBot_bot/Mamontenok?startapp=" + tg.initDataUnsafe?.user?.id;
 const shareLink = "https://t.me/share/url?url=http://t.me/mamontenokBot_bot/Mamontenok?startapp=" + tg.initDataUnsafe?.user?.id
 
-export default function Dashboard({person}) {
+export default function Dashboard({person, count}) {
 
   const [state, setState] = useState(false);
   const [referals, setReferals] = useState([]);
 
+  const formatCount = new Intl.NumberFormat("en-US").format(count);
+
   const fakeData = [
     {
-      name: "Pepe",
+      name: "Notcoin",
       coins: "70,00",
       photo: userImage,
     },
@@ -28,25 +30,50 @@ export default function Dashboard({person}) {
       photo: userImage,
     },
     {
-      name: "Pepe",
+      name: "Shiba",
       coins: "70,00",
       photo: userImage,
     },
     {
-      name: "Pepe",
+      name: "Dogecoin",
       coins: "70,00",
       photo: userImage,
     },
     {
-      name: "Pepe",
+      name: "Dogwifhat",
       coins: "70,00",
       photo: userImage,
     },
     {
-      name: "Pepe",
+      name: "Popcat",
       coins: "70,00",
       photo: userImage,
     },
+    {
+      name: "Mog",
+      coins: "70.00",
+      photo: userImage,
+    },
+    {
+      name: "Floki",
+      coins: "70.00",
+      photo: userImage,
+    },
+    {
+      name: "Ponke",
+      coins: "70.00",
+      photo: userImage,
+    },
+    {
+      name: "Mew",
+      coins: "70.00",
+      photo: userImage,
+    },
+    {
+      name: "Bome",
+      coins: "70.00",
+      photo: userImage,
+    }
   ];
 
   const nGetReferals = async () => {
@@ -80,7 +107,7 @@ export default function Dashboard({person}) {
         <div className="flex flex-row items-center gap-[8px]">
           <img src={coinsSvg} alt="" />
           <p className="font-comic text-gradient text-[50px] font-bold">
-            10,000
+            {formatCount}
           </p>
         </div>
 

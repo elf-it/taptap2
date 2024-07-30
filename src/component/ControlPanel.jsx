@@ -3,8 +3,9 @@ import { calculateFontSize } from "../helper/calculateFontSize";
 import caseIcon from "../assets/icons/icon__case.svg";
 import walletIcon from "../assets/icons/icon__wallet.svg";
 import coinsIcon from "../assets/icons/icon__coins.svg";
+import { getAutoclick } from "../lib/fetch";
 
-export default function ControlPanel({ count, allSteps }) {
+export default function ControlPanel({ count, allSteps, person }) {
   const [unlimited, setUnlimited] = useState(false);
   const [autoFarm, setAutoFarm] = useState(false);
 
@@ -27,9 +28,15 @@ export default function ControlPanel({ count, allSteps }) {
     setUnlimited((prev) => !prev);
   };
 
-  const autoFarmClick = () => {
-    setAutoFarm((prev) => !prev);
+  const autoFarmClick = async () => {
+    const response = await getAutoclick({tid: person.tid})
+    if(response.error){
+      console.log(response.error)
+    }else{
+      setAutoFarm(response.status)
+    }
   };
+
   return (
     <div className="flex flex-row items-center gap-[10px] justify-between w-full">
       <div className="flex flex-col gap-[10px]">

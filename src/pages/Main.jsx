@@ -13,7 +13,7 @@ export default function Main({setNumPage, person, addStep, count, allSteps}) {
     <>
     <div className="py-[24px] px-[17px] flex flex-col items-center gap-[8px] pb-[100px] h-full overflow-hidden">
       <MainPageHeader setNumPage={setNumPage} person={person} setLangSelectOpen={setLangSelectOpen} />
-      <ControlPanel count={count} allSteps={allSteps} />
+      <ControlPanel count={count} allSteps={allSteps} person={person} />
       <Clicker
         handleClick={addStep} allSteps={allSteps} />
     </div>

@@ -42,7 +42,7 @@ function App() {
     },
     {
       path: "/",
-      element: <Dashboard person={person} />,
+      element: <Dashboard person={person} count={count} />,
       label: "Дашборд",
       icon:"dashboard"
     },
