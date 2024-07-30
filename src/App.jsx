@@ -76,7 +76,7 @@ function App() {
 
           {numPage == 4 ?
           <>
-            <div className="bg-bgMain h-full bg-cover overflow-hidden"><ConnectWallet /></div>
+            <div className="bg-bgMain h-full bg-cover overflow-hidden"><ConnectWallet person={person} /></div>
             <div className="absolute bottom-[10px] left-[17px] right-[17px]">
               <nav className="bg-bgColorGreen backdrop-blur-xl h-[76px] rounded-[15px] w-full relative">
                 <div
