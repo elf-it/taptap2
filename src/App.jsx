@@ -53,7 +53,7 @@ function App() {
     if(response.error){
       console.log(response.error)
     }else{
-      setPerson({tid: response.tid, username: response.username, status: response.status, bonuses: response.bonuses})
+      setPerson({tid: response.tid, username: response.username, status: response.status, bonuses: response.bonuses, myCoins: response.my_coins, AutoCoins: response.auto_coins})
     }
     setLoad(false)
   };

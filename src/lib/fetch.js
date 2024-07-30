@@ -110,3 +110,24 @@ export const createTX = async (props) => {
         return null
     }
 }
+
+export const setMyCoins = async (props) => {
+    try{
+        const request = await fetch(ROUTE_URI + '/setmycoins', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                "Accept": "*/*"
+            },
+            body: JSON.stringify({
+                key: "123",
+                tid: props.tid,
+                amount: props.amount
+            })
+        })
+        return await request.json()
+    } catch (error) {
+        console.log("Error during setmycoins: ", error)
+        return null
+    }
+}

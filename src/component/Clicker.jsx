@@ -83,7 +83,7 @@ function Clicker({ handleClick }) {
   };
 
   return (
-    <button onTouchEnd={mamothClick} className="flex-1 relative active:scale-[.98] duration-[0]">
+    <button onTouchStart={mamothClick} className="flex-1 relative active:scale-[.98] duration-[0]">
       {showedCoins.map((coin) => (
         <Coin
           key={coin.id}
