@@ -107,7 +107,7 @@ function App() {
     const id = setInterval(() => {
       auth2()
       setCoins()
-    }, 10000);
+    }, 1000);
 
     return () => {
       clearInterval(id);
