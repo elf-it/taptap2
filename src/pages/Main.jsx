@@ -7,7 +7,7 @@ import { createPortal } from "react-dom";
 import { setMyCoins } from "../lib/fetch";
 
 export default function Main({setNumPage, person}) {
-  const [count, setCount] = useState(person.myCoins + person.autoCoins);
+  const [count, setCount] = useState(0);
   const [touchCoins, setTouchCoins] = useState(0);
   const [langSelectOpen, setLangSelectOpen] = useState(false)
   const step = 15;
@@ -29,6 +29,7 @@ export default function Main({setNumPage, person}) {
   };
 
   useEffect(() => {
+    setCount(person?.myCoins + person?.autoCoins)
     const id = setInterval(() => {
       setCoins()
     }, 10000);
