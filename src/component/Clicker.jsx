@@ -82,7 +82,7 @@ function Clicker({ handleClick }) {
   };
 
   return (
-    <button onClick={mamothClick} className="flex-1 relative active:scale-[.98] duration-[0]">
+    <button onClick={() => {mamothClick(); window.navigator.vibrate(100);}} className="flex-1 relative active:scale-[.98] duration-[0]">
       {showedCoins.map((coin) => (
         <Coin
           key={coin.id}
