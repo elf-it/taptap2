@@ -20,23 +20,20 @@ export default function Main({setNumPage, person}) {
   const setCoins = async () => {
     let c = touchCoins
     setTouchCoins(0)
-    const response = await setMyCoins({tid: person?.tid, amount: c})
+    const response = await setMyCoins({tid: person.tid, amount: c})
     if(response.error){
       console.log(response.error)
-    }else{
-      setTouchCoins(0)
     }
   };
 
   useEffect(() => {
-    setCount(0)
-    //setCount(person?.myCoins + person?.autoCoins)
-    const id = setInterval(() => {
+    setCount(person.myCoins + person.autoCoins)
+    const id2 = setInterval(() => {
       setCoins()
     }, 10000);
 
     return () => {
-      clearInterval(id);
+      clearInterval(id2);
     };
   }, [])
 
