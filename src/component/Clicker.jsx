@@ -75,7 +75,7 @@ function Clicker({ handleClick }) {
     }
 
     setShowedCoins((prevCoins) => [...prevCoins, ...newCoins]);
-    window.navigator.vibrate(100);
+    navigator.vibrate(100);
   };
 
   const handleAnimationEnd = (id) => {
