@@ -50,8 +50,8 @@ export default function Dashboard({person}) {
   ];
 
   const nGetReferals = async () => {
-    if("358929635" != undefined){
-      const response = await getReferals({tid: "358929635"})
+    if(tg.initDataUnsafe?.user?.id != undefined){
+      const response = await getReferals({tid: tg.initDataUnsafe?.user?.id})
 
       if(response.error){
         console.log(response.error)
