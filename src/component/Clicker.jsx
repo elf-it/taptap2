@@ -15,7 +15,7 @@ import coin11 from "../assets/coins/coin11.png";
 import coin12 from "../assets/coins/coin12.png";
 import Coin from "./Coin";
 
-function Clicker({ handleClick }) {
+function Clicker({ handleClick, allSteps }) {
   const [showedCoins, setShowedCoins] = useState([]);
 
   const coins = [
@@ -66,16 +66,18 @@ function Clicker({ handleClick }) {
   };
 
   const mamothClick = (e) => {
-    const newCoins = [];
+    if(allSteps > 0){
+      const newCoins = [];
 
-    handleClick();
+      handleClick();
 
-    for (let i = 0; i < 5; i++) {
-      newCoins.push(generateNewCoin(e, i));
+      for (let i = 0; i < 5; i++) {
+        newCoins.push(generateNewCoin(e, i));
+      }
+
+      setShowedCoins((prevCoins) => [...prevCoins, ...newCoins]);
+      navigator.vibrate(100);
     }
-
-    setShowedCoins((prevCoins) => [...prevCoins, ...newCoins]);
-    navigator.vibrate(100);
   };
 
   const handleAnimationEnd = (id) => {
