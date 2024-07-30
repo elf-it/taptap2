@@ -99,6 +99,7 @@ function App() {
 
   useEffect(() => {
     tg.ready()
+    tg.enableClosingConfirmation()
     auth()
   }, []);
 
