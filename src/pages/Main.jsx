@@ -19,12 +19,12 @@ export default function Main({setNumPage, person}) {
 
   const setCoins = async () => {
     let c = touchCoins
-    setTouchCoins = 0
+    setTouchCoins(0)
     const response = await setMyCoins({tid: person.tid, amount: c})
     if(response.error){
       console.log(response.error)
     }else{
-      setTouchCoins = 0;
+      setTouchCoins(0)
     }
   };
 
