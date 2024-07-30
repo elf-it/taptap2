@@ -14,7 +14,13 @@ export default function Main({setNumPage, person, addStep, count, allSteps}) {
     <div className="py-[24px] px-[17px] flex flex-col items-center gap-[8px] pb-[100px] h-full overflow-hidden">
       <MainPageHeader setNumPage={setNumPage} person={person} setLangSelectOpen={setLangSelectOpen} />
       <ControlPanel count={count} allSteps={allSteps} />
-      <Clicker handleClick={addStep} />
+      <Clicker
+        handleClick={() => {
+          if(allSteps > 0){
+            addStep()
+          }
+        }}
+      />
     </div>
     {createPortal(<LanguageSelectModal isOpen={langSelectOpen} setLangSelectOpen={setLangSelectOpen}/>, document.body)}
     </>
