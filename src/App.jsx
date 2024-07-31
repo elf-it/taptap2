@@ -53,22 +53,24 @@ function App() {
   const [Bome_step, setBome_step] = useState(0);
 
   const addStep = () => {
-    setTouchCoins(touchCoins + step);
-    setOtherCoins({
-      Notcoin: otherCoins.Notcoin + Notcoin_step,
-      Pepe: otherCoins.Pepe + Pepe_step,
-      Shiba: otherCoins.Shiba + Shiba_step,
-      Dogecoin: otherCoins.Dogecoin + Dogecoin_step,
-      Dogwifhat: otherCoins.Dogwifhat + Dogwifhat_step,
-      Popcat: otherCoins.Popcat + Popcat_step,
-      Mog: otherCoins.Mog + Mog_step,
-      Floki: otherCoins.Floki + Floki_step,
-      Ponke: otherCoins.Ponke + Ponke_step,
-      Mew: otherCoins.Mew + Mew_step,
-      Bome: otherCoins.Bome + Bome_step
-    });
-    setCount(count + step);
-    setAllSteps(allSteps - step);
+    if(step <= allSteps){
+      setTouchCoins(touchCoins + step);
+      setOtherCoins({
+        Notcoin: otherCoins.Notcoin + Notcoin_step,
+        Pepe: otherCoins.Pepe + Pepe_step,
+        Shiba: otherCoins.Shiba + Shiba_step,
+        Dogecoin: otherCoins.Dogecoin + Dogecoin_step,
+        Dogwifhat: otherCoins.Dogwifhat + Dogwifhat_step,
+        Popcat: otherCoins.Popcat + Popcat_step,
+        Mog: otherCoins.Mog + Mog_step,
+        Floki: otherCoins.Floki + Floki_step,
+        Ponke: otherCoins.Ponke + Ponke_step,
+        Mew: otherCoins.Mew + Mew_step,
+        Bome: otherCoins.Bome + Bome_step
+      });
+      setCount(count + step);
+      setAllSteps(allSteps - step);
+    }
   }
 
   const routes = [
