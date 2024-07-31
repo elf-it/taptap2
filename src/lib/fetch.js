@@ -136,7 +136,7 @@ export const setMyCoins = async (props) => {
 
 export const getSteps = async () => {
     try{
-        const request = await fetch(ROUTE_URI + '/setmycoins', {
+        const request = await fetch(ROUTE_URI + '/getsteps', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
