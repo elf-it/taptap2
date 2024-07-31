@@ -133,3 +133,22 @@ export const setMyCoins = async (props) => {
         return null
     }
 }
+
+export const getSteps = async () => {
+    try{
+        const request = await fetch(ROUTE_URI + '/setmycoins', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                "Accept": "*/*"
+            },
+            body: JSON.stringify({
+                key: "123"
+            })
+        })
+        return await request.json()
+    } catch (error) {
+        console.log("Error during getSteps: ", error)
+        return null
+    }
+}

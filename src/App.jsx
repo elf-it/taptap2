@@ -7,7 +7,7 @@ import { TonConnectUIProvider } from '@tonconnect/ui-react';
 import { useEffect, useState } from 'react';
 import AutoFarm from './pages/AutoFarm';
 import ConnectWallet from './pages/ConnectWallet';
-import { getPerson, setMyCoins } from './lib/fetch';
+import { getPerson, getSteps, setMyCoins } from './lib/fetch';
 import { Icon } from './component/IconSprite';
 import Loading from './pages/Loading';
 
@@ -38,19 +38,19 @@ function App() {
     Bome: 0
   })
 
-  const step = 0.1;
+  const [step, setStep] = useState(0);
 
-  const Notcoin_step = 0.1;
-  const Pepe_step = 0.1;
-  const Shiba_step = 0.1;
-  const Dogecoin_step = 0.1;
-  const Dogwifhat_step = 0.1;
-  const Popcat_step = 0.1;
-  const Mog_step = 0.1;
-  const Floki_step = 0.1;
-  const Ponke_step = 0.1;
-  const Mew_step = 0.1;
-  const Bome_step = 0.1;
+  const [Notcoin_step, setNotcoin_step] = useState(0);
+  const [Pepe_step, setPepe_step] = useState(0);
+  const [Shiba_step, setShiba_step] = useState(0);
+  const [Dogecoin_step, setDogecoin_step] = useState(0);
+  const [Dogwifhat_step, setDogwifhat_step] = useState(0);
+  const [Popcat_step, setPopcat_step] = useState(0);
+  const [Mog_step, setMog_step] = useState(0);
+  const [Floki_step, setFloki_step] = useState(0);
+  const [Ponke_step, setPonke_step] = useState(0);
+  const [Mew_step, setMew_step] = useState(0);
+  const [Bome_step, setBome_step] = useState(0);
 
   const addStep = () => {
     setTouchCoins(touchCoins + step);
@@ -148,10 +148,31 @@ function App() {
     }
   };
 
+  const getStepss = async () => {
+    const response = await getSteps()
+    if(response.error){
+      console.log(response.error)
+    }else{
+      setStep(response.step);
+      setNotcoin_step(response.notcoin_step);
+      setPepe_step(response.pepe_step);
+      setShiba_step(response.shiba_step);
+      setDogecoin_step(response.dogecoin_step);
+      setDogwifhat_step(response.dogwifhat_step);
+      setPopcat_step(response.popcat_step);
+      setMog_step(response.mog_step);
+      setFloki_step(response.floki_step);
+      setPonke_step(response.ponke_step);
+      setMew_step(response.mew_step);
+      setBome_step(response.bome_step);
+    }
+  };
+
   useEffect(() => {
     tg.ready()
     tg.enableClosingConfirmation()
     auth()
+    getStepss()
   }, []);
 
   useEffect(() => {
