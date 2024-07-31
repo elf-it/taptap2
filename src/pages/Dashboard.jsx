@@ -2,7 +2,19 @@ import React, { useEffect, useState } from "react";
 import crownSvg from "../assets/icons/icon__crown.svg";
 import coinsSvg from "../assets/icons/icon__coins.svg";
 import ticketSvg from "../assets/icons/icon__ticket.svg";
-import userImage from "../assets/images/user-image.png";
+import bome from "../assets/dasboardCoins/bome.png";
+import dogecoin from "../assets/dasboardCoins/dogecoin.png";
+import dogwifhat from "../assets/dasboardCoins/dogwifhat.png";
+import floki from "../assets/dasboardCoins/floki.png";
+import mew from "../assets/dasboardCoins/mew.png";
+import mog from "../assets/dasboardCoins/mog.png";
+import notcoin from "../assets/dasboardCoins/notcoin.png";
+import pepe from "../assets/dasboardCoins/pepe.png";
+import ponke from "../assets/dasboardCoins/ponke.png";
+import popcat from "../assets/dasboardCoins/popcat.png";
+import shiba from "../assets/dasboardCoins/shiba.png";
+
+
 import copySvg from "../assets/icons/icon__copy.svg";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { getReferals } from "../lib/fetch";
@@ -24,57 +36,57 @@ export default function Dashboard({person, count}) {
     {
       name: "Notcoin",
       coins: person.Notcoin.toString(),
-      photo: userImage,
+      photo: notcoin,
     },
     {
       name: "Pepe",
       coins: person.Pepe.toString(),
-      photo: userImage,
+      photo: pepe,
     },
     {
       name: "Shiba",
       coins: person.Shiba.toString(),
-      photo: userImage,
+      photo: shiba,
     },
     {
       name: "Dogecoin",
       coins: person.Dogecoin.toString(),
-      photo: userImage,
+      photo: dogecoin,
     },
     {
       name: "Dogwifhat",
       coins: person.Dogwifhat.toString(),
-      photo: userImage,
+      photo: dogwifhat,
     },
     {
       name: "Popcat",
       coins: person.Popcat.toString(),
-      photo: userImage,
+      photo: popcat,
     },
     {
       name: "Mog",
       coins: person.Mog.toString(),
-      photo: userImage,
+      photo: mog,
     },
     {
       name: "Floki",
       coins: person.Floki.toString(),
-      photo: userImage,
+      photo: floki,
     },
     {
       name: "Ponke",
       coins: person.Ponke.toString(),
-      photo: userImage,
+      photo: ponke,
     },
     {
       name: "Mew",
       coins: person.Mew.toString(),
-      photo: userImage,
+      photo: mew,
     },
     {
       name: "Bome",
       coins: person.Bome.toString(),
-      photo: userImage,
+      photo: bome,
     }
   ];
 
