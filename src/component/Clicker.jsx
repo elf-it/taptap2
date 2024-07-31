@@ -78,7 +78,7 @@ function Clicker({ handleClick, allSteps }) {
       }
 
       setShowedCoins((prevCoins) => [...prevCoins, ...newCoins]);
-      tg.HapticFeedback.notificationOccurred("error");
+      tg.HapticFeedback.notificationOccurred("warning");
       //navigator.vibrate(100);
     }
   };
