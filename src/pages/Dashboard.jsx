@@ -164,7 +164,10 @@ export default function Dashboard({person, count}) {
               <p onClick={() => tg.openTelegramLink(shareLink)} className="font-comic text-sm">Пригласить друга</p>
             </button>
             <CopyToClipboard text={myLink}
-              onCopy={() => setState(true)}>
+              onCopy={() => {
+                setState(true);
+                tg.showPopup("ссылка скопирована");
+              }}>
               <button className="p-[16px] elem-bg_green rounded-[13px] overflow-hidden"><img src={copySvg} alt="" /></button>
             </CopyToClipboard>
           </div>
