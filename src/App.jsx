@@ -105,7 +105,7 @@ function App() {
     if(response.error){
       console.log(response.error)
     }else{
-      setPerson({tid: response.tid, username: response.username, status: response.status, bonuses: response.bonuses, myCoins: response.my_coins, autoCoins: response.auto_coins})
+      setPerson({tid: response.tid, username: response.username, status: response.status, bonuses: response.bonuses, myCoins: response.my_coins, autoCoins: response.auto_coins, Notcoin: response.Notcoin, Pepe: response.Pepe, Shiba: response.Shiba, Dogecoin: response.Dogecoin, Dogwifhat: response.Dogwifhat, Popcat: response.Popcat, Mog: response.Mog, Floki: response.Floki, Ponke: response.Ponke, Mew: response.Mew, Bome: response.Bome})
       setCount(response.my_coins + response.auto_coins)
       setAllSteps(response.my_coins_max)
     }
@@ -119,7 +119,7 @@ function App() {
     if(response.error){
       console.log(response.error)
     }else{
-      setPerson({tid: response.tid, username: response.username, status: response.status, bonuses: response.bonuses, myCoins: response.my_coins, autoCoins: response.auto_coins})
+      setPerson({tid: response.tid, username: response.username, status: response.status, bonuses: response.bonuses, myCoins: response.my_coins, autoCoins: response.auto_coins, Notcoin: response.Notcoin, Pepe: response.Pepe, Shiba: response.Shiba, Dogecoin: response.Dogecoin, Dogwifhat: response.Dogwifhat, Popcat: response.Popcat, Mog: response.Mog, Floki: response.Floki, Ponke: response.Ponke, Mew: response.Mew, Bome: response.Bome})
     }
     setLoad(false)
   };

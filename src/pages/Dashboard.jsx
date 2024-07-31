@@ -18,6 +18,8 @@ export default function Dashboard({person, count}) {
 
   const formatCount = new Intl.NumberFormat("en-US").format(count);
 
+  console.log(person)
+
   const fakeData = [
     {
       name: "Notcoin",
