@@ -21,57 +21,57 @@ export default function Dashboard({person, count}) {
   const fakeData = [
     {
       name: "Notcoin",
-      coins: "70,00",
+      coins: person.Notcoin.toString(),
       photo: userImage,
     },
     {
       name: "Pepe",
-      coins: "70,00",
+      coins: person.Pepe.toString(),
       photo: userImage,
     },
     {
       name: "Shiba",
-      coins: "70,00",
+      coins: person.Shiba.toString(),
       photo: userImage,
     },
     {
       name: "Dogecoin",
-      coins: "70,00",
+      coins: person.Dogecoin.toString(),
       photo: userImage,
     },
     {
       name: "Dogwifhat",
-      coins: "70,00",
+      coins: person.Dogwifhat.toString(),
       photo: userImage,
     },
     {
       name: "Popcat",
-      coins: "70,00",
+      coins: person.Popcat.toString(),
       photo: userImage,
     },
     {
       name: "Mog",
-      coins: "70.00",
+      coins: person.Mog.toString(),
       photo: userImage,
     },
     {
       name: "Floki",
-      coins: "70.00",
+      coins: person.Floki.toString(),
       photo: userImage,
     },
     {
       name: "Ponke",
-      coins: "70.00",
+      coins: person.Ponke.toString(),
       photo: userImage,
     },
     {
       name: "Mew",
-      coins: "70.00",
+      coins: person.Mew.toString(),
       photo: userImage,
     },
     {
       name: "Bome",
-      coins: "70.00",
+      coins: person.Bome.toString(),
       photo: userImage,
     }
   ];
