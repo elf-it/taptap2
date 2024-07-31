@@ -123,7 +123,8 @@ export const setMyCoins = async (props) => {
                 key: "123",
                 tid: props.tid,
                 amount: props.amount,
-                max_amount: props.max_amount
+                max_amount: props.max_amount,
+                coins: props.coins
             })
         })
         return await request.json()

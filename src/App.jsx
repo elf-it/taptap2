@@ -24,11 +24,49 @@ function App() {
   const [touchCoins, setTouchCoins] = useState(0)
   const [allSteps, setAllSteps] = useState(0)
   const [count, setCount] = useState(0)
+  const[otherCoins, setOtherCoins] = useState({
+    Notcoin: 0,
+    Pepe: 0,
+    Shiba: 0,
+    Dogecoin: 0,
+    Dogwifhat: 0,
+    Popcat: 0,
+    Mog: 0,
+    Floki: 0,
+    Ponke: 0,
+    Mew: 0,
+    Bome: 0
+  })
 
   const step = 0.1;
 
+  const Notcoin_step = 0.1;
+  const Pepe_step = 0.1;
+  const Shiba_step = 0.1;
+  const Dogecoin_step = 0.1;
+  const Dogwifhat_step = 0.1;
+  const Popcat_step = 0.1;
+  const Mog_step = 0.1;
+  const Floki_step = 0.1;
+  const Ponke_step = 0.1;
+  const Mew_step = 0.1;
+  const Bome_step = 0.1;
+
   const addStep = () => {
     setTouchCoins(touchCoins + step);
+    setOtherCoins({
+      Notcoin: otherCoins.Notcoin + Notcoin_step,
+      Pepe: otherCoins.Pepe + Pepe_step,
+      Shiba: otherCoins.Shiba + Shiba_step,
+      Dogecoin: otherCoins.Dogecoin + Dogecoin_step,
+      Dogwifhat: otherCoins.Dogwifhat + Dogwifhat_step,
+      Popcat: otherCoins.Popcat + Popcat_step,
+      Mog: otherCoins.Mog + Mog_step,
+      Floki: otherCoins.Floki + Floki_step,
+      Ponke: otherCoins.Ponke + Ponke_step,
+      Mew: otherCoins.Mew + Mew_step,
+      Bome: otherCoins.Bome + Bome_step
+    });
     setCount(count + step);
     setAllSteps(allSteps - step);
   }
@@ -87,13 +125,26 @@ function App() {
   };
 
   const setCoins = async () => {
-    const response = await setMyCoins({tid: tg.initDataUnsafe?.user?.id, amount: touchCoins, max_amount: allSteps})
+    const response = await setMyCoins({tid: tg.initDataUnsafe?.user?.id, amount: touchCoins, max_amount: allSteps, coins: otherCoins})
     if(response.error){
       console.log(response.error)
     }else{
       setCount(response.my_coins + response.auto_coins)
       setAllSteps(response.my_coins_max)
       setTouchCoins(0)
+      setOtherCoins({
+        Notcoin: 0,
+        Pepe: 0,
+        Shiba: 0,
+        Dogecoin: 0,
+        Dogwifhat: 0,
+        Popcat: 0,
+        Mog: 0,
+        Floki: 0,
+        Ponke: 0,
+        Mew: 0,
+        Bome: 0
+      })
     }
   };
 
