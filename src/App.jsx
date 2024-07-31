@@ -25,7 +25,7 @@ function App() {
   const [allSteps, setAllSteps] = useState(0)
   const [count, setCount] = useState(0)
 
-  const step = 10;
+  const step = 0.1;
 
   const addStep = () => {
     setTouchCoins(touchCoins + step);
