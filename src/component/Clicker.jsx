@@ -15,6 +15,8 @@ import coin11 from "../assets/coins/coin11.png";
 import coin12 from "../assets/coins/coin12.png";
 import Coin from "./Coin";
 
+const tg = window.Telegram.WebApp;
+
 function Clicker({ handleClick, allSteps }) {
   const [showedCoins, setShowedCoins] = useState([]);
 
@@ -76,7 +78,8 @@ function Clicker({ handleClick, allSteps }) {
       }
 
       setShowedCoins((prevCoins) => [...prevCoins, ...newCoins]);
-      navigator.vibrate(100);
+      tg.HapticFeedback.impactOccurred("soft");
+      //navigator.vibrate(100);
     }
   };
 

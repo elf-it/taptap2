@@ -165,7 +165,7 @@ export default function Dashboard({person, count}) {
             </button>
             <CopyToClipboard text={myLink}
               onCopy={() => {
-                setState(true);
+                //setState(true);
                 tg.showPopup("ссылка скопирована");
               }}>
               <button className="p-[16px] elem-bg_green rounded-[13px] overflow-hidden"><img src={copySvg} alt="" /></button>
