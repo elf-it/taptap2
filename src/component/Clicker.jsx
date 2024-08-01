@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Icon } from "../component/IconSprite";
 
 import coin1 from "../assets/coins/coin1.png";
@@ -17,7 +17,7 @@ import Coin from "./Coin";
 
 const tg = window.Telegram.WebApp;
 
-function Clicker({ handleClick, allSteps }) {
+function Clicker({ handleClick, allSteps, person }) {
   const [showedCoins, setShowedCoins] = useState([]);
 
   const coins = [
@@ -83,9 +83,33 @@ function Clicker({ handleClick, allSteps }) {
     }
   };
 
+  const mamothAutoClick = (e) => {
+    if(allSteps > 0){
+      const newCoins = [];
+
+      for (let i = 0; i < 5; i++) {
+        newCoins.push(generateNewCoin(e, i));
+      }
+
+      setShowedCoins((prevCoins) => [...prevCoins, ...newCoins]);
+    }
+  };
+
   const handleAnimationEnd = (id) => {
     setShowedCoins((prevCoins) => prevCoins.filter((coin) => coin.id !== id));
   };
+
+  useEffect(() => {
+    if (person.autoclick){
+      const id = setInterval(() => {
+        mamothAutoClick()
+      }, 1000);
+
+      return () => {
+        clearInterval(id);
+      };
+    }
+  }, [])
 
   return (
     <button onTouchStart={mamothClick} className="flex-1 relative active:scale-[.98] duration-[0]">

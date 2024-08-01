@@ -15,7 +15,7 @@ export default function Main({setNumPage, person, addStep, count, allSteps}) {
       <MainPageHeader setNumPage={setNumPage} person={person} setLangSelectOpen={setLangSelectOpen} />
       <ControlPanel count={count} allSteps={allSteps} person={person} />
       <Clicker
-        handleClick={addStep} allSteps={allSteps} />
+        handleClick={addStep} allSteps={allSteps} person={person} />
     </div>
     {createPortal(<LanguageSelectModal isOpen={langSelectOpen} setLangSelectOpen={setLangSelectOpen}/>, document.body)}
     </>
