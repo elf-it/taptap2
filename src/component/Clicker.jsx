@@ -122,6 +122,7 @@ function Clicker({ handleClick, allSteps, person }) {
   };
 
   useEffect(() => {
+    alert(person.autoclick)
     const id = setInterval(() => {
       if (person.autoclick){
         mamothAutoClick()
