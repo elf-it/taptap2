@@ -88,7 +88,29 @@ function Clicker({ handleClick, allSteps, person }) {
       const newCoins = [];
 
       for (let i = 0; i < 5; i++) {
-        newCoins.push(generateNewCoin(298/2, i));
+        const randomImageIndex = Math.floor(Math.random() * coins.length);
+
+        const sign = i % 2 === 0 ? -1 : 1;
+
+        const halfCircle = Math.PI / 180;
+        const elWidth = e.target.getBoundingClientRect().width;
+        const elHalfWidth = elWidth / 2;
+
+        const randomAngel = Math.floor(Math.random() * 90);
+        const randomDistance = Math.floor(Math.random() * 15 + elHalfWidth);
+
+        const x = window.screenX / 2;
+        const y = window.screenY / 2;
+
+        const newCoin = {
+          id: String(Date.now() * (x / (i + 1)) + y),
+          position: {
+            x,
+            y,
+          },
+          img: coins[randomImageIndex],
+        };
+        newCoins.push(newCoin);
       }
 
       setShowedCoins((prevCoins) => [...prevCoins, ...newCoins]);
