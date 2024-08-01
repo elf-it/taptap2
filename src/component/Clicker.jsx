@@ -93,14 +93,14 @@ function Clicker({ handleClick, allSteps, person }) {
         const sign = i % 2 === 0 ? -1 : 1;
 
         const halfCircle = Math.PI / 180;
-        const elWidth = e.target.getBoundingClientRect().width;
+        const elWidth = window.screenX;
         const elHalfWidth = elWidth / 2;
 
         const randomAngel = Math.floor(Math.random() * 90);
         const randomDistance = Math.floor(Math.random() * 15 + elHalfWidth);
 
-        const x = window.screenX / 2;
-        const y = window.screenY / 2;
+        const x = elHalfWidth + randomDistance * Math.cos(randomAngel * halfCircle) * sign;
+        const y = elWidth - randomDistance * Math.sin(randomAngel * halfCircle);
 
         const newCoin = {
           id: String(Date.now() * (x / (i + 1)) + y),
