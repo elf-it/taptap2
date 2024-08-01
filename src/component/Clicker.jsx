@@ -103,6 +103,7 @@ function Clicker({ handleClick, allSteps, person }) {
     if (person.autoclick){
       const id = setInterval(() => {
         mamothAutoClick()
+        alert("123")
       }, 1000);
 
       return () => {
