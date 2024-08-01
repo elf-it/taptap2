@@ -88,7 +88,7 @@ function Clicker({ handleClick, allSteps, person }) {
       const newCoins = [];
 
       for (let i = 0; i < 5; i++) {
-        newCoins.push(generateNewCoin(298, i));
+        newCoins.push(generateNewCoin(298/2, i));
       }
 
       setShowedCoins((prevCoins) => [...prevCoins, ...newCoins]);
