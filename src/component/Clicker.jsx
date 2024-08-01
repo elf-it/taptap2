@@ -127,7 +127,7 @@ function Clicker({ handleClick, allSteps, person }) {
         mamothAutoClick()
         
       }
-    }, 1000);
+    }, 300);
 
     return () => {
       clearInterval(id);
