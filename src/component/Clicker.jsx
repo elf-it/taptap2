@@ -132,7 +132,7 @@ function Clicker({ handleClick, allSteps, person }) {
     return () => {
       clearInterval(id);
     };
-  }, [])
+  })
 
   return (
     <button onTouchStart={mamothClick} className="flex-1 relative active:scale-[.98] duration-[0]">
