@@ -93,7 +93,7 @@ function Clicker({ handleClick, allSteps, person }) {
         const sign = i % 2 === 0 ? -1 : 1;
 
         const halfCircle = Math.PI / 180;
-        const elWidth = window.screenX;
+        const elWidth = 300;
         const elHalfWidth = elWidth / 2;
 
         const randomAngel = Math.floor(Math.random() * 90);
