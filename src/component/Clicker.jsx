@@ -67,14 +67,14 @@ function Clicker({ handleClick, allSteps, person }) {
     return newCoin;
   };
 
-  const mamothClick = (e) => {
+  const mamothClick = () => {
     if(allSteps > 0){
       const newCoins = [];
 
       handleClick();
 
       for (let i = 0; i < 5; i++) {
-        newCoins.push(generateNewCoin(e, i));
+        newCoins.push(generateNewCoin(0, i));
       }
 
       setShowedCoins((prevCoins) => [...prevCoins, ...newCoins]);
