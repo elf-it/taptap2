@@ -38,8 +38,6 @@ function Clicker({ handleClick, allSteps, person }) {
   const circleRandomCoordinates = (e, i) => {
     const sign = i % 2 === 0 ? -1 : 1;
 
-    alert(e.target.getBoundingClientRect().width)
-
     const halfCircle = Math.PI / 180;
     const elWidth = e.target.getBoundingClientRect().width;
     const elHalfWidth = elWidth / 2;
@@ -90,7 +88,7 @@ function Clicker({ handleClick, allSteps, person }) {
       const newCoins = [];
 
       for (let i = 0; i < 5; i++) {
-        newCoins.push(generateNewCoin(e, i));
+        newCoins.push(generateNewCoin(298, i));
       }
 
       setShowedCoins((prevCoins) => [...prevCoins, ...newCoins]);
