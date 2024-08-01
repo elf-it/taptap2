@@ -100,16 +100,16 @@ function Clicker({ handleClick, allSteps, person }) {
   };
 
   useEffect(() => {
-    if (person.autoclick){
-      const id = setInterval(() => {
+    const id = setInterval(() => {
+      if (person.autoclick){
         mamothAutoClick()
         alert("123")
-      }, 1000);
+      }
+    }, 1000);
 
-      return () => {
-        clearInterval(id);
-      };
-    }
+    return () => {
+      clearInterval(id);
+    };
   }, [])
 
   return (
