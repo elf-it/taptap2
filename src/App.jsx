@@ -101,6 +101,7 @@ function App() {
   ];
 
   const auth = async () => {
+    tg.ready()
     const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
     //const response = await getPerson({tid: "358929635", username: "Fourpro"})
 
@@ -111,7 +112,8 @@ function App() {
       setCount(response.my_coins + response.auto_coins)
       setAllSteps(response.my_coins_max)
     }
-    setLoad(false)
+    //setLoad(false)
+    setTimeout(() => { setLoad(false); }, 2000);
   };
 
   const auth2 = async () => {
@@ -124,7 +126,6 @@ function App() {
       setPerson({tid: response.tid, username: response.username, status: response.status, bonuses: response.bonuses, myCoins: response.my_coins, autoCoins: response.auto_coins, Notcoin: response.Notcoin, Pepe: response.Pepe, Shiba: response.Shiba, Dogecoin: response.Dogecoin, Dogwifhat: response.Dogwifhat, Popcat: response.Popcat, Mog: response.Mog, Floki: response.Floki, Ponke: response.Ponke, Mew: response.Mew, Bome: response.Bome, autoclick: response.autoclick, status_autoclick: response.status_autoclick, status_unlimit: response.status_unlimit, status_boost: response.status_boost})
     }
     //setLoad(false)
-    setTimeout(() => { setLoad(false); }, 2000);
   };
 
   const setCoins = async () => {
@@ -172,7 +173,6 @@ function App() {
   };
 
   useEffect(() => {
-    tg.ready()
     tg.enableClosingConfirmation()
     auth()
     getStepss()
