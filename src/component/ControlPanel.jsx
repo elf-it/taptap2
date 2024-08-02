@@ -22,19 +22,14 @@ export default function ControlPanel({ count, allSteps, person }) {
 
   const countFontSize = calculateFontSize(formatCount, 50, 7); // динамически считает размер
   const smallCountFontSize = calculateFontSize(formatCount, 18, 7);
-  const maxCountFontSize = calculateFontSize(formatMaxCount, 14, 7);
+  const maxCountFontSize = calculateFontSize(allSteps < 10000000 ? formatMaxCount : "∞", 14, 7);
 
   const unlimitedClick = () => {
-    setUnlimited((prev) => !prev);
+    setUnlimited(person.status_unlimit);
   };
 
-  const autoFarmClick = async () => {
-    const response = await getAutoclick({tid: person.tid})
-    if(response.error){
-      console.log(response.error)
-    }else{
-      setAutoFarm(response.status)
-    }
+  const autoFarmClick = () => {
+    setAutoFarm(person.status_autoclick)
   };
 
   useEffect(() => {
@@ -89,7 +84,7 @@ export default function ControlPanel({ count, allSteps, person }) {
               style={{ fontSize: smallCountFontSize }}
               className="text-lg font-comic font-bold text-[#FFCC48]"
             >
-              {formatMaxCount}
+              {allSteps < 10000000 ? formatMaxCount : "∞"}
             </span>
             <span
               style={{ fontSize: maxCountFontSize }}
