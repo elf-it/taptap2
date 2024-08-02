@@ -101,7 +101,6 @@ function App() {
   ];
 
   const auth = async () => {
-    tg.ready()
     const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
     //const response = await getPerson({tid: "358929635", username: "Fourpro"})
 
@@ -173,6 +172,7 @@ function App() {
   };
 
   useEffect(() => {
+    tg.ready()
     tg.enableClosingConfirmation()
     auth()
     getStepss()
