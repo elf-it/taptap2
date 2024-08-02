@@ -28,19 +28,15 @@ export default function ControlPanel({ count, allSteps, person }) {
     setUnlimited(person.status_unlimit);
   };
 
-  const autoFarmClick = () => {
-    setAutoFarm(person.status_autoclick)
-  };
-
   useEffect(() => {
-    autoFarmClick();
+    setUnlimited(person.status_unlimit);
+    setAutoFarm(person.status_autoclick);
   }, []);
 
   return (
     <div className="flex flex-row items-center gap-[10px] justify-between w-full">
       <div className="flex flex-col gap-[10px]">
         <button
-          onClick={unlimitedClick}
           className="elem-bg_green text-[10px]  font-comic rounded-[13px] flex flex-col items-center justify-center p-[8px]"
         >
           <span
@@ -53,7 +49,6 @@ export default function ControlPanel({ count, allSteps, person }) {
           <span className="text-gradient">Безлимит</span>
         </button>
         <button
-          onClick={autoFarmClick}
           className="elem-bg_green text-[10px]  font-comic rounded-[13px] flex flex-col items-center justify-center p-[8px]"
         >
           <span
