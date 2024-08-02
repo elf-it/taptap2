@@ -1,7 +1,8 @@
 import './App.css';
 import Guide from './pages/Guide';
 import { TonConnectUIProvider } from '@tonconnect/ui-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { LvlContext } from "./store/levelContext";
 import ConnectWallet from './pages/ConnectWallet';
 import { getPerson, getSteps, setMyCoins } from './lib/fetch';
 import { Icon } from './component/IconSprite';
@@ -18,9 +19,27 @@ import autofarmIcon from "./assets/icons/icon__nav-autofarm.svg";
 import lotteryIcon from "./assets/icons/icon__nav-lottery.svg";
 import gamesIcon from "./assets/icons/icon__nav-games.svg";
 
+import bgMain1 from './assets/images/bg-main-1.png'
+import bgMain2 from './assets/images/bg-main-2.png'
+import bgMain3 from './assets/images/bg-main-3.png'
+import bgMain4 from './assets/images/bg-main-4.png'
+import bgMain5 from './assets/images/bg-main-5.png'
+import bgMain6 from './assets/images/bg-main-6.png'
+
 const tg = window.Telegram.WebApp;
 
 function App() {
+
+  const [level, setLevel] = useContext(LvlContext);
+
+  const bgImages = [
+    bgMain1,
+    bgMain2,
+    bgMain3,
+    bgMain4,
+    bgMain5,
+    bgMain6
+  ]
 
   const [numPage, setNumPage] = useState(0);
 
@@ -122,34 +141,36 @@ function App() {
   const activeNavElemWidth = 100 / routesVisibleElemCount;
 
   const auth = async () => {
-    const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
-    //const response = await getPerson({tid: "358929635", username: "Fourpro"})
+    //const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
+    const response = await getPerson({tid: "358929635", username: "Fourpro"})
 
     if(response.error){
       console.log(response.error)
     }else{
-      setPerson({tid: response.tid, username: response.username, status: response.status, bonuses: response.bonuses, myCoins: response.my_coins, autoCoins: response.auto_coins, Notcoin: response.Notcoin, Pepe: response.Pepe, Shiba: response.Shiba, Dogecoin: response.Dogecoin, Dogwifhat: response.Dogwifhat, Popcat: response.Popcat, Mog: response.Mog, Floki: response.Floki, Ponke: response.Ponke, Mew: response.Mew, Bome: response.Bome, autoclick: response.autoclick, status_autoclick: response.status_autoclick, status_unlimit: response.status_unlimit, status_boost: response.status_boost})
+      setPerson({tid: response.tid, username: response.username, status: response.status, bonuses: response.bonuses, myCoins: response.my_coins, autoCoins: response.auto_coins, Notcoin: response.Notcoin, Pepe: response.Pepe, Shiba: response.Shiba, Dogecoin: response.Dogecoin, Dogwifhat: response.Dogwifhat, Popcat: response.Popcat, Mog: response.Mog, Floki: response.Floki, Ponke: response.Ponke, Mew: response.Mew, Bome: response.Bome, autoclick: response.autoclick, status_autoclick: response.status_autoclick, status_unlimit: response.status_unlimit, status_boost: response.status_boost, level: response.level, timer: response.timer})
       setCount(response.my_coins + response.auto_coins)
       setAllSteps(response.my_coins_max)
+      setLevel(response.level)
     }
     //setLoad(false)
     setTimeout(() => { setLoad(false); }, 2000);
   };
 
   const auth2 = async () => {
-    const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
-    //const response = await getPerson({tid: "358929635", username: "Fourpro"})
+    //const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
+    const response = await getPerson({tid: "358929635", username: "Fourpro"})
 
     if(response.error){
       console.log(response.error)
     }else{
-      setPerson({tid: response.tid, username: response.username, status: response.status, bonuses: response.bonuses, myCoins: response.my_coins, autoCoins: response.auto_coins, Notcoin: response.Notcoin, Pepe: response.Pepe, Shiba: response.Shiba, Dogecoin: response.Dogecoin, Dogwifhat: response.Dogwifhat, Popcat: response.Popcat, Mog: response.Mog, Floki: response.Floki, Ponke: response.Ponke, Mew: response.Mew, Bome: response.Bome, autoclick: response.autoclick, status_autoclick: response.status_autoclick, status_unlimit: response.status_unlimit, status_boost: response.status_boost})
+      setPerson({tid: response.tid, username: response.username, status: response.status, bonuses: response.bonuses, myCoins: response.my_coins, autoCoins: response.auto_coins, Notcoin: response.Notcoin, Pepe: response.Pepe, Shiba: response.Shiba, Dogecoin: response.Dogecoin, Dogwifhat: response.Dogwifhat, Popcat: response.Popcat, Mog: response.Mog, Floki: response.Floki, Ponke: response.Ponke, Mew: response.Mew, Bome: response.Bome, autoclick: response.autoclick, status_autoclick: response.status_autoclick, status_unlimit: response.status_unlimit, status_boost: response.status_boost, level: response.level, timer: response.timer})
+      setLevel(response.level)
     }
     //setLoad(false)
   };
 
   const setCoins = async () => {
-    const response = await setMyCoins({tid: tg.initDataUnsafe?.user?.id, amount: touchCoins, max_amount: allSteps, coins: otherCoins})
+    const response = await setMyCoins({tid: "358929635", amount: touchCoins, max_amount: allSteps, coins: otherCoins})
     if(response.error){
       console.log(response.error)
     }else{
@@ -215,7 +236,7 @@ function App() {
     {"358929635" != "undefined" ?
       <>
       {load ?
-        <div className="bg-bgMain h-full bg-cover overflow-hidden"><Loading /></div>
+        <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}><Loading /></div>
       :
       <>
       { person != null ?
@@ -223,74 +244,76 @@ function App() {
 
           {numPage == 5 ?
           <>
-            <div className="bg-bgMain h-full bg-cover overflow-hidden"><ConnectWallet person={person} /></div>
-            <div className="absolute bottom-[10px] left-[17px] right-[17px]">
-              <nav className="bg-bgColorGreen backdrop-blur-xl h-[76px] rounded-[15px] w-full relative">
-                <div
-                  style={{ width: `${activeNavElemWidth}%` , left: `${0}%` }}
-                  className=" absolute h-full z-0 p-[4px] transition-all"
-                >
-                  <div className="elem-bg_green h-full w-full rounded-[12px]"></div>
-                </div>
-                <ul className="flex flex-row justify-between gap-[2px] h-full">
-                  {routes.map((link, i) => {
-                    return (
-                      link.visible && (
-                        <button
-                          key={i}
-                          className={
-                            "font-comic text-gradient text-sm flex-1 flex flex-col items-center justify-end gap-[4px] z-10 mb-[8px]"
-                          }
-                          onClick={() => setNumPage(i)}
-                        >
-                          <>
-                            <img src={link.icon} alt="" />
-                            {link.label}
-                          </>
-                        </button>
-                      )
-                    );
-                  })}
-                </ul>
-              </nav>
+            <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}><ConnectWallet person={person} />
+              <div className="absolute bottom-[10px] left-[17px] right-[17px]">
+                <nav className="bg-bgColorGreen backdrop-blur-xl h-[76px] rounded-[15px] w-full relative">
+                  <div
+                    style={{ width: `${activeNavElemWidth}%` , left: `${0}%` }}
+                    className=" absolute h-full z-0 p-[4px] transition-all"
+                  >
+                    <div className="elem-bg_green h-full w-full rounded-[12px]"></div>
+                  </div>
+                  <ul className="flex flex-row justify-between gap-[2px] h-full">
+                    {routes.map((link, i) => {
+                      return (
+                        link.visible && (
+                          <button
+                            key={i}
+                            className={
+                              "font-comic text-gradient text-sm flex-1 flex flex-col items-center justify-end gap-[4px] z-10 mb-[8px]"
+                            }
+                            onClick={() => setNumPage(i)}
+                          >
+                            <>
+                              <img src={link.icon} alt="" />
+                              {link.label}
+                            </>
+                          </button>
+                        )
+                      );
+                    })}
+                  </ul>
+                </nav>
+              </div>
             </div>
           </>
           :
           <>
           {numPage == 6 ?
-            <div className="bg-bgMain h-full bg-cover overflow-hidden"><Guide /></div>
+            <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}><Guide /></div>
           :
           <>
-            <div className="bg-bgMain h-full bg-cover overflow-hidden">{routes[numPage].element}</div>
-            <div className="absolute bottom-[10px] left-[17px] right-[17px]">
-              <nav className="bg-bgColorGreen backdrop-blur-xl h-[76px] rounded-[15px] w-full relative">
-                <div
-                  style={{ width: `${activeNavElemWidth}%` , left: `${numPage > (routesVisibleElemCount - 1) ? 0 : numPage  * activeNavElemWidth}%` }}
-                  className=" absolute h-full z-0 p-[4px] transition-all"
-                >
-                  <div className="elem-bg_green h-full w-full rounded-[12px]"></div>
-                </div>
-                <ul className="flex flex-row justify-between gap-[2px] h-full">
-                  {routes.map((link, i) => {
-                    return (
-                      link.visible && (
-                        <button
-                          key={i}
-                          className={
-                            "font-comic text-gradient text-sm flex-1 flex flex-col items-center justify-end gap-[4px] z-10 mb-[8px]"
-                          }
-                          onClick={() => setNumPage(i)}
-                        >
-                          <>
-                            <img src={link.icon} alt="" />
-                            {link.label}
-                          </>
-                        </button>
-                      )
-                    );
-                  })}
-                </ul>
-              </nav>
+            <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}>{routes[numPage].element}
+              <div className="absolute bottom-[10px] left-[17px] right-[17px]">
+                <nav className="bg-bgColorGreen backdrop-blur-xl h-[76px] rounded-[15px] w-full relative">
+                  <div
+                    style={{ width: `${activeNavElemWidth}%` , left: `${numPage > (routesVisibleElemCount - 1) ? 0 : numPage  * activeNavElemWidth}%` }}
+                    className=" absolute h-full z-0 p-[4px] transition-all"
+                  >
+                    <div className="elem-bg_green h-full w-full rounded-[12px]"></div>
+                  </div>
+                  <ul className="flex flex-row justify-between gap-[2px] h-full">
+                    {routes.map((link, i) => {
+                      return (
+                        link.visible && (
+                          <button
+                            key={i}
+                            className={
+                              "font-comic text-gradient text-sm flex-1 flex flex-col items-center justify-end gap-[4px] z-10 mb-[8px]"
+                            }
+                            onClick={() => setNumPage(i)}
+                          >
+                            <>
+                              <img src={link.icon} alt="" />
+                              {link.label}
+                            </>
+                          </button>
+                        )
+                      );
+                    })}
+                  </ul>
+                </nav>
+              </div>
             </div>
           </>
           }
@@ -298,7 +321,7 @@ function App() {
           }
         </TonConnectUIProvider>
       :
-        <div className="bg-bgMain h-full bg-cover overflow-hidden"><Guide /></div>
+      <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}><Guide /></div>
       }
       </>
       }

@@ -165,17 +165,23 @@ export default function Dashboard({person, count}) {
           <h3 className="text-lg text-white font-comic font-bold mb-[8px]">
             Приглашенные друзья
           </h3>
-          <div className="flex flex-row items-center gap-[8px]">
-            <img className="w-[32px] h-[19px]" src={coinsSvg} alt="" />
-            <p className="font-comic text-sm">
-              <span className="text-[#FFCC48]">+400</span>
-              <span className="text-[#9B9B9B]">/за друга</span>
+          <div className="elem-bg_green px-[8px] rounded-[40px] w-auto flex flex-row items-center gap-[8px]">
+            <img src={crownSvg} alt="" />
+            <p className="font-comic text-gradient font-bold text-sm">
+              Gold Status
             </p>
           </div>
-
+          <div className="flex flex-row items-center gap-[8px]">
+            <img className="w-[32px] h-[19px]" src={coinsSvg} alt="" />
+            <p className="font-comic text-[28px] text-[#FFCC48] font-bold">+400</p>
+          </div>
+          <button className="p-[16px] elem-bg_green rounded-[13px] overflow-hidden flex flex-row items-center gap-[10px] w-full justify-center">
+          <p className="font-comic font-bold text-base text-gradient">Получить бонус</p>
+              <img className="w-[32px] h-[19px]" src={coinsSvg} alt="" />
+            </button>
           <div className="w-full flex flex-row items-center gap-[8px]">
-            <button className="flex-1 py-[16px] bg-gradient-to-b from-gradientStartColor to-gradientEndColor rounded-[13px]">
-              <p onClick={() => tg.openTelegramLink(shareLink)} className="font-comic text-sm">Пригласить друга</p>
+            <button onClick={() => tg.openTelegramLink(shareLink)} className="flex-1 py-[16px] bg-gradient-to-b from-gradientStartColor to-gradientEndColor rounded-[13px]">
+              <p className="font-comic text-sm">Пригласить друга</p>
             </button>
             <CopyToClipboard text={myLink}
               onCopy={() => {

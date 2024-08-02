@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-
-import Button from "../component/Button";
 import BuyCard from "../component/BuyCard";
-
 import case1 from "../assets/icons/case1.svg";
 import case2 from "../assets/icons/case2.svg";
 import case3 from "../assets/icons/case3.svg";
 import case4 from "../assets/icons/case4.svg";
+import case5 from "../assets/icons/case5.png";
 import key1 from "../assets/icons/key1.svg";
 import key2 from "../assets/icons/key2.svg";
 import key3 from "../assets/icons/key3.svg";
@@ -17,6 +15,7 @@ import star2 from "../assets/icons/icon__star2.svg";
 import star3 from "../assets/icons/icon__star3.svg";
 import star4 from "../assets/icons/icon__star4.svg";
 import star5 from "../assets/icons/icon__star5.svg";
+import coinsIcon from "../assets/icons/icon__coins.svg";
 import BuyCardModal from "../component/BuyCardModal";
 import { createPortal } from "react-dom";
 import { useTonAddress } from "@tonconnect/ui-react";
