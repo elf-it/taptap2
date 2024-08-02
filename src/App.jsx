@@ -170,26 +170,28 @@ function App() {
   };
 
   const setCoins = async () => {
-    const response = await setMyCoins({tid: tg.initDataUnsafe?.user?.id, amount: touchCoins, max_amount: allSteps, coins: otherCoins})
-    if(response.error){
-      console.log(response.error)
-    }else{
-      setCount(response.my_coins + response.auto_coins)
-      setAllSteps(response.my_coins_max)
-      setTouchCoins(0)
-      setOtherCoins({
-        Notcoin: 0,
-        Pepe: 0,
-        Shiba: 0,
-        Dogecoin: 0,
-        Dogwifhat: 0,
-        Popcat: 0,
-        Mog: 0,
-        Floki: 0,
-        Ponke: 0,
-        Mew: 0,
-        Bome: 0
-      })
+    if(allSteps > 0){
+      const response = await setMyCoins({tid: tg.initDataUnsafe?.user?.id, amount: touchCoins, max_amount: allSteps, coins: otherCoins})
+      if(response.error){
+        console.log(response.error)
+      }else{
+        setCount(response.my_coins + response.auto_coins)
+        setAllSteps(response.my_coins_max)
+        setTouchCoins(0)
+        setOtherCoins({
+          Notcoin: 0,
+          Pepe: 0,
+          Shiba: 0,
+          Dogecoin: 0,
+          Dogwifhat: 0,
+          Popcat: 0,
+          Mog: 0,
+          Floki: 0,
+          Ponke: 0,
+          Mew: 0,
+          Bome: 0
+        })
+      }
     }
   };
 
