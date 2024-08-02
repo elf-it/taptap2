@@ -4,6 +4,7 @@ import coinsIcon from "../assets/icons/icon__coins.svg";
 import tasksIcon from '../assets/icons/icon__tasks.svg'
 import fermIcon from '../assets/icons/icon__ferm.svg'
 import walletIcon from '../assets/icons/icon__wallet.svg'
+import crownSvg from "../assets/icons/icon__crown.svg";
 import Timer from "./Timer";
 
 export default function ControlPanel({ count, allSteps, person }) {
@@ -73,10 +74,12 @@ export default function ControlPanel({ count, allSteps, person }) {
         </button>
       </div>
       <div className="flex flex-col items-center gap-[5px]">
-        <p className="text-sm text-white font-comic font-bold">
-          Level <span>{userInfo.levelCurrent}</span>
-          <span className="text-[#9B9B9B]">/{userInfo.levelMax}</span>
-        </p>
+        <div className="elem-bg_green px-[8px] rounded-[40px] w-auto flex flex-row items-center gap-[8px]">
+          <img src={crownSvg} alt="" />
+          <p className="font-comic text-gradient font-bold text-sm">
+            {person.status}
+          </p>
+        </div>
         <p
           style={{ fontSize: countFontSize }}
           className="text-gradient font-comic font-bold"
