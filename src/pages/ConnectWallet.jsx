@@ -37,7 +37,7 @@ export default function ConnectWallet({person}) {
   const [tonConnectUI, setOptions] = useTonConnectUI();
   const {network, wallet, connected} = useTonConnect();
   const { state, open, close } = useTonConnectModal();
-  const {user, buy, withdraw} = useMamotContract();
+  const {buy, withdraw} = useMamotContract();
 
   const disconnect = async () => {
     await tonConnectUI.disconnect();
@@ -93,7 +93,7 @@ export default function ConnectWallet({person}) {
               <button
                 className={`font-comic text-sm text-black py-[15px] rounded-xl w-full flex flex-row items-center justify-center gap-[10px] bg-gradient-to-b from-gradientStartColor to-gradientEndColor`}
                 disabled={!connected}
-                onClick={() => withdraw()}
+                onClick={() => withdraw(person.bonuses.toString(), "123")}
               >
                 Получить бонус
                 <img className="w-[32px]" src={coinsSvg} alt="" />

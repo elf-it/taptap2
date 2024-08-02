@@ -28,82 +28,7 @@ forall X -> X __tact_not_null(X x) inline {
     throw_if(128, null?(x)); return x;
 }
 
-(cell, int) __tact_dict_delete(cell dict, int key_len, slice index) asm(index dict key_len) "DICTDEL";
-
 (slice, int) __tact_dict_get(cell dict, int key_len, slice index) asm(index dict key_len) "DICTGET" "NULLSWAPIFNOT";
-
-() __tact_debug_str(slice value, slice debug_print) impure asm "STRDUMP" "DROP" "STRDUMP" "DROP";
-
-(slice) __tact_preload_offset(slice s, int offset, int bits) asm "SDSUBSTR";
-
-(slice) __tact_crc16(slice data) inline_ref {
-    slice new_data = begin_cell()
-        .store_slice(data)
-        .store_slice("0000"s)
-    .end_cell().begin_parse();
-    int reg = 0;
-    while (~ new_data.slice_data_empty?()) {
-        int byte = new_data~load_uint(8);
-        int mask = 0x80;
-        while (mask > 0) {
-            reg <<= 1;
-            if (byte & mask) {
-                reg += 1;
-            }
-            mask >>= 1;
-            if (reg > 0xffff) {
-                reg &= 0xffff;
-                reg ^= 0x1021;
-            }
-        }
-    }
-    (int q, int r) = divmod(reg, 256);
-    return begin_cell()
-        .store_uint(q, 8)
-        .store_uint(r, 8)
-    .end_cell().begin_parse();
-}
-
-(slice) __tact_base64_encode(slice data) inline_ref {
-    slice chars = "4142434445464748494A4B4C4D4E4F505152535455565758595A6162636465666768696A6B6C6D6E6F707172737475767778797A303132333435363738392D5F"s;
-    builder res = begin_cell();
-    
-    while (data.slice_bits() >= 24) {
-        (int bs1, int bs2, int bs3) = (data~load_uint(8), data~load_uint(8), data~load_uint(8));
-    
-        int n = (bs1 << 16) | (bs2 << 8) | bs3;
-    
-        res = res
-            .store_slice(__tact_preload_offset(chars, ((n >> 18) & 63) * 8, 8))
-            .store_slice(__tact_preload_offset(chars, ((n >> 12) & 63) * 8, 8))
-            .store_slice(__tact_preload_offset(chars, ((n >>  6) & 63) * 8, 8))
-            .store_slice(__tact_preload_offset(chars, ((n      ) & 63) * 8, 8));
-    }
-    
-    return res.end_cell().begin_parse();
-}
-
-(slice) __tact_address_to_user_friendly(slice address) inline_ref {
-    (int wc, int hash) = address.parse_std_addr();
-    
-    slice user_friendly_address = begin_cell()
-        .store_slice("11"s)
-        .store_uint((wc + 0x100) % 0x100, 8)
-        .store_uint(hash, 256)
-    .end_cell().begin_parse();
-    
-    slice checksum = __tact_crc16(user_friendly_address);
-    slice user_friendly_address_with_checksum = begin_cell()
-        .store_slice(user_friendly_address)
-        .store_slice(checksum)
-    .end_cell().begin_parse();
-    
-    return __tact_base64_encode(user_friendly_address_with_checksum);
-}
-
-() __tact_debug_address(slice address, slice debug_print) impure inline_ref {
-    __tact_debug_str(__tact_address_to_user_friendly(address), debug_print);
-}
 
 (int, slice, int, slice) __tact_context_get() inline {
     return __tact_context;
@@ -126,33 +51,6 @@ builder __tact_store_bool(builder b, int v) inline {
     }
 }
 
-int __tact_dict_get_int_int(cell d, int kl, int k, int vl) inline {
-    var (r, ok) = idict_get?(d, kl, k);
-    if (ok) {
-        return r~load_int(vl);
-    } else {
-        return null();
-    }
-}
-
-slice __tact_dict_get_int_slice(cell d, int kl, int k) inline {
-    var (r, ok) = idict_get?(d, kl, k);
-    if (ok) {
-        return r;
-    } else {
-        return null();
-    }
-}
-
-(cell, ()) __tact_dict_set_slice_int(cell d, int kl, slice k, int v, int vl) inline {
-    if (null?(v)) {
-        var (r, ok) = __tact_dict_delete(d, kl, k);
-        return (r, ());
-    } else {
-        return (dict_set_builder(d, kl, k, begin_cell().store_int(v, vl)), ());
-    }
-}
-
 int __tact_dict_get_slice_int(cell d, int kl, slice k, int vl) inline {
     var (r, ok) = __tact_dict_get(d, kl, k);
     if (ok) {
@@ -164,6 +62,10 @@ int __tact_dict_get_slice_int(cell d, int kl, slice k, int vl) inline {
 
 int __tact_slice_eq_bits(slice a, slice b) inline {
     return equal_slice_bits(a, b);
+}
+
+int __tact_slice_eq(slice a, slice b) inline {
+    return (a.slice_hash() ==  b.slice_hash());
 }
 
 forall X0, X1 -> (X0, X1) __tact_tuple_destroy_2(tuple v) asm "2 UNTUPLE";
@@ -211,8 +113,8 @@ forall X0, X1 -> (X0, X1) __tact_tuple_destroy_2(tuple v) asm "2 UNTUPLE";
     send_raw_message($c, $params'mode);
 }
 
-((int, slice, slice, int, int, cell, cell, int, slice), ()) $Mamotic$_fun_forward((int, slice, slice, int, int, cell, cell, int, slice) $self, slice $to, cell $body, int $bounce, tuple $init) impure inline_ref {
-    var (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner)) = $self;
+((int, slice, slice, int, int, cell, cell, int, slice, slice), ()) $Mamotic$_fun_forward((int, slice, slice, int, int, cell, cell, int, slice, slice) $self, slice $to, cell $body, int $bounce, tuple $init) impure inline_ref {
+    var (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey)) = $self;
     var ($init) = $init;
     cell $code = null();
     cell $data = null();
@@ -228,21 +130,21 @@ forall X0, X1 -> (X0, X1) __tact_tuple_destroy_2(tuple v) asm "2 UNTUPLE";
         if (($balanceBeforeMessage < 0)) {
             raw_reserve(0, 0);
             $global_send($SendParameters$_constructor_bounce_to_value_mode_body_code_data($bounce, $to, 0, 130, $body, $code, $data));
-            return (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner), ());
+            return (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey), ());
         }
     }
     $global_send($SendParameters$_constructor_bounce_to_value_mode_body_code_data($bounce, $to, 0, 66, $body, $code, $data));
-    return (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner), ());
+    return (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey), ());
 }
 
-((int, slice, slice, int, int, cell, cell, int, slice), ()) $Mamotic$_fun_reply((int, slice, slice, int, int, cell, cell, int, slice) $self, cell $body) impure inline {
-    var (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner)) = $self;
-    ($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner)~$Mamotic$_fun_forward(__tact_context_get_sender(), $body, true, null());
-    return (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner), ());
+((int, slice, slice, int, int, cell, cell, int, slice, slice), ()) $Mamotic$_fun_reply((int, slice, slice, int, int, cell, cell, int, slice, slice) $self, cell $body) impure inline {
+    var (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey)) = $self;
+    ($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey)~$Mamotic$_fun_forward(__tact_context_get_sender(), $body, true, null());
+    return (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey), ());
 }
 
-((int, slice, slice, int, int, cell, cell, int, slice), ()) $Mamotic$_fun_notify((int, slice, slice, int, int, cell, cell, int, slice) $self, cell $body) impure inline {
-    var (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner)) = $self;
-    ($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner)~$Mamotic$_fun_forward(__tact_context_get_sender(), $body, false, null());
-    return (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner), ());
+((int, slice, slice, int, int, cell, cell, int, slice, slice), ()) $Mamotic$_fun_notify((int, slice, slice, int, int, cell, cell, int, slice, slice) $self, cell $body) impure inline {
+    var (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey)) = $self;
+    ($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey)~$Mamotic$_fun_forward(__tact_context_get_sender(), $body, false, null());
+    return (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey), ());
 }

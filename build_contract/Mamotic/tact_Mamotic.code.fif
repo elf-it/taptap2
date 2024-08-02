@@ -4,23 +4,17 @@ PROGRAM{
   DECLPROC __tact_store_address
   DECLPROC __tact_my_balance
   DECLPROC __tact_not_null
-  DECLPROC __tact_crc16
-  DECLPROC __tact_base64_encode
-  DECLPROC __tact_address_to_user_friendly
-  DECLPROC __tact_debug_address
   DECLPROC __tact_context_get
   DECLPROC __tact_context_get_sender
   DECLPROC __tact_store_bool
   DECLPROC __tact_dict_set_int_int
-  DECLPROC __tact_dict_get_int_int
-  DECLPROC __tact_dict_get_int_slice
-  DECLPROC __tact_dict_set_slice_int
   DECLPROC __tact_dict_get_slice_int
   DECLPROC __tact_slice_eq_bits
+  DECLPROC __tact_slice_eq
   DECLPROC $Deploy$_load
   DECLPROC $DeployOk$_store
   DECLPROC $DeployOk$_store_cell
-  DECLPROC $Buy$_load
+  DECLPROC $WithdrawPercents$_load
   DECLPROC $Mamotic$_store
   DECLPROC $Mamotic$_load
   DECLPROC $StateInit$_not_null
@@ -40,9 +34,8 @@ PROGRAM{
   DECLPROC $SendParameters$_constructor_to_bounce_value_mode
   DECLPROC $DeployOk$_constructor_queryId
   DECLPROC %$Mamotic$_internal_empty
-  DECLPROC $Mamotic$_internal_binary_Buy
   DECLPROC $Mamotic$_internal_text_beb2935a82089b154d32f99c4377aa960aa115366cc2c602755e36b97f505cec
-  DECLPROC $Mamotic$_internal_text_13e48137b7f3348da7feca8849f53d44200438fbc350bf54dd7718e5d4e4942c
+  DECLPROC $Mamotic$_internal_binary_WithdrawPercents
   DECLPROC $Mamotic$_internal_binary_Deploy
   104128 DECLMETHOD %balance
   105872 DECLMETHOD %id
@@ -90,158 +83,6 @@ PROGRAM{
     ISNULL
     128 THROWIF
   }>
-  __tact_crc16 PROCREF:<{
-    NEWC
-    SWAP
-    STSLICER
-    x{0000} PUSHSLICE
-    STSLICER
-    ENDC
-    CTOS
-    0 PUSHINT
-    WHILE:<{
-      OVER
-      SDEMPTY
-      NOT
-    }>DO<{
-      SWAP
-      8 LDU
-      7 PUSHPOW2
-      WHILE:<{
-        DUP
-        0 GTINT
-      }>DO<{
-        s0 s3 XCHG
-        1 LSHIFT#
-        s2 s3 PUSH2
-        AND
-        IF:<{
-          INC
-        }>
-        s0 s3 XCHG
-        1 RSHIFT#
-        s3 PUSH
-        16 PUSHPOW2DEC
-        GREATER
-        IF:<{
-          s0 s3 XCHG
-          16 PUSHPOW2DEC
-          AND
-          4129 PUSHINT
-          XOR
-          s0 s3 XCHG
-        }>
-      }>
-      DROP
-      NIP
-      SWAP
-    }>
-    NIP
-    8 PUSHPOW2
-    DIVMOD
-    SWAP
-    NEWC
-    8 STU
-    8 STU
-    ENDC
-    CTOS
-  }>
-  __tact_base64_encode PROCREF:<{
-    x{4142434445464748494A4B4C4D4E4F505152535455565758595A6162636465666768696A6B6C6D6E6F707172737475767778797A303132333435363738392D5F} PUSHSLICE
-    NEWC
-    WHILE:<{
-      s2 PUSH
-      SBITS
-      23 GTINT
-    }>DO<{
-      s0 s2 XCHG
-      8 LDU
-      8 LDU
-      8 LDU
-      s0 s3 XCHG
-      16 LSHIFT#
-      s0 s2 XCHG
-      8 LSHIFT#
-      s1 s2 XCHG
-      OR
-      SWAP
-      OR
-      DUP
-      18 RSHIFT#
-      63 PUSHINT
-      AND
-      3 LSHIFT#
-      s3 s(-1) PUXC
-      8 PUSHINT
-      SDSUBSTR
-      s1 s4 XCHG
-      STSLICER
-      s3 PUSH
-      12 RSHIFT#
-      63 PUSHINT
-      AND
-      3 LSHIFT#
-      s3 s(-1) PUXC
-      8 PUSHINT
-      SDSUBSTR
-      STSLICER
-      s3 PUSH
-      6 RSHIFT#
-      63 PUSHINT
-      AND
-      3 LSHIFT#
-      s3 s(-1) PUXC
-      8 PUSHINT
-      SDSUBSTR
-      STSLICER
-      s0 s3 XCHG
-      63 PUSHINT
-      AND
-      3 LSHIFT#
-      s2 s(-1) PUXC
-      8 PUSHINT
-      SDSUBSTR
-      s1 s3 XCHG
-      STSLICER
-    }>
-    2 1 BLKDROP2
-    ENDC
-    CTOS
-  }>
-  __tact_address_to_user_friendly PROCREF:<{
-    REWRITESTDADDR
-    NEWC
-    x{11} PUSHSLICE
-    STSLICER
-    s0 s2 XCHG
-    8 PUSHPOW2
-    ADD
-    8 MODPOW2#
-    ROT
-    8 STU
-    256 STU
-    ENDC
-    CTOS
-    DUP
-    __tact_crc16 INLINECALLDICT
-    NEWC
-    ROT
-    STSLICER
-    SWAP
-    STSLICER
-    ENDC
-    CTOS
-    __tact_base64_encode INLINECALLDICT
-  }>
-  __tact_debug_address PROCREF:<{
-    SWAP
-    __tact_address_to_user_friendly INLINECALLDICT
-    SWAP
-    STRDUMP
-    DROP
-    STRDUMP
-    DROP
-  }>
   __tact_context_get PROCINLINE:<{
     __tact_context GETGLOB
     4 UNTUPLE
@@ -269,45 +110,6 @@ PROGRAM{
       DICTISETB
     }>
   }>
-  __tact_dict_get_int_int PROCINLINE:<{
-    s1 s3 s3 XCHG3
-    DICTIGET
-    NULLSWAPIFNOT
-    IF:<{
-      SWAP
-      LDIX
-      DROP
-    }>ELSE<{
-      2DROP
-      PUSHNULL
-    }>
-  }>
-  __tact_dict_get_int_slice PROCINLINE:<{
-    -ROT
-    DICTIGET
-    NULLSWAPIFNOT
-    IF:<{
-    }>ELSE<{
-      DROP
-      PUSHNULL
-    }>
-  }>
-  __tact_dict_set_slice_int PROCINLINE:<{
-    OVER
-    ISNULL
-    IF:<{
-      2DROP
-      -ROT
-      DICTDEL
-      DROP
-    }>ELSE<{
-      NEWC
-      SWAP
-      STIX
-      s1 s3 s3 XCHG3
-      DICTSETB
-    }>
-  }>
   __tact_dict_get_slice_int PROCINLINE:<{
     s1 s3 s3 XCHG3
     DICTGET
@@ -323,6 +125,13 @@ PROGRAM{
   }>
   __tact_slice_eq_bits PROCINLINE:<{
     SDEQ
+  }>
+  __tact_slice_eq PROCINLINE:<{
+    SWAP
+    HASHSU
+    SWAP
+    HASHSU
+    EQUAL
   }>
   $Deploy$_load PROCINLINE:<{
     32 LDU
@@ -345,24 +154,27 @@ PROGRAM{
     $DeployOk$_store INLINECALLDICT
     ENDC
   }>
-  $Buy$_load PROCINLINE:<{
+  $WithdrawPercents$_load PROCINLINE:<{
     32 LDU
     SWAP
-    2599776987 PUSHINT
+    4010341951 PUSHINT
     EQUAL
     129 THROWIFNOT
-    LDDICT
+    32 LDU
+    LDREF
     SWAP
+    CTOS
+    s1 s2 XCHG
   }>
   $Mamotic$_store PROCINLINE:<{
-    s8 s9 XCHG2
+    s9 s10 XCHG2
     257 PUSHINT
     STIX
-    s0 s6 XCHG2
+    s0 s7 XCHG2
     __tact_store_address INLINECALLDICT
-    s0 s4 XCHG2
+    s0 s5 XCHG2
     __tact_store_address INLINECALLDICT
-    s1 s2 XCHG
+    s1 s3 XCHG
     32 STU
     32 STU
     STDICT
@@ -371,6 +183,12 @@ PROGRAM{
     NEWC
     ROT
     __tact_store_address INLINECALLDICT
+    NEWC
+    s0 s3 XCHG2
+    STSLICER
+    ENDC
+    ROT
+    STREF
     ENDC
     SWAP
     STREF
@@ -391,14 +209,18 @@ PROGRAM{
     SWAP
     CTOS
     __tact_load_address INLINECALLDICT
-    NIP
-    s1 s9 XCHG
-    s1 s8 XCHG
-    s1 s7 XCHG
-    s1 s6 XCHG
-    s1 s5 XCHG
-    s1 s4 XCHG
-    s3 s3 s0 XCHG3
+    SWAP
+    LDREF
+    DROP
+    CTOS
+    s2 s10 XCHG
+    s2 s9 XCHG
+    s2 s8 XCHG
+    s2 s7 XCHG
+    s2 s6 XCHG
+    s2 s5 XCHG
+    s2 s4 XCHG
+    s2 s3 XCHG
   }>
   $StateInit$_not_null PROCINLINE:<{
     DUP
@@ -427,35 +249,36 @@ PROGRAM{
     s3 s3 s0 XCHG3
   }>
   $Mamotic$_contract_init PROCREF:<{
-    0 PUSHINT
+    5467 PUSHINT
     PUSHNULL
-    OVER
+    0 PUSHINT
     __tact_context_get_sender INLINECALLDICT
     PUSHNULL
+    B{b5ee9c7241010101000500000631323318854035} B>boc <s PUSHSLICE
     257 PUSHINT
     500 PUSHINT
-    s1 s4 PUSH2
-    s4 s7 XCHG
+    s1 s5 PUSH2
+    s4 s8 XCHG
     -ROT
     __tact_dict_set_int_int INLINECALLDICT
-    s2 POP
+    s3 POP
     1 PUSHINT
     5 PUSHINT
     REPEAT:<{
       257 PUSHINT
       200 PUSHINT
       s1 s2 PUSH2
-      s4 s6 XCHG
+      s4 s7 XCHG
       -ROT
       __tact_dict_set_int_int INLINECALLDICT
-      s0 s2 XCHG
+      s0 s3 XCHG
       INC
     }>
-    s4 s8 XCHG
-    s4 s7 XCHG
-    s4 s6 XCHG
-    s4 s5 XCHG
-    SWAP
+    s5 s9 XCHG
+    s5 s8 XCHG
+    s5 s7 XCHG
+    s5 s6 XCHG
+    s0 s0 s4 XCHG3
   }>
   $Mamotic$_contract_load PROCREF:<{
     c4 PUSH
@@ -467,7 +290,7 @@ PROGRAM{
     SWAP
     IFJMP:<{
       $Mamotic$_load INLINECALLDICT
-      1 9 BLKDROP2
+      1 10 BLKDROP2
     }>
     MYADDR
     11 PLDU
@@ -488,7 +311,7 @@ PROGRAM{
     TRUE
     SWAP
     1 STI
-    9 -ROLL
+    10 -ROLL
     $Mamotic$_store INLINECALLDICT
     ENDC
     c4 POP
@@ -599,10 +422,10 @@ PROGRAM{
     __tact_my_balance INLINECALLDICT
   }>
   $Mamotic$_fun_id PROCREF:<{
-    s8 PUSH
+    s9 PUSH
   }>
   $Mamotic$_fun_user PROCREF:<{
-    s4 PUSH
+    s5 PUSH
     267 PUSHINT
     s2 PUSH
     257 PUSHINT
@@ -611,7 +434,7 @@ PROGRAM{
     NOT
     IFJMP:<{
       267 PUSHINT
-      s5 PUSH
+      s6 PUSH
       s0 s2 XCHG
       257 PUSHINT
       __tact_dict_get_slice_int INLINECALLDICT
@@ -667,77 +490,19 @@ PROGRAM{
   $DeployOk$_constructor_queryId PROCINLINE:<{
   }>
   %$Mamotic$_internal_empty PROCINLINE:<{
-  }>
-  $Mamotic$_internal_binary_Buy PROCINLINE:<{
-    0 PUSHINT
-    s3 PUSH
-    REPEAT:<{
-      OVER
-      257 PUSHINT
-      s2 PUSH
-      __tact_dict_get_int_slice INLINECALLDICT
-      ISNULL
-      NOT
-      IF:<{
-        OVER
-        257 PUSHINT
-        s2 PUSH
-        __tact_dict_get_int_slice INLINECALLDICT
-        __tact_not_null INLINECALLDICT
-        s6 PUSH
-        267 PUSHINT
-        s2 PUSH
-        257 PUSHINT
-        __tact_dict_get_slice_int INLINECALLDICT
-        ISNULL
-        IF:<{
-          267 PUSHINT
-          __tact_context_get INLINECALLDICT
-          $Context$_get_value INLINECALLDICT
-          257 PUSHINT
-          s8 s(-1) s(-1) PUXCPU
-          s6 s(-1) PUXC
-          __tact_dict_get_int_int INLINECALLDICT
-          __tact_not_null INLINECALLDICT
-          MUL
-          10000 PUSHINT
-          DIV
-          s2 PUSH
-          s3 s9 XCHG
-          SWAP
-          257 PUSHINT
-          __tact_dict_set_slice_int INLINECALLDICT
-        }>ELSE<{
-          267 PUSHINT
-          s7 s0 s1 PUSH3
-          257 PUSHINT
-          __tact_dict_get_slice_int INLINECALLDICT
-          __tact_not_null INLINECALLDICT
-          __tact_context_get INLINECALLDICT
-          $Context$_get_value INLINECALLDICT
-          257 PUSHINT
-          s9 s(-1) s(-1) PUXCPU
-          s7 s(-1) PUXC
-          __tact_dict_get_int_int INLINECALLDICT
-          __tact_not_null INLINECALLDICT
-          MUL
-          10000 PUSHINT
-          DIV
-          ADD
-          s2 PUSH
-          s3 s9 XCHG
-          SWAP
-          257 PUSHINT
-          __tact_dict_set_slice_int INLINECALLDICT
-        }>
-        s0 s6 XCHG
-        x{5b44454255475d2046696c6520636f6e7472616374735c6d616d6f7469632e746163743a36303a3137} PUSHSLICE
-        __tact_debug_address INLINECALLDICT
-      }>
-      INC
-    }>
-    2DROP
-    FALSE
+    TRUE
+    __tact_context_get INLINECALLDICT
+    $Context$_get_value INLINECALLDICT
+    s8 PUSH
+    MUL
+    10000 PUSHINT
+    DIV
+    s10 PUSH
+    -ROT
+    3 PUSHINT
+    $SendParameters$_constructor_to_bounce_value_mode INLINECALLDICT
+    $global_send INLINECALLDICT
+    TRUE
     __tact_context_get INLINECALLDICT
     $Context$_get_value INLINECALLDICT
     s7 PUSH
@@ -749,25 +514,13 @@ PROGRAM{
     3 PUSHINT
     $SendParameters$_constructor_to_bounce_value_mode INLINECALLDICT
     $global_send INLINECALLDICT
-    FALSE
-    __tact_context_get INLINECALLDICT
-    $Context$_get_value INLINECALLDICT
-    s6 PUSH
-    MUL
-    10000 PUSHINT
-    DIV
-    s8 PUSH
-    -ROT
-    3 PUSHINT
-    $SendParameters$_constructor_to_bounce_value_mode INLINECALLDICT
-    $global_send INLINECALLDICT
     B{b5ee9c7241010101001400002400000000627579207375636365737366756cc8a3f2c1} B>boc PUSHREF
     $Mamotic$_fun_reply INLINECALLDICT
   }>
   $Mamotic$_internal_text_beb2935a82089b154d32f99c4377aa960aa115366cc2c602755e36b97f505cec PROCINLINE:<{
     53979 PUSHINT
     __tact_context_get_sender INLINECALLDICT
-    s2 s(-1) PUXC
+    s3 s(-1) PUXC
     __tact_slice_eq_bits INLINECALLDICT
     THROWANYIFNOT
     __tact_context_get_sender INLINECALLDICT
@@ -784,50 +537,23 @@ PROGRAM{
     B{b5ee9c7241010101001b000032000000007769746864726177616c207375636365737366756c73781620} B>boc PUSHREF
     $Mamotic$_fun_reply INLINECALLDICT
   }>
-  $Mamotic$_internal_text_13e48137b7f3348da7feca8849f53d44200438fbc350bf54dd7718e5d4e4942c PROCINLINE:<{
-    22865 PUSHINT
-    267 PUSHINT
-    __tact_context_get_sender INLINECALLDICT
-    s6 PUSH
-    -ROT
-    257 PUSHINT
-    __tact_dict_get_slice_int INLINECALLDICT
-    ISNULL
-    NOT
+  $Mamotic$_internal_binary_WithdrawPercents PROCINLINE:<{
+    30483 PUSHINT
+    s1 s3 XCPU
+    __tact_slice_eq INLINECALLDICT
     THROWANYIFNOT
     7728 PUSHINT
-    267 PUSHINT
-    __tact_context_get_sender INLINECALLDICT
-    s6 PUSH
-    -ROT
-    257 PUSHINT
-    __tact_dict_get_slice_int INLINECALLDICT
-    __tact_not_null INLINECALLDICT
     __tact_my_balance INLINECALLDICT
-    100000000 PUSHINT
-    SUB
-    LEQ
+    s2 PUSH
+    GEQ
     THROWANYIFNOT
     __tact_context_get_sender INLINECALLDICT
     TRUE
-    267 PUSHINT
-    __tact_context_get_sender INLINECALLDICT
-    s7 PUSH
-    -ROT
-    257 PUSHINT
-    __tact_dict_get_slice_int INLINECALLDICT
-    __tact_not_null INLINECALLDICT
+    ROT
     2 PUSHINT
     $SendParameters$_constructor_to_bounce_value_mode INLINECALLDICT
     $global_send INLINECALLDICT
-    267 PUSHINT
-    __tact_context_get_sender INLINECALLDICT
-    s2 s5 XCHG
-    PUSHNULL
-    257 PUSHINT
-    __tact_dict_set_slice_int INLINECALLDICT
     B{b5ee9c7241010101001b000032000000007769746864726177616c207375636365737366756c73781620} B>boc PUSHREF
-    s1 s4 XCHG
     $Mamotic$_fun_reply INLINECALLDICT
   }>
   $Mamotic$_internal_binary_Deploy PROCINLINE:<{
@@ -838,19 +564,19 @@ PROGRAM{
   %balance PROC:<{
     $Mamotic$_contract_load INLINECALLDICT
     $Mamotic$_fun_balance INLINECALLDICT
-    9 1 BLKDROP2
+    10 1 BLKDROP2
   }>
   %id PROC:<{
     $Mamotic$_contract_load INLINECALLDICT
     $Mamotic$_fun_id INLINECALLDICT
-    9 1 BLKDROP2
+    10 1 BLKDROP2
   }>
   %user PROC:<{
     __tact_verify_address INLINECALLDICT
     $Mamotic$_contract_load INLINECALLDICT
-    9 ROLL
+    10 ROLL
     $Mamotic$_fun_user INLINECALLDICT
-    9 1 BLKDROP2
+    10 1 BLKDROP2
   }>
   supported_interfaces PROC:<{
     123515602279859691144772641439386770278 PUSHINT
@@ -860,7 +586,7 @@ PROGRAM{
     209474421377847335869795010607481022628 PUSHINT
   }>
   get_abi_ipfs PROC:<{
-    x{697066733a2f2f516d617963774e5352696154446732616b444b6861314a6e7441456f75414d76717a476a38545131695251685438} PUSHSLICE
+    x{697066733a2f2f516d555736566e5772507a696d5644586d676552644a4b41537241376a4a63414538345048557736703768483279} PUSHSLICE
   }>
   lazy_deployment_completed PROC:<{
     c4 PUSH
@@ -897,13 +623,13 @@ PROGRAM{
       TRUE
     }>
     DUP
-    2599776987 PUSHINT
+    4010341951 PUSHINT
     EQUAL
     IFJMP:<{
       DROP
-      $Buy$_load INLINECALLDICT
-      NIP
-      $Mamotic$_internal_binary_Buy INLINECALLDICT
+      $WithdrawPercents$_load INLINECALLDICT
+      1 2 BLKDROP2
+      $Mamotic$_internal_binary_WithdrawPercents INLINECALLDICT
       TRUE
     }>
     DUP
@@ -919,19 +645,10 @@ PROGRAM{
     0 EQINT
     IF:<{
       HASHSU
-      DUP
       86254957005153482593167742035089344693437782575091241529406133056369733950700 PUSHINT
       EQUAL
       IFJMP:<{
-        DROP
         $Mamotic$_internal_text_beb2935a82089b154d32f99c4377aa960aa115366cc2c602755e36b97f505cec INLINECALLDICT
-        TRUE
-        RETALT
-      }>
-      8997677081299533909424025482035252625473185153267410363198001706423233582124 PUSHINT
-      EQUAL
-      IFJMP:<{
-        $Mamotic$_internal_text_13e48137b7f3348da7feca8849f53d44200438fbc350bf54dd7718e5d4e4942c INLINECALLDICT
         TRUE
         RETALT
       }>
@@ -959,7 +676,7 @@ PROGRAM{
     s0 s2 XCHG
     __tact_context_sender SETGLOB
     $Mamotic$_contract_load INLINECALLDICT
-    2 9 BLKSWAP
+    2 10 BLKSWAP
     $Mamotic$_contract_router_internal INLINECALLDICT
     130 THROWIFNOT
     $Mamotic$_contract_store INLINECALLDICT

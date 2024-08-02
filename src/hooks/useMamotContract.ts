@@ -1,5 +1,5 @@
-import { Address, Dictionary, OpenedContract, fromNano, toNano } from 'ton-core';
-import { Buy, Mamotic } from '../wrappers/Mamotic';
+import { Address, OpenedContract, fromNano, toNano } from 'ton-core';
+import { Mamotic } from '../wrappers/Mamotic';
 import { useAsyncInitialize } from "./useAsyncInitialize";
 import { useTonClient } from "./useTonClient";
 import { useEffect, useState } from 'react';
@@ -9,11 +9,12 @@ export function useMamotContract(){
     const {client} = useTonClient();
     const {sender} = useTonConnect();
     const [user, setUser] = useState<string>("");
+    const ca = "EQCRxHgjCXpGgyfKU8FUMuYofskjJezq6jidUsdIx3NSVrDx";
 
     const mamotContract = useAsyncInitialize(async () => {
         if(!client) return;
 
-        const contract = Mamotic.fromAddress(Address.parse("EQCga9E2Wy7iWMyFf0X8ttbvOnfBEM025UtzO2YwOU0NPX7c"));
+        const contract = Mamotic.fromAddress(Address.parse(ca));
 
         return client.open(contract) as OpenedContract<Mamotic>;
     }, [client]);
@@ -32,28 +33,21 @@ export function useMamotContract(){
 
     return {
         user: user,
-        buy: (ref1: Address, ref2: Address, ref3: Address, ref4: Address, ref5: Address, ref6: Address, value: string) => {
-            const referrers = Dictionary.empty(Dictionary.Keys.BigInt(32), Dictionary.Values.Address());
-
-            referrers.set(0n, ref1);
-            referrers.set(1n, ref2);
-            referrers.set(2n, ref3);
-            referrers.set(3n, ref4);
-            referrers.set(4n, ref5);
-            referrers.set(5n, ref6);
-            const message: Buy = {
-                $$type: "Buy",
-                referrers
-            }
-
-            const res = mamotContract?.send(sender, {
+        contractAddress: ca,
+        buy: (value: string) => {
+            mamotContract?.send(sender, {
                 value: toNano(value)
-            }, message);
+            }, null);
         },
-        withdraw: () => {
+        withdraw: (amount: string, passkey: string) => {
             mamotContract?.send(sender, {
                 value: toNano("0.02")
-            }, "withdraw percents");
+            },
+            {
+                $$type: 'WithdrawPercents',
+                amount: toNano(amount),
+                passkey: passkey
+            });
         }
     }
 }

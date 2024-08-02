@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import moneyImgage from "../assets/images/money.png";
 import CustomSelect from "./CustomSelect";
-import { Dictionary, Address } from "ton-core";
+import { contractAddress } from '../hooks/useMamotContract';
+import { Address, toNano } from "ton-core";
 import { useTonConnectUI } from "@tonconnect/ui-react";
 import { createTX, getAutoclick } from "../lib/fetch";
 
@@ -11,24 +12,13 @@ export default function BuyCardModal({ setShowModal, data }) {
   const [currentChoosedTarrif, setCurrentChoosedTarrif] = useState(0);
   const [disabled, setDisabled] = useState(false);
 
-  const referrers = Dictionary.empty(Dictionary.Keys.BigInt(32), Dictionary.Values.Address());
-
-  referrers.set(0n, Address.parse("UQDs-xDFMg033y71LR8n3ImXIjXD5U79a0nVf3PXUycFRKVo"));
-  referrers.set(1n, Address.parse("UQDs-xDFMg033y71LR8n3ImXIjXD5U79a0nVf3PXUycFRKVo"));
-  referrers.set(2n, Address.parse("UQDs-xDFMg033y71LR8n3ImXIjXD5U79a0nVf3PXUycFRKVo"));
-  referrers.set(3n, Address.parse("UQDs-xDFMg033y71LR8n3ImXIjXD5U79a0nVf3PXUycFRKVo"));
-  referrers.set(4n, Address.parse("UQDs-xDFMg033y71LR8n3ImXIjXD5U79a0nVf3PXUycFRKVo"));
-  referrers.set(5n, Address.parse("UQDs-xDFMg033y71LR8n3ImXIjXD5U79a0nVf3PXUycFRKVo"));
-
   const transaction = {
     validUntil: Math.floor(Date.now() / 1000) * 360,
     messages: [
       {
-        $$type: "Buy",
-        address: "EQCga9E2Wy7iWMyFf0X8ttbvOnfBEM025UtzO2YwOU0NPX7c",
-        amount: data.tarrifs[currentChoosedTarrif]?.count * 10000000,
-        referrers: referrers
-      }
+        address: Address.parse(contractAddress),
+        amount: toNano(data.tarrifs[currentChoosedTarrif]?.count)
+      }, null
     ]
   }
 
@@ -36,18 +26,6 @@ export default function BuyCardModal({ setShowModal, data }) {
 
   const overlayClick = (event) => {
     if (event.currentTarget === event.target) setShowModal(false);
-  };
-
-  const getAutoclickT = async () => {
-    const response = await getAutoclick({tid: tg.initDataUnsafe?.user?.id})
-    if(response.error){
-      console.log(response.error)
-    }else{
-      alert(response.index + " : " + data.tarrifs[currentChoosedTarrif]?.count)
-      if(response.index == data.tarrifs[currentChoosedTarrif]?.count - 1 && response.status){
-        setDisabled(true);
-      }
-    }
   };
 
   const sendTransaction = async () => {
