@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import moneyImgage from "../assets/images/money.png";
 import CustomSelect from "./CustomSelect";
-import { contractAddress } from '../hooks/useMamotContract';
 import { Address, toNano } from "ton-core";
 import { useTonConnectUI } from "@tonconnect/ui-react";
 import { createTX, getAutoclick } from "../lib/fetch";
@@ -9,6 +8,7 @@ import { createTX, getAutoclick } from "../lib/fetch";
 const tg = window.Telegram.WebApp;
 
 export default function BuyCardModal({ setShowModal, data }) {
+  const {contractAddress} = useMamotContract();
   const [currentChoosedTarrif, setCurrentChoosedTarrif] = useState(0);
   const [disabled, setDisabled] = useState(false);
 
