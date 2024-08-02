@@ -96,8 +96,7 @@ function Clicker({ handleClick, allSteps, person }) {
   };
 
   const mamothClick = (e) => {
-    alert(allSteps + " : " + step)
-    if(allSteps >= step){
+    if(allSteps >= 0){
 
       const newCoins = [];
 
@@ -114,7 +113,7 @@ function Clicker({ handleClick, allSteps, person }) {
   };
 
   const mamothAutoClick = () => {
-    if(allSteps >= step){
+    if(allSteps >= 0){
       const newCoins = [];
 
       for (let i = 0; i < 5; i++) {
