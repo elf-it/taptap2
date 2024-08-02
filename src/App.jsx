@@ -266,7 +266,7 @@ function App() {
                           >
                             <>
                               <img src={link.icon} alt="" />
-                              {link.label}
+                              <span className='whitespace-nowrap'>{link.label}</span>
                             </>
                           </button>
                         )
@@ -305,7 +305,7 @@ function App() {
                           >
                             <>
                               <img src={link.icon} alt="" />
-                              {link.label}
+                              <span className='whitespace-nowrap'>{link.label}</span>
                             </>
                           </button>
                         )
