@@ -168,7 +168,7 @@ export default function Dashboard({person, count}) {
           <div className="elem-bg_green px-[8px] rounded-[40px] w-auto flex flex-row items-center gap-[8px]">
             <img src={crownSvg} alt="" />
             <p className="font-comic text-gradient font-bold text-sm">
-              Gold Status
+              {person.status}
             </p>
           </div>
           <div className="flex flex-row items-center gap-[8px]">
