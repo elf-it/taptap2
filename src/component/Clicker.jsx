@@ -98,6 +98,7 @@ function Clicker({ handleClick, allSteps, person }) {
   const mamothClick = (e) => {
     if(allSteps >= step){
       alert(allSteps + " : " + step)
+      
       const newCoins = [];
 
       handleClick();
