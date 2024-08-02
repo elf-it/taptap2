@@ -17,7 +17,7 @@ export default function ControlPanel({ count, allSteps, person }) {
 
   const maxCount = 10000000;
 
-  const formatCount = new Intl.NumberFormat("en-US").format(count); // форматирует число
+  const formatCount = new Intl.NumberFormat("en-US").format(parseInt(count)); // форматирует число
   const formatMaxCount = new Intl.NumberFormat("en-US").format(allSteps); // форматирует число
 
   const countFontSize = calculateFontSize(formatCount, 50, 7); // динамически считает размер
