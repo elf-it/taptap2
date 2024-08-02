@@ -173,7 +173,7 @@ export default function Dashboard({person, count}) {
           </div>
           <div className="flex flex-row items-center gap-[8px]">
             <img className="w-[32px] h-[19px]" src={coinsSvg} alt="" />
-            <p className="font-comic text-[28px] text-[#FFCC48] font-bold">+400</p>
+            <p className="font-comic text-[28px] text-[#FFCC48] font-bold">+{person.bonuses}</p>
           </div>
           <button className="p-[16px] elem-bg_green rounded-[13px] overflow-hidden flex flex-row items-center gap-[10px] w-full justify-center">
           <p className="font-comic font-bold text-base text-gradient">Получить бонус</p>
