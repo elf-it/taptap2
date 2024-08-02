@@ -5,7 +5,7 @@ import LanguageSelectModal from '../component/LanguageSelectModal';
 import Clicker from "../component/Clicker";
 import { createPortal } from "react-dom";
 
-export default function Main({setNumPage, person, addStep, count, allSteps}) {
+export default function Main({setNumPage, person, addStep, count, allSteps, step}) {
   
   const [langSelectOpen, setLangSelectOpen] = useState(false)
 
@@ -15,7 +15,7 @@ export default function Main({setNumPage, person, addStep, count, allSteps}) {
       <MainPageHeader setNumPage={setNumPage} person={person} setLangSelectOpen={setLangSelectOpen} />
       <ControlPanel count={count} allSteps={allSteps} person={person} />
       <Clicker
-        handleClick={addStep} allSteps={allSteps} person={person} />
+        handleClick={addStep} allSteps={allSteps} person={person} step={step} />
     </div>
     {createPortal(<LanguageSelectModal isOpen={langSelectOpen} setLangSelectOpen={setLangSelectOpen}/>, document.body)}
     </>

@@ -102,7 +102,7 @@ function App() {
   const routes = [
     {
       path: "/",
-      element: <Main setNumPage={setNumPage} person={person} addStep={addStep} count={count} allSteps={allSteps} />,
+      element: <Main setNumPage={setNumPage} person={person} addStep={addStep} count={count} allSteps={allSteps} step={step} />,
       label: "Games",
       icon: mamothIcon,
       visible: true,
