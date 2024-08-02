@@ -34,7 +34,7 @@ export default function BottomNav() {
                     return (
                       <>
                         <img src={link.icon} alt="" />
-                        {link.label}
+                        <span className="whitespace-nowrap">{link.label}</span>
                       </>
                     );
                   }}
