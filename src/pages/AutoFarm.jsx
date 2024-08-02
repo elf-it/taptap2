@@ -32,7 +32,7 @@ export default function AutoFarm({setNumPage}) {
       setModalInfo(data)
       setShowModal(true)
     }else{
-      setNumPage(4)
+      setNumPage(5)
     }
   };
 

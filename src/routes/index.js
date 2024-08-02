@@ -2,7 +2,6 @@ import AutoFarm from "../pages/AutoFarm";
 import Dashboard from "../pages/Dashboard";
 import Lottery from "../pages/Lottery";
 import Main from "../pages/Main";
-import Wallet from "../pages/Wallet";
 
 import mamothIcon from "../assets/icons/icon__nav-mamoth.svg";
 import dashboardIcon from "../assets/icons/icon__nav-dashboard.svg";
@@ -13,34 +12,34 @@ import gamesIcon from "../assets/icons/icon__nav-games.svg";
 export const routes = [
   {
     path: "/",
-    element: <Main />,
+    element: <Main setNumPage={setNumPage} person={person} addStep={addStep} count={count} allSteps={allSteps} />,
     label: "Games",
     icon: mamothIcon,
     visible: true,
   },
   {
-    path: "/dashboard",
-    element: <Dashboard />,
+    path: "/",
+    element: <Dashboard person={person} count={count} />,
     label: "Дашборд",
     icon: dashboardIcon,
     visible: true,
   },
   {
-    path: "/auto-farm",
-    element: <AutoFarm />,
+    path: "/",
+    element: <AutoFarm setNumPage={setNumPage} />,
     label: "Auto Farm",
     icon: autofarmIcon,
     visible: true,
   },
   {
-    path: "/lottery",
+    path: "/",
     element: <Lottery />,
-    label: "Лоторея",
+    label: "Лотерея",
     icon: lotteryIcon,
     visible: true,
   },
   {
-    path: "/games",
+    path: "/",
     element: null,
     label: "Games",
     icon: gamesIcon,

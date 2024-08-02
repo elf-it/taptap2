@@ -1,15 +1,22 @@
 import './App.css';
 import Guide from './pages/Guide';
-import Main from './pages/Main';
-import Dashboard from './pages/Dashboard';
-import Lottery from './pages/Lottery';
 import { TonConnectUIProvider } from '@tonconnect/ui-react';
 import { useEffect, useState } from 'react';
-import AutoFarm from './pages/AutoFarm';
 import ConnectWallet from './pages/ConnectWallet';
 import { getPerson, getSteps, setMyCoins } from './lib/fetch';
 import { Icon } from './component/IconSprite';
 import Loading from './pages/Loading';
+
+import AutoFarm from "./pages/AutoFarm";
+import Dashboard from "./pages/Dashboard";
+import Lottery from "./pages/Lottery";
+import Main from "./pages/Main";
+
+import mamothIcon from "./assets/icons/icon__nav-mamoth.svg";
+import dashboardIcon from "./assets/icons/icon__nav-dashboard.svg";
+import autofarmIcon from "./assets/icons/icon__nav-autofarm.svg";
+import lotteryIcon from "./assets/icons/icon__nav-lottery.svg";
+import gamesIcon from "./assets/icons/icon__nav-games.svg";
 
 const tg = window.Telegram.WebApp;
 
@@ -78,27 +85,41 @@ function App() {
       path: "/",
       element: <Main setNumPage={setNumPage} person={person} addStep={addStep} count={count} allSteps={allSteps} />,
       label: "Games",
-      icon: "mamoth"
+      icon: mamothIcon,
+      visible: true,
     },
     {
       path: "/",
       element: <Dashboard person={person} count={count} />,
       label: "Дашборд",
-      icon:"dashboard"
+      icon: dashboardIcon,
+      visible: true,
     },
     {
       path: "/",
       element: <AutoFarm setNumPage={setNumPage} />,
       label: "Auto Farm",
-      icon:"autofarm"
+      icon: autofarmIcon,
+      visible: true,
     },
     {
       path: "/",
       element: <Lottery />,
       label: "Лотерея",
-      icon: "lottery",
+      icon: lotteryIcon,
+      visible: true,
     },
+    {
+      path: "/",
+      element: null,
+      label: "Games",
+      icon: gamesIcon,
+      visible: true,
+    }
   ];
+
+  const routesVisibleElemCount = routes.filter((route) => route.visible).length
+  const activeNavElemWidth = 100 / routesVisibleElemCount;
 
   const auth = async () => {
     const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
@@ -200,72 +221,74 @@ function App() {
       { person != null ?
         <TonConnectUIProvider manifestUrl='https://hammerhead-app-lqwus.ondigitalocean.app/tonconnect-manifest.json'>
 
-          {numPage == 4 ?
+          {numPage == 5 ?
           <>
             <div className="bg-bgMain h-full bg-cover overflow-hidden"><ConnectWallet person={person} /></div>
             <div className="absolute bottom-[10px] left-[17px] right-[17px]">
               <nav className="bg-bgColorGreen backdrop-blur-xl h-[76px] rounded-[15px] w-full relative">
                 <div
-                  style={{ width: "25%", left: `${0 * 25}%` }}
+                  style={{ width: `${activeNavElemWidth}%` , left: `${0}%` }}
                   className=" absolute h-full z-0 p-[4px] transition-all"
                 >
                   <div className="elem-bg_green h-full w-full rounded-[12px]"></div>
                 </div>
                 <ul className="flex flex-row justify-between gap-[2px] h-full">
-                  {routes.map((link, i) => (
-                    <button
-                      key={i}
-                      className={
-                        "font-comic text-gradient text-sm flex-1 flex flex-col items-center justify-end gap-[4px] z-10 mb-[8px]"
-                      }
-                      onClick={() => setNumPage(i)}
-                    >
-                      <Icon
-                          styles={{ opacity: link.icon === "mamoth" ? 1 : 0.3 }}
-                          name={link.icon}
-                          size={link.icon === "mamoth" ? 38 : 24}
-                          color={true ? "#79F2CE" : "#fff"}
-                        />
-                        {link.label}
-                    </button>
-                  ))}
+                  {routes.map((link, i) => {
+                    return (
+                      link.visible && (
+                        <button
+                          key={i}
+                          className={
+                            "font-comic text-gradient text-sm flex-1 flex flex-col items-center justify-end gap-[4px] z-10 mb-[8px]"
+                          }
+                          onClick={() => setNumPage(i)}
+                        >
+                          <>
+                            <img src={link.icon} alt="" />
+                            {link.label}
+                          </>
+                        </button>
+                      )
+                    );
+                  })}
                 </ul>
               </nav>
             </div>
           </>
           :
           <>
-          {numPage == 5 ?
-            <div className="bg-bgMain h-full bg-cover overflow-hidden">{tg.initDataUnsafe?.start_param}</div>
+          {numPage == 6 ?
+            <div className="bg-bgMain h-full bg-cover overflow-hidden"><Guide /></div>
           :
           <>
             <div className="bg-bgMain h-full bg-cover overflow-hidden">{routes[numPage].element}</div>
             <div className="absolute bottom-[10px] left-[17px] right-[17px]">
               <nav className="bg-bgColorGreen backdrop-blur-xl h-[76px] rounded-[15px] w-full relative">
                 <div
-                  style={{ width: "25%", left: `${numPage * 25}%` }}
+                  style={{ width: `${activeNavElemWidth}%` , left: `${numPage > (routesVisibleElemCount - 1) ? 0 : numPage  * activeNavElemWidth}%` }}
                   className=" absolute h-full z-0 p-[4px] transition-all"
                 >
                   <div className="elem-bg_green h-full w-full rounded-[12px]"></div>
                 </div>
                 <ul className="flex flex-row justify-between gap-[2px] h-full">
-                  {routes.map((link, i) => (
-                    <button
-                      key={i}
-                      className={
-                        "font-comic text-gradient text-sm flex-1 flex flex-col items-center justify-end gap-[4px] z-10 mb-[8px]"
-                      }
-                      onClick={() => setNumPage(i)}
-                    >
-                      <Icon
-                          styles={{ opacity: link.icon === "mamoth" ? 1 : 0.3 }}
-                          name={link.icon}
-                          size={link.icon === "mamoth" ? 38 : 24}
-                          color={true ? "#79F2CE" : "#fff"}
-                        />
-                        {link.label}
-                    </button>
-                  ))}
+                  {routes.map((link, i) => {
+                    return (
+                      link.visible && (
+                        <button
+                          key={i}
+                          className={
+                            "font-comic text-gradient text-sm flex-1 flex flex-col items-center justify-end gap-[4px] z-10 mb-[8px]"
+                          }
+                          onClick={() => setNumPage(i)}
+                        >
+                          <>
+                            <img src={link.icon} alt="" />
+                            {link.label}
+                          </>
+                        </button>
+                      )
+                    );
+                  })}
                 </ul>
               </nav>
             </div>
