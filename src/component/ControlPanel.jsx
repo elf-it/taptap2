@@ -45,7 +45,7 @@ export default function ControlPanel({ count, allSteps, person }) {
           >
             {unlimited ? "ON" : "OFF"}
           </span>
-          <span className="text-gradient">Безлимит</span>
+          <span className="text-gradient whitespace-nowrap">Безлимит</span>
         </button>
         <button
           className="elem-bg_green text-[10px]  font-comic rounded-[13px] flex flex-col items-center justify-center p-[8px]"
@@ -57,7 +57,7 @@ export default function ControlPanel({ count, allSteps, person }) {
           >
             {autoFarm ? "ON" : "OFF"}
           </span>
-          <span className="text-gradient">Auto Farm</span>
+          <span className="text-gradient whitespace-nowrap">Auto Farm</span>
         </button>
         <button
           className="elem-bg_green text-[10px]  font-comic rounded-[13px] flex flex-col items-center justify-center p-[8px]"
@@ -69,7 +69,7 @@ export default function ControlPanel({ count, allSteps, person }) {
           >
             {bust ? "ON" : "OFF"}
           </span>
-          <span className="text-gradient">Буст</span>
+          <span className="text-gradient whitespace-nowrap">Буст</span>
         </button>
       </div>
       <div className="flex flex-col items-center gap-[5px]">
