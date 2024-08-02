@@ -46,29 +46,33 @@ export default function AutoFarm({setNumPage}) {
     index: 0,
     colorClass: "elem-bg_violet",
     title: "Режим безлимит",
-    titleEn: "nolimit",
     descr: "Выбери свое вермя для неограниченного кликанья:",
     image: case1,
     tarrifs: [
       {
         image: clock,
-        time: "6 часов",
-        count: 1,
+        time:'X5',
+        count: 10,
       },
       {
         image: clock,
-        time: "12 часов",
-        count: 2,
+        time:'X6',
+        count: 20,
       },
       {
         image: clock,
-        time: "18 часов",
-        count: 3,
+        time:'X7',
+        count: 30,
       },
       {
         image: clock,
-        time: "24 часа",
-        count: 4,
+        time:'X8',
+        count: 40,
+      },
+      {
+        image: clock,
+        time:'X10',
+        count: 50,
       },
     ],
     btn: {
@@ -85,7 +89,6 @@ export default function AutoFarm({setNumPage}) {
     index: 1,
     colorClass: "elem-bg_blue",
     title: "Функция авто-клик",
-    titleEn: "autoclick",
     descr:
       "Включается один раз в день, и система автоматически кликает за пользователя.",
     image: case2,
@@ -125,7 +128,6 @@ export default function AutoFarm({setNumPage}) {
     index: 2,
     colorClass: "elem-bg_yellow",
     title: "Покупка билетов лотереи",
-    titleEn: "lotery",
     descr: "",
     image: case3,
     tarrifs: [],
@@ -143,7 +145,6 @@ export default function AutoFarm({setNumPage}) {
     index: 3,
     colorClass: "elem-bg_pink",
     title: "Покупка статуса",
-    titleEn: "status",
     descr:
       "Включается один раз в день, и система автоматически кликает за пользователя.",
     image: case4,
@@ -152,36 +153,90 @@ export default function AutoFarm({setNumPage}) {
         image: star1,
         time: "Сильвер",
         count: 1,
+        percents:50
       },
       {
         image: star2,
         time: "Голд",
         count: 2,
+        percents:100
       },
       {
         image: star3,
         time: "Платина",
         count: 3,
+        percents:150
       },
       {
         image: star4,
         time: "Блек",
         count: 4,
+        percents:200
       },
       {
         image: star5,
         time: "Ультима",
         count: 5,
+        percents:250
       },
     ],
     btn: {
-      text: "Купить",
+      text: "Повысить статус",
       color: "#F582FF",
       textColor: "white",
       icon: key4,
       handler: firstCardClick,
     },
     info: null,
+  };
+
+  const fifthCardData = {
+    index: 3,
+    colorClass: "elem-bg_green",
+    title: "Покупка Бустов",
+    descr:
+      "Покупай буст, получай увеличенное колличество монет",
+    image: case5,
+    tarrifs: [
+      {
+        image: coinsIcon,
+        time: '+50',
+        count: 1,
+        percents:50
+      },
+      {
+        image: coinsIcon,
+        time: '+100',
+        count: 2,
+        percents:100
+      },
+      {
+        image: coinsIcon,
+        time: '+150',
+        count: 3,
+        percents:150
+      },
+      {
+        image: coinsIcon,
+        time: '+200',
+        count: 4,
+        percents:200
+      },
+      {
+        image: coinsIcon,
+        time: '+250',
+        count: 5,
+        percents:250
+      },
+    ],
+    btn: {
+      text: "Купить",
+      color: "#45E9B8",
+      textColor: "black",
+      icon: key4,
+      handler: firstCardClick,
+    },
+    info: 'Буст действует 30 дней с момента покупки',
   };
 
   return (
