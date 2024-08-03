@@ -1,42 +1,41 @@
 import { useEffect, useState } from "react";
 import moneyImgage from "../assets/images/money.png";
 import CustomSelect from "./CustomSelect";
-import { Address, toNano } from "ton-core";
 import { useTonConnectUI } from "@tonconnect/ui-react";
+import { useMamotContract } from "../hooks/useMamotContract";
 import { createTX, getAutoclick } from "../lib/fetch";
+import { toNano, Cell, utils } from "@ton/core";
 
 const tg = window.Telegram.WebApp;
 
 export default function BuyCardModal({ setShowModal, data }) {
   const {contractAddress} = useMamotContract();
+  const [tonConnectUI, setOptions] = useTonConnectUI();
   const [currentChoosedTarrif, setCurrentChoosedTarrif] = useState(0);
   const [disabled, setDisabled] = useState(false);
-
-  const transaction = {
-    validUntil: Math.floor(Date.now() / 1000) * 360,
-    messages: [
-      {
-        address: Address.parse(contractAddress),
-        amount: toNano(data.tarrifs[currentChoosedTarrif]?.count)
-      }, null
-    ]
-  }
-
-  const [tonConnectUI, setOptions] = useTonConnectUI();
 
   const overlayClick = (event) => {
     if (event.currentTarget === event.target) setShowModal(false);
   };
 
   const sendTransaction = async () => {
-    const result = await tonConnectUI.sendTransaction(transaction)
-
-    const response = await createTX({tid: tg.initDataUnsafe?.user?.id, txhash: result.boc, package_index: data.index, amount: data.tarrifs[currentChoosedTarrif]?.count * 10000000})
-    if(response.error){
-      console.log(response.error)
-      alert(response.error)
-    }else{
-      alert("https://tonviewer.com/transaction/" + response.hash)
+    const transaction = {
+      validUntil: Math.floor(Date.now() / 1000) + 60,
+      messages: [
+          {
+              address: contractAddress,
+              amount: toNano((data.tarrifs[currentChoosedTarrif]?.count / 100).toString()).toString()
+          }
+      ]
+    }
+    
+    const result = await tonConnectUI.sendTransaction(transaction);
+    
+    if(result){
+      const bocCell = Cell.fromBoc(result.boc);
+      console.log(bocCell)
+      //const hash = utils.bytesToBase64(await bocCell.hash());
+      //console.log(hash)
       setShowModal(false)
     }
   };

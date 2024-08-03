@@ -1,4 +1,4 @@
-import { Address, OpenedContract, fromNano, toNano } from 'ton-core';
+import { Address, OpenedContract, fromNano, toNano } from '@ton/core';
 import { Mamotic } from '../wrappers/Mamotic';
 import { useAsyncInitialize } from "./useAsyncInitialize";
 import { useTonClient } from "./useTonClient";
@@ -35,6 +35,7 @@ export function useMamotContract(){
         user: user,
         contractAddress: ca,
         buy: (value: string) => {
+
             mamotContract?.send(sender, {
                 value: toNano(value)
             }, null);

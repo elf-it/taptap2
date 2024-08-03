@@ -26,7 +26,7 @@ export default function ConnectWallet() {
 
 import { CHAIN, TonConnectButton, useTonConnectModal, useTonConnectUI } from "@tonconnect/ui-react";
 import { useTonConnect } from "../hooks/useTonConnect";
-import { Address } from "ton-core";
+import { Address } from "@ton/core";
 import { useMamotContract } from "../hooks/useMamotContract";
 import lock from "../assets/images/wallet-lock.png";
 import { Icon } from "../component/IconSprite";

@@ -13,6 +13,8 @@
     "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
     "@orbs-network/ton-access": "^2.3.3",
     "@ton/blueprint": "^0.22.0",
+    "@ton/core": "^0.56.3",
+    "@ton/ton": "^14.0.0",
     "@tonconnect/ui-react": "^2.0.6",
     "@types/telegram-web-app": "^7.3.1",
     "node-telegram-bot-api": "^0.66.0",
