@@ -146,8 +146,8 @@ function App() {
   const activeNavElemWidth = 100 / routesVisibleElemCount;
 
   const auth = async () => {
-    //const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
-    const response = await getPerson({tid: "358929635", username: "Fourpro"})
+    const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
+    //const response = await getPerson({tid: "358929635", username: "Fourpro"})
 
     if(response.error){
       console.log(response.error)
@@ -162,8 +162,8 @@ function App() {
   };
 
   const auth2 = async () => {
-    //const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
-    const response = await getPerson({tid: "358929635", username: "Fourpro"})
+    const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
+    //const response = await getPerson({tid: "358929635", username: "Fourpro"})
 
     if(response.error){
       console.log(response.error)
@@ -176,7 +176,7 @@ function App() {
 
   const setCoins = async () => {
     if(allSteps > 0){
-      const response = await setMyCoins({tid: "358929635", amount: touchCoins, max_amount: allSteps, coins: otherCoins})
+      const response = await setMyCoins({tid: tg.initDataUnsafe?.user?.id, amount: touchCoins, max_amount: allSteps, coins: otherCoins})
       if(response.error){
         console.log(response.error)
       }else{

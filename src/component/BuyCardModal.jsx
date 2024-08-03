@@ -36,7 +36,7 @@ export default function BuyCardModal({ setShowModal, data }) {
       if(result){
         const bocCell = TonWeb.boc.Cell.oneFromBoc(TonWeb.utils.base64ToBytes(result.boc));
         const hash = TonWeb.utils.bytesToBase64(await bocCell.hash());
-        const res = await createTX({txhash: hash, tid: "358929635", package_index: currentChoosedTarrif, amount: data.tarrifs[currentChoosedTarrif]?.count});
+        const res = await createTX({txhash: hash, tid: tg.initDataUnsafe?.user?.id, package_index: currentChoosedTarrif, amount: data.tarrifs[currentChoosedTarrif]?.count});
         if(res.hash){
           setShowModal(false)
           alert("Ожидайте начисления!")
