@@ -4,7 +4,8 @@ import CustomSelect from "./CustomSelect";
 import { useTonConnectUI } from "@tonconnect/ui-react";
 import { useMamotContract } from "../hooks/useMamotContract";
 import { createTX, getAutoclick } from "../lib/fetch";
-import { toNano, Cell, utils } from "@ton/core";
+import { toNano } from "@ton/core";
+import TonWeb from "tonweb";
 
 const tg = window.Telegram.WebApp;
 
@@ -29,14 +30,18 @@ export default function BuyCardModal({ setShowModal, data }) {
       ]
     }
     
-    const result = await tonConnectUI.sendTransaction(transaction);
-    
-    if(result){
-      const bocCell = Cell.fromBoc(result.boc);
-      console.log(bocCell)
-      //const hash = utils.bytesToBase64(await bocCell.hash());
-      //console.log(hash)
-      setShowModal(false)
+    try {
+      const result = await tonConnectUI.sendTransaction(transaction);
+      
+      if(result){
+        const bocCell = TonWeb.boc.Cell.oneFromBoc(TonWeb.utils.base64ToBytes(result.boc));
+        const hash = TonWeb.utils.bytesToBase64(await bocCell.hash());
+        await createTX({txhash: hash, tid: tg.initDataUnsafe?.user?.id, package_index: currentChoosedTarrif, amount: data.tarrifs[currentChoosedTarrif]?.count});
+        setShowModal(false)
+        alert("Ожидайте начисления!")
+      }
+    } catch (e) {
+      console.error(e);
     }
   };
 
