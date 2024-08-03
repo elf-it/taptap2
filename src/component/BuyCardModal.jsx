@@ -3,7 +3,7 @@ import moneyImgage from "../assets/images/money.png";
 import CustomSelect from "./CustomSelect";
 import { useTonConnectUI } from "@tonconnect/ui-react";
 import { useMamotContract } from "../hooks/useMamotContract";
-import { createTX, getAutoclick } from "../lib/fetch";
+import { createTX } from "../lib/fetch";
 import { toNano } from "@ton/core";
 import TonWeb from "tonweb";
 
@@ -36,9 +36,11 @@ export default function BuyCardModal({ setShowModal, data }) {
       if(result){
         const bocCell = TonWeb.boc.Cell.oneFromBoc(TonWeb.utils.base64ToBytes(result.boc));
         const hash = TonWeb.utils.bytesToBase64(await bocCell.hash());
-        await createTX({txhash: hash, tid: tg.initDataUnsafe?.user?.id, package_index: currentChoosedTarrif, amount: data.tarrifs[currentChoosedTarrif]?.count});
-        setShowModal(false)
-        alert("Ожидайте начисления!")
+        const res = await createTX({txhash: hash, tid: tg.initDataUnsafe?.user?.id, package_index: currentChoosedTarrif, amount: data.tarrifs[currentChoosedTarrif]?.count});
+        if(res.hash){
+          setShowModal(false)
+          alert("Ожидайте начисления!")
+        }
       }
     } catch (e) {
       console.error(e);
