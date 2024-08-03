@@ -240,10 +240,11 @@ export default function AutoFarm({setNumPage}) {
 
   return (
     <div className=" py-[24px] px-[17px] flex flex-col items-center gap-[8px] pb-[80px] h-full overflow-auto">
-      <BuyCard data={firstCardData} />
-      <BuyCard data={secondCardData} />
-      <BuyCard data={thirdCardData} />
       <BuyCard data={fourthCardData} />
+      <BuyCard data={secondCardData} />
+      <BuyCard data={fifthCardData} />
+      <BuyCard data={firstCardData} />
+      <BuyCard data={thirdCardData} />
       {showModal && createPortal(<BuyCardModal setShowModal={setShowModal} data={modalInfo}/>, document.body)}
     </div>
   );

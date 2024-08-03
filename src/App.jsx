@@ -13,6 +13,8 @@ import Dashboard from "./pages/Dashboard";
 import Lottery from "./pages/Lottery";
 import Main from "./pages/Main";
 
+import usePreloadImage from "./hooks/usePreloadImage";
+
 import mamothIcon from "./assets/icons/icon__nav-mamoth.svg";
 import dashboardIcon from "./assets/icons/icon__nav-dashboard.svg";
 import autofarmIcon from "./assets/icons/icon__nav-autofarm.svg";
@@ -26,11 +28,14 @@ import bgMain4 from './assets/images/bg-main-4.png'
 import bgMain5 from './assets/images/bg-main-5.png'
 import bgMain6 from './assets/images/bg-main-6.png'
 
+import { imagesList } from "./image-list";
+
 const tg = window.Telegram.WebApp;
 
 function App() {
 
   const [level, setLevel] = useContext(LvlContext);
+  const [loading] = usePreloadImage(imagesList);
 
   const bgImages = [
     bgMain1,
@@ -141,8 +146,8 @@ function App() {
   const activeNavElemWidth = 100 / routesVisibleElemCount;
 
   const auth = async () => {
-    const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
-    //const response = await getPerson({tid: "358929635", username: "Fourpro"})
+    //const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
+    const response = await getPerson({tid: "358929635", username: "Fourpro"})
 
     if(response.error){
       console.log(response.error)
@@ -157,8 +162,8 @@ function App() {
   };
 
   const auth2 = async () => {
-    const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
-    //const response = await getPerson({tid: "358929635", username: "Fourpro"})
+    //const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
+    const response = await getPerson({tid: "358929635", username: "Fourpro"})
 
     if(response.error){
       console.log(response.error)
@@ -171,7 +176,7 @@ function App() {
 
   const setCoins = async () => {
     if(allSteps > 0){
-      const response = await setMyCoins({tid: tg.initDataUnsafe?.user?.id, amount: touchCoins, max_amount: allSteps, coins: otherCoins})
+      const response = await setMyCoins({tid: "358929635", amount: touchCoins, max_amount: allSteps, coins: otherCoins})
       if(response.error){
         console.log(response.error)
       }else{
@@ -237,7 +242,7 @@ function App() {
     <>
     {"358929635" != "undefined" ?
       <>
-      {load ?
+      {load && loading ?
         <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}><Loading /></div>
       :
       <>

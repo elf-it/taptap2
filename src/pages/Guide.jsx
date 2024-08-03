@@ -26,10 +26,11 @@ export default function Guide() {
   const pages = [
     <GuideFirstStep />,
     <GuideSecondStep />,
-    <GuideThirdStep />,
-    <GuideFourthStep />,
     <GuideFifthStep />,
-    <GuideSixthStep />
+    <GuideThirdStep />,
+    <GuideSevenStep />,
+    <GuideFourthStep />,
+    <GuideSixthStep />,
   ];
 
   const auth = async () => {
