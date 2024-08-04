@@ -503,18 +503,6 @@ PROGRAM{
   $DeployOk$_constructor_queryId PROCINLINE:<{
   }>
   %$Mamotic$_internal_empty PROCINLINE:<{
-    TRUE
-    __tact_context_get INLINECALLDICT
-    $Context$_get_value INLINECALLDICT
-    s7 PUSH
-    MUL
-    10000 PUSHINT
-    DIV
-    s9 PUSH
-    -ROT
-    2 PUSHINT
-    $SendParameters$_constructor_to_bounce_value_mode INLINECALLDICT
-    $global_send INLINECALLDICT
     B{b5ee9c7241010101001400002400000000627579207375636365737366756cc8a3f2c1} B>boc PUSHREF
     $Mamotic$_fun_reply INLINECALLDICT
   }>
