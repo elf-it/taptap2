@@ -12,7 +12,7 @@ export const suggestedLanguages = {
     en_lang: allLanguages.en_lang,
 };
 
-export const otherrLanguages = {
+export const otherLanguages = {
     ch_lang: allLanguages.ch_lang,
     cr_lang: allLanguages.cr_lang,
     cz_lang: allLanguages.cz_lang,
