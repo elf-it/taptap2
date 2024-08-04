@@ -17,7 +17,7 @@ export default function Main({setNumPage, person, addStep, count, allSteps, step
       <Clicker
         handleClick={addStep} allSteps={allSteps} person={person} step={step} />
     </div>
-    {createPortal(<LanguageSelectModal isOpen={langSelectOpen} setLangSelectOpen={setLangSelectOpen}/>, document.body)}
+    {createPortal(<LanguageSelectModal isOpen={langSelectOpen} setLangSelectOpen={setLangSelectOpen} person={person}/>, document.body)}
     </>
   );
 }

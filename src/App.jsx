@@ -4,7 +4,7 @@ import { TonConnectUIProvider } from '@tonconnect/ui-react';
 import { useEffect, useState, useContext } from 'react';
 import { LvlContext } from "./store/levelContext";
 import ConnectWallet from './pages/ConnectWallet';
-import { getPerson, getSteps, setMyCoins } from './lib/fetch';
+import { getPerson, getSteps, setMyCoins, getLang } from './lib/fetch';
 import { Icon } from './component/IconSprite';
 import Loading from './pages/Loading';
 
@@ -29,6 +29,7 @@ import bgMain5 from './assets/images/bg-main-5.png'
 import bgMain6 from './assets/images/bg-main-6.png'
 
 import { imagesList } from "./image-list";
+import { LngContext } from './store/langContext';
 
 const tg = window.Telegram.WebApp;
 
@@ -36,6 +37,13 @@ function App() {
 
   const [level, setLevel] = useContext(LvlContext);
   const [loading] = usePreloadImage(imagesList);
+
+  const [lang, setLang] = useContext(LngContext)
+
+  const getLng = async () => {
+    const response = await getLang()
+    setLang(response)
+  }
 
   const bgImages = [
     bgMain1,
@@ -121,14 +129,14 @@ function App() {
     },
     {
       path: "/",
-      element: <AutoFarm setNumPage={setNumPage} />,
+      element: <AutoFarm setNumPage={setNumPage} person={person} />,
       label: "Auto Farm",
       icon: autofarmIcon,
       visible: true,
     },
     {
       path: "/",
-      element: <Lottery />,
+      element: <Lottery person={person} />,
       label: "Лотерея",
       icon: lotteryIcon,
       visible: true,
@@ -152,7 +160,7 @@ function App() {
     if(response.error){
       console.log(response.error)
     }else{
-      setPerson({tid: response.tid, username: response.username, status: response.status, bonuses: response.bonuses, myCoins: response.my_coins, autoCoins: response.auto_coins, Notcoin: response.Notcoin, Pepe: response.Pepe, Shiba: response.Shiba, Dogecoin: response.Dogecoin, Dogwifhat: response.Dogwifhat, Popcat: response.Popcat, Mog: response.Mog, Floki: response.Floki, Ponke: response.Ponke, Mew: response.Mew, Bome: response.Bome, autoclick: response.autoclick, status_autoclick: response.status_autoclick, status_unlimit: response.status_unlimit, status_boost: response.status_boost, level: response.level, timer: response.timer})
+      setPerson({tid: response.tid, username: response.username, status: response.status, bonuses: response.bonuses, myCoins: response.my_coins, autoCoins: response.auto_coins, Notcoin: response.Notcoin, Pepe: response.Pepe, Shiba: response.Shiba, Dogecoin: response.Dogecoin, Dogwifhat: response.Dogwifhat, Popcat: response.Popcat, Mog: response.Mog, Floki: response.Floki, Ponke: response.Ponke, Mew: response.Mew, Bome: response.Bome, autoclick: response.autoclick, status_autoclick: response.status_autoclick, status_unlimit: response.status_unlimit, status_boost: response.status_boost, level: response.level, timer: response.timer, lang: response.lang})
       setCount(response.my_coins + response.auto_coins)
       setAllSteps(response.my_coins_max)
       setLevel(response.level)
@@ -168,7 +176,7 @@ function App() {
     if(response.error){
       console.log(response.error)
     }else{
-      setPerson({tid: response.tid, username: response.username, status: response.status, bonuses: response.bonuses, myCoins: response.my_coins, autoCoins: response.auto_coins, Notcoin: response.Notcoin, Pepe: response.Pepe, Shiba: response.Shiba, Dogecoin: response.Dogecoin, Dogwifhat: response.Dogwifhat, Popcat: response.Popcat, Mog: response.Mog, Floki: response.Floki, Ponke: response.Ponke, Mew: response.Mew, Bome: response.Bome, autoclick: response.autoclick, status_autoclick: response.status_autoclick, status_unlimit: response.status_unlimit, status_boost: response.status_boost, level: response.level, timer: response.timer})
+      setPerson({tid: response.tid, username: response.username, status: response.status, bonuses: response.bonuses, myCoins: response.my_coins, autoCoins: response.auto_coins, Notcoin: response.Notcoin, Pepe: response.Pepe, Shiba: response.Shiba, Dogecoin: response.Dogecoin, Dogwifhat: response.Dogwifhat, Popcat: response.Popcat, Mog: response.Mog, Floki: response.Floki, Ponke: response.Ponke, Mew: response.Mew, Bome: response.Bome, autoclick: response.autoclick, status_autoclick: response.status_autoclick, status_unlimit: response.status_unlimit, status_boost: response.status_boost, level: response.level, timer: response.timer, lang: response.lang})
       setLevel(response.level)
     }
     //setLoad(false)
@@ -225,6 +233,7 @@ function App() {
     tg.enableClosingConfirmation()
     auth()
     getStepss()
+    getLng()
   }, []);
 
   useEffect(() => {

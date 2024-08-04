@@ -152,3 +152,40 @@ export const getSteps = async () => {
         return null
     }
 }
+
+export const setLangR = async (props) => {
+    try{
+        const request = await fetch(ROUTE_URI + '/setlang', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                "Accept": "*/*"
+            },
+            body: JSON.stringify({
+                key: "123",
+                tid: props.tid,
+                lang: props.langr
+            })
+        })
+        return await request.json()
+    } catch (error) {
+        console.log("Error during getSteps: ", error)
+        return null
+    }
+}
+
+export const getLang = async () => {
+    try{
+        const request = await fetch(ROUTE_URI + '/getlang', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                "Accept": "*/*"
+            }
+        })
+        return await request.json()
+    } catch (error) {
+        console.log("Error during getSteps: ", error)
+        return null
+    }
+}

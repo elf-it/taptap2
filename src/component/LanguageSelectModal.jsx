@@ -1,7 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Icon } from "./IconSprite";
+import { LngContext } from "../store/langContext";
+import { setLangR } from "../lib/fetch";
+import { suggestedLanguages, otherLanguages } from "../helper/languages";
 
-export default function LanguageSelectModal({ isOpen, setLangSelectOpen }) {
+export default function LanguageSelectModal({ isOpen, setLangSelectOpen, person }) {
+  const [lang, setLang] = useContext(LngContext);
+
+  const [currentLang, setCurrentLang] = useState("");
+
   const onOverlayClose = (e) => {
     if (e && e.target === e.currentTarget) {
       setLangSelectOpen(false);
@@ -12,15 +19,24 @@ export default function LanguageSelectModal({ isOpen, setLangSelectOpen }) {
     setLangSelectOpen(false);
   };
 
+  const setLng = async () => {
+    const response = await setLangR({tid: person.tid, langr: currentLang})
+
+    if(response.error){
+      console.log(response.error)
+    }else{
+      console.log("ok")
+    }
+  }
+
   const saveAndClose = () => {
-    // other code
+    setLng()
     setLangSelectOpen(false)
   }
 
-  const suggestedLanguages = ["English (UK)", "English", "Bahasa Indonesia"];
-  const otherLanguages = ["Chineses", "Croatian", "Czech", "Danish"];
-
-  const [currentLang, setCurrentLang] = useState("English");
+  useEffect(() => {
+    setCurrentLang(person.lang)
+  }, [])
 
   return (
     <div
@@ -41,31 +57,33 @@ export default function LanguageSelectModal({ isOpen, setLangSelectOpen }) {
             <Icon name="cross" color={"rgba(255,255,255,0.5)"} size={24} />
           </button>
           <p className="text-gradient font-comic font-bold text-[24px]">
-            Смена языка
+            {lang?.languages?.title[person.lang]}
           </p>
           <p className="text-white font-comic text-[14px] mb-[50px]">
-            Выбери язык приложения
+            {lang?.languages?.choice[person.lang]}
           </p>
           <div className="flex-1 overflow-y-auto w-full py-[10px]">
             <p className="font-comic text-white/20 text-[14px] mb-[10px]">
-              Suggested Languages
+              {lang?.languages?.suggested[person.lang]}
             </p>
-            {suggestedLanguages.map((lang, i) => (
+            {Object.keys(suggestedLanguages).map((langi, i) => (
               <LangItem
                 key={i}
-                lang={lang}
+                langi={langi}
+                visibleLang = {suggestedLanguages[langi].fullName}
                 currentLang={currentLang}
                 setCurrentLang={setCurrentLang}
               />
             ))}
 
             <p className="font-comic text-white/20 text-[14px] mt-[20px] mb-[10px]">
-              Other Languages
+              {lang?.languages?.other[person.lang]}
             </p>
-            {otherLanguages.map((lang, i) => (
+            {Object.keys(otherLanguages).map((langi, i) => (
               <LangItem
                 key={i}
-                lang={lang}
+                langi={langi}
+                visibleLang = {otherLanguages[langi].fullName}
                 currentLang={currentLang}
                 setCurrentLang={setCurrentLang}
               />
@@ -83,14 +101,14 @@ export default function LanguageSelectModal({ isOpen, setLangSelectOpen }) {
   );
 }
 
-const LangItem = ({ lang, currentLang, setCurrentLang }) => {
+const LangItem = ({ langi, currentLang, setCurrentLang, visibleLang }) => {
   return (
     <button
-      onClick={() => setCurrentLang(lang)}
+      onClick={() => setCurrentLang(langi)}
       className="py-[10px] flex flex-row items-center justify-between w-full"
     >
-      <p className="font-comic text-white text-[16px]">{lang}</p>
-      {lang === currentLang && <Icon name="done" color="#45E9B8" size={24} />}
+      <p className="font-comic text-white text-[16px]">{visibleLang}</p>
+      {langi === currentLang && <Icon name="done" color="#45E9B8" size={24} />}
     </button>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import crownSvg from "../assets/icons/icon__crown.svg";
 import coinsSvg from "../assets/icons/icon__coins.svg";
 import ticketSvg from "../assets/icons/icon__ticket.svg";
@@ -18,6 +18,7 @@ import shiba from "../assets/dasboardCoins/shiba.png";
 import copySvg from "../assets/icons/icon__copy.svg";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { getReferals } from "../lib/fetch";
+import { LngContext } from "../store/langContext";
 
 const tg = window.Telegram.WebApp;
 const myLink = "https://t.me/mamontenokBot_bot/Mamontenok?startapp=" + tg.initDataUnsafe?.user?.id;
@@ -28,9 +29,9 @@ export default function Dashboard({person, count}) {
   const [state, setState] = useState(false);
   const [referals, setReferals] = useState([]);
 
-  const formatCount = new Intl.NumberFormat("en-US").format(count);
+  const [lang, setLang] = useContext(LngContext);
 
-  console.log(person)
+  const formatCount = new Intl.NumberFormat("en-US").format(count);
 
   const fakeData = [
     {
@@ -129,13 +130,13 @@ export default function Dashboard({person, count}) {
           <img src={ticketSvg} alt="" />
           <p className="font-comic text-sm">
             <span className="text-[#FFCC48]">23</span>
-            <span className="text-[#9B9B9B]">/билет</span>
+            <span className="text-[#9B9B9B]">/{lang?.dashboard?.text_ticket[person.lang]}</span>
           </p>
         </div>
 
         <div className="flex flex-col items-center elem-bg_green py-[24px] px-[20px] rounded-[15px] w-full mb-[10px]">
           <h3 className="text-lg text-white font-comic font-bold mb-[8px]">
-            Meme coins
+            {lang?.dashboard?.text_meme_coins[person.lang]}
           </h3>
           {fakeData.map((user, i) => (
             <div
@@ -163,7 +164,7 @@ export default function Dashboard({person, count}) {
 
         <div className="flex flex-col items-center elem-bg_green py-[24px] px-[20px] rounded-[15px] w-full gap-[20px]">
           <h3 className="text-lg text-white font-comic font-bold mb-[8px]">
-            Приглашенные друзья
+            {lang?.dashboard?.text_friends[person.lang]}
           </h3>
           <div className="elem-bg_green px-[8px] rounded-[40px] w-auto flex flex-row items-center gap-[8px]">
             <img src={crownSvg} alt="" />
@@ -176,12 +177,12 @@ export default function Dashboard({person, count}) {
             <p className="font-comic text-[28px] text-[#FFCC48] font-bold">+{person.bonuses}</p>
           </div>
           <button className="p-[16px] elem-bg_green rounded-[13px] overflow-hidden flex flex-row items-center gap-[10px] w-full justify-center">
-          <p className="font-comic font-bold text-base text-gradient">Получить бонус</p>
+          <p className="font-comic font-bold text-base text-gradient">{lang?.dashboard?.text_get_bonus[person.lang]}</p>
               <img className="w-[32px] h-[19px]" src={coinsSvg} alt="" />
             </button>
           <div className="w-full flex flex-row items-center gap-[8px]">
             <button onClick={() => tg.openTelegramLink(shareLink)} className="flex-1 py-[16px] bg-gradient-to-b from-gradientStartColor to-gradientEndColor rounded-[13px]">
-              <p className="font-comic text-sm">Пригласить друга</p>
+              <p className="font-comic text-sm">{lang?.dashboard?.text_invite_friend[person.lang]}</p>
             </button>
             <CopyToClipboard text={myLink}
               onCopy={() => {

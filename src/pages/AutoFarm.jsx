@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import BuyCard from "../component/BuyCard";
 import case1 from "../assets/icons/case1.svg";
 import case2 from "../assets/icons/case2.svg";
@@ -19,10 +19,13 @@ import coinsIcon from "../assets/icons/icon__coins.svg";
 import BuyCardModal from "../component/BuyCardModal";
 import { createPortal } from "react-dom";
 import { useTonAddress } from "@tonconnect/ui-react";
+import { LngContext } from "../store/langContext";
 
-export default function AutoFarm({setNumPage}) {
+export default function AutoFarm({setNumPage, person}) {
   const [showModal, setShowModal] = useState(false);
   const [modalInfo, setModalInfo] = useState(null);
+
+  const [lang, setLang] = useContext(LngContext);
 
   const userFriendlyAddress = useTonAddress();
 
@@ -44,8 +47,8 @@ export default function AutoFarm({setNumPage}) {
   const firstCardData = {
     index: 0,
     colorClass: "elem-bg_violet",
-    title: "Режим безлимит",
-    descr: "Выбери свое вермя для неограниченного кликанья:",
+    title: lang?.autofarm?.title_unlimit[person.lang],
+    descr: lang?.autofarm?.description_unlimit[person.lang],
     image: case1,
     tarrifs: [
       {
@@ -75,63 +78,62 @@ export default function AutoFarm({setNumPage}) {
       },
     ],
     btn: {
-      text: "Купить",
+      text: lang?.autofarm?.button_unlimit[person.lang],
       color: "#CC92FF",
       textColor: "white",
       icon: key1,
       handler: firstCardClick,
     },
-    info: "Плата взимается однократно. ",
+    info: lang?.autofarm?.info_unlimit[person.lang],
   };
 
   const secondCardData = {
     index: 1,
     colorClass: "elem-bg_blue",
-    title: "Функция авто-клик",
-    descr:
-      "Включается один раз в день, и система автоматически кликает за пользователя.",
+    title: lang?.autofarm?.title_autofarm[person.lang],
+    descr: lang?.autofarm?.description_autofarm[person.lang],
     image: case2,
     tarrifs: [
       {
         image: clock,
-        time: "6 часов",
+        time: lang?.autofarm?.tarif_time1_autofarm[person.lang],
         count: 1,
       },
       {
         image: clock,
-        time: "12 часов",
+        time: lang?.autofarm?.tarif_time2_autofarm[person.lang],
         count: 2,
       },
       {
         image: clock,
-        time: "18 часов",
+        time: lang?.autofarm?.tarif_time3_autofarm[person.lang],
         count: 3,
       },
       {
         image: clock,
-        time: "24 часа",
+        time: lang?.autofarm?.tarif_time4_autofarm[person.lang],
         count: 4,
       },
     ],
     btn: {
-      text: "Купить",
+      text: lang?.autofarm?.button_autofarm[person.lang],
       color: "#82BCFF",
       textColor: "white",
       icon: key2,
       handler: firstCardClick,
     },
-    info: "Плата взимается однократно, но функцию необходимо включать каждый день.",
+    info: lang?.autofarm?.info_autofarm[person.lang],
   };
 
   const thirdCardData = {
     index: 2,
     colorClass: "elem-bg_yellow",
-    title: "Покупка билетов лотереи",
-    descr: "",
+    title: lang?.autofarm?.title_lottery[person.lang],
+    descr: lang?.autofarm?.description_lottery[person.lang],
     image: case3,
     tarrifs: [],
     btn: {
-      text: "Купить",
+      text: lang?.autofarm?.button_lottery[person.lang],
       color: "#FFCD56",
       textColor: "#911B00",
       icon: key3,
@@ -143,44 +145,43 @@ export default function AutoFarm({setNumPage}) {
   const fourthCardData = {
     index: 3,
     colorClass: "elem-bg_pink",
-    title: "Покупка статуса",
-    descr:
-      "Включается один раз в день, и система автоматически кликает за пользователя.",
+    title: lang?.autofarm?.title_status[person.lang],
+    descr: lang?.autofarm?.description_status[person.lang],
     image: case4,
     tarrifs: [
       {
         image: star1,
-        time: "Сильвер",
+        time: lang?.stats?.get_silver[person.lang],
         count: 1,
         percents:50
       },
       {
         image: star2,
-        time: "Голд",
+        time: lang?.stats?.get_gold[person.lang],
         count: 2,
         percents:100
       },
       {
         image: star3,
-        time: "Платина",
+        time: lang?.stats?.get_platinum[person.lang],
         count: 3,
         percents:150
       },
       {
         image: star4,
-        time: "Блек",
+        time: lang?.stats?.get_black[person.lang],
         count: 4,
         percents:200
       },
       {
         image: star5,
-        time: "Ультима",
+        time: lang?.stats?.get_ultima[person.lang],
         count: 5,
         percents:250
       },
     ],
     btn: {
-      text: "Повысить статус",
+      text: lang?.autofarm?.button_status[person.lang],
       color: "#F582FF",
       textColor: "white",
       icon: key4,
@@ -192,50 +193,49 @@ export default function AutoFarm({setNumPage}) {
   const fifthCardData = {
     index: 3,
     colorClass: "elem-bg_green",
-    title: "Покупка Бустов",
-    descr:
-      "Покупай буст, получай увеличенное колличество монет",
+    title: lang?.autofarm?.title_boost[person.lang],
+    descr: lang?.autofarm?.description_boost[person.lang],
     image: case5,
     tarrifs: [
       {
         image: coinsIcon,
-        time: '+50',
+        time: lang?.autofarm?.tarifs_time1_boost[person.lang],
         count: 1,
         percents:50
       },
       {
         image: coinsIcon,
-        time: '+100',
+        time: lang?.autofarm?.tarifs_time2_boost[person.lang],
         count: 2,
         percents:100
       },
       {
         image: coinsIcon,
-        time: '+150',
+        time: lang?.autofarm?.tarifs_time3_boost[person.lang],
         count: 3,
         percents:150
       },
       {
         image: coinsIcon,
-        time: '+200',
+        time: lang?.autofarm?.tarifs_time4_boost[person.lang],
         count: 4,
         percents:200
       },
       {
         image: coinsIcon,
-        time: '+250',
+        time: lang?.autofarm?.tarifs_time5_boost[person.lang],
         count: 5,
         percents:250
       },
     ],
     btn: {
-      text: "Купить",
+      text: lang?.autofarm?.button_boost[person.lang],
       color: "#45E9B8",
       textColor: "black",
       icon: key4,
       handler: firstCardClick,
     },
-    info: 'Буст действует 30 дней с момента покупки',
+    info: lang?.autofarm?.info_boost[person.lang],
   };
 
   return (

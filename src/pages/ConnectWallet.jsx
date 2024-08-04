@@ -24,6 +24,7 @@ export default function ConnectWallet() {
 
 */
 
+import { useState } from "react";
 import { CHAIN, TonConnectButton, useTonConnectModal, useTonConnectUI } from "@tonconnect/ui-react";
 import { useTonConnect } from "../hooks/useTonConnect";
 import { Address } from "@ton/core";
@@ -31,13 +32,19 @@ import { useMamotContract } from "../hooks/useMamotContract";
 import lock from "../assets/images/wallet-lock.png";
 import { Icon } from "../component/IconSprite";
 import coinsSvg from "../assets/icons/icon__coins.svg";
+import { useContext } from "react";
+import { LngContext } from "../store/langContext";
+import CopyToClipboard from "react-copy-to-clipboard";
 
 export default function ConnectWallet({person}) {
 
   const [tonConnectUI, setOptions] = useTonConnectUI();
   const {network, wallet, connected} = useTonConnect();
   const { state, open, close } = useTonConnectModal();
+  const [stateCopy, setStateCopy] = useState(false);
   const {buy, withdraw} = useMamotContract();
+
+  const [lang, setLang] = useContext(LngContext);
 
   const disconnect = async () => {
     await tonConnectUI.disconnect();
@@ -48,19 +55,18 @@ export default function ConnectWallet({person}) {
       <img className="w-[224px] " src={lock} alt="" />
       <div className="flex flex-col items-center mb-[40px] w-full">
         <h3 className="text-[32px] font-comic text-white font-bold  w-full text-center mb-[20px]">
-          Кошелек
+            {lang?.wallet?.title[person.lang]}
         </h3>
         {!connected ? (
           <>
             <p className="text-base font-comic text-white text-center mb-[50px]">
-              Подключите свой кошелек для совершения покупок и получения
-              вознаграждений{" "}
+                {lang?.wallet?.description_noconnect[person.lang]}{" "}
             </p>
             <button
               onClick={open}
               className={`font-comic text-sm text-black py-[15px] rounded-xl w-4/5 flex flex-row items-center justify-center gap-[10px] bg-gradient-to-b from-gradientStartColor to-gradientEndColor`}
             >
-              Подключить свой кошелек
+              {lang?.wallet?.button_connect[person.lang]}
             </button>
           </>
         ) : (
@@ -80,22 +86,28 @@ export default function ConnectWallet({person}) {
                 />
                 </button>
               </div>
-              <div className="elem-bg_green p-[15px] rounded-[13px]">
-                <Icon name="copy" size={24} color="#45E9B8" />
-              </div>
+
+              <CopyToClipboard text={Address.parse(wallet).toString()}
+                onCopy={() => {
+                    setStateCopy(true);
+                }}>
+                <button className="elem-bg_green p-[15px] rounded-[13px]">
+                    <Icon name="copy" size={24} color="#45E9B8" />    
+                </button>
+              </CopyToClipboard>
             </div>
             <div className="elem-bg_green p-[24px] rounded-[13px] flex flex-col gap-[10px] items-center">
               <div className="flex flex-row items-center gap-[10px] justify-center">
                 <img className="w-[32px]" src={coinsSvg} alt="" />
                 <p className="text-[#FFCC48] font-comic text-[24px]">+{person.bonuses}</p>
               </div>
-              <p className="text-white font-comic text-[14px]">Реферальных бонусов</p>
+              <p className="text-white font-comic text-[14px]">{lang?.wallet?.bonuses[person.lang]}</p>
               <button
                 className={`font-comic text-sm text-black py-[15px] rounded-xl w-full flex flex-row items-center justify-center gap-[10px] bg-gradient-to-b from-gradientStartColor to-gradientEndColor`}
                 disabled={!connected}
                 onClick={() => withdraw(person.bonuses.toString(), "123")}
               >
-                Получить бонус
+                {lang?.wallet?.bonuse_button[person.lang]}
                 <img className="w-[32px]" src={coinsSvg} alt="" />
               </button>
             </div>

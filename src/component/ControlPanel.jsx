@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { calculateFontSize } from "../helper/calculateFontSize";
 import coinsIcon from "../assets/icons/icon__coins.svg";
 import tasksIcon from '../assets/icons/icon__tasks.svg'
@@ -6,11 +6,13 @@ import fermIcon from '../assets/icons/icon__ferm.svg'
 import walletIcon from '../assets/icons/icon__wallet.svg'
 import crownSvg from "../assets/icons/icon__crown.svg";
 import Timer from "./Timer";
+import { LngContext } from "../store/langContext";
 
 export default function ControlPanel({ count, allSteps, person }) {
   const [unlimited, setUnlimited] = useState(false);
   const [autoFarm, setAutoFarm] = useState(false);
   const [bust, setBust] = useState(false);
+  const [lang, setLang] = useContext(LngContext);
 
   const userInfo = {
     name: "Nickname",
@@ -46,7 +48,7 @@ export default function ControlPanel({ count, allSteps, person }) {
           >
             {unlimited ? "ON" : "OFF"}
           </span>
-          <span className="text-gradient whitespace-nowrap">Безлимит</span>
+          <span className="text-gradient whitespace-nowrap">{lang?.main?.check_unlimit[person.lang]}</span>
         </button>
         <button
           className="elem-bg_green text-[10px]  font-comic rounded-[13px] flex flex-col items-center justify-center p-[8px]"
@@ -58,7 +60,7 @@ export default function ControlPanel({ count, allSteps, person }) {
           >
             {autoFarm ? "ON" : "OFF"}
           </span>
-          <span className="text-gradient whitespace-nowrap">Auto Farm</span>
+          <span className="text-gradient whitespace-nowrap">{lang?.main?.check_autofarm[person.lang]}</span>
         </button>
         <button
           className="elem-bg_green text-[10px]  font-comic rounded-[13px] flex flex-col items-center justify-center p-[8px]"
@@ -70,7 +72,7 @@ export default function ControlPanel({ count, allSteps, person }) {
           >
             {bust ? "ON" : "OFF"}
           </span>
-          <span className="text-gradient whitespace-nowrap">Буст</span>
+          <span className="text-gradient whitespace-nowrap">{lang?.main?.check_boost[person.lang]}</span>
         </button>
       </div>
       <div className="flex flex-col items-center gap-[5px]">
@@ -106,15 +108,15 @@ export default function ControlPanel({ count, allSteps, person }) {
       <div className="flex flex-col gap-[10px]">
         <button className="elem-bg_green text-[10px]  font-comic rounded-[13px] flex flex-col items-center justify-center p-[8px]">
           <img className="relative top-[-18px] mb-[-15px]" src={tasksIcon} alt="" />
-          <span className="text-gradient">Задания</span>
+          <span className="text-gradient">{lang?.main?.button_tasks[person.lang]}</span>
         </button>
         <button className="elem-bg_green text-[10px]  font-comic rounded-[13px] flex flex-col items-center justify-center p-[8px]">
           <img className="relative top-[-18px] mb-[-15px]" src={walletIcon} alt="" />
-          <span className="text-gradient">Кошелек</span>
+          <span className="text-gradient">{lang?.main?.button_wallet[person.lang]}</span>
         </button>
         <button className="elem-bg_green text-[10px]  font-comic rounded-[13px] flex flex-col items-center justify-center p-[8px]">
           <img className="relative top-[-18px] mb-[-15px]" src={fermIcon} alt="" />
-          <span className="text-gradient">Ферма</span>
+          <span className="text-gradient">{lang?.main?.button_farm[person.lang]}</span>
         </button>
       </div>
     </div>
