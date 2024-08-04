@@ -510,8 +510,6 @@ PROGRAM{
     MUL
     10000 PUSHINT
     DIV
-    2000000 PUSHINT
-    ADD
     s9 PUSH
     -ROT
     2 PUSHINT

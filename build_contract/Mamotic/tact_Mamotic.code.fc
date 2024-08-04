@@ -54,7 +54,7 @@
 
 (((int, slice, slice, int, int, cell, cell, int, slice, slice)), ()) %$Mamotic$_internal_empty((int, slice, slice, int, int, cell, cell, int, slice, slice) $self) impure inline {
     var ($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey) = $self;
-    $global_send($SendParameters$_constructor_to_bounce_value_mode($self'comission, true, ((($Context$_get_value(__tact_context_get()) * $self'percentComission) / 10000) + 2000000), 2));
+    $global_send($SendParameters$_constructor_to_bounce_value_mode($self'comission, true, (($Context$_get_value(__tact_context_get()) * $self'percentComission) / 10000), 2));
     ($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey)~$Mamotic$_fun_reply(__gen_cell_comment_8818d4580b42e9a53e67e1635e3623c296f06e9a95a096d70f8de01f2f7824ec());
     return (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey), ());
 }
