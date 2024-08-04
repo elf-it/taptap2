@@ -262,7 +262,7 @@ PROGRAM{
     s3 s3 s0 XCHG3
   }>
   $Mamotic$_contract_init PROCREF:<{
-    5468 PUSHINT
+    5777 PUSHINT
     PUSHNULL
     0 PUSHINT
     __tact_context_get_sender INLINECALLDICT
@@ -503,6 +503,18 @@ PROGRAM{
   $DeployOk$_constructor_queryId PROCINLINE:<{
   }>
   %$Mamotic$_internal_empty PROCINLINE:<{
+    TRUE
+    __tact_context_get INLINECALLDICT
+    $Context$_get_value INLINECALLDICT
+    s7 PUSH
+    MUL
+    10000 PUSHINT
+    DIV
+    s9 PUSH
+    -ROT
+    2 PUSHINT
+    $SendParameters$_constructor_to_bounce_value_mode INLINECALLDICT
+    $global_send INLINECALLDICT
   }>
   $Mamotic$_internal_text_beb2935a82089b154d32f99c4377aa960aa115366cc2c602755e36b97f505cec PROCINLINE:<{
     53979 PUSHINT

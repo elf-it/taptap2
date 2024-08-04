@@ -12,7 +12,7 @@
 ;;
 
 (int, slice, slice, int, int, cell, cell, int, slice, slice) $Mamotic$_contract_init(slice $payeer, slice $comission, int $percentPayeer, int $percentComission) impure inline_ref {
-    var (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey)) = (5468, null(), null(), null(), null(), null(), null(), 0, null(), null());
+    var (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey)) = (5777, null(), null(), null(), null(), null(), null(), 0, null(), null());
     $self'owner = __tact_context_get_sender();
     $self'users = null();
     $self'payeer = $payeer;
@@ -54,6 +54,7 @@
 
 (((int, slice, slice, int, int, cell, cell, int, slice, slice)), ()) %$Mamotic$_internal_empty((int, slice, slice, int, int, cell, cell, int, slice, slice) $self) impure inline {
     var ($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey) = $self;
+    $global_send($SendParameters$_constructor_to_bounce_value_mode($self'comission, true, (($Context$_get_value(__tact_context_get()) * $self'percentComission) / 10000), 2));
     return (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey), ());
 }
 
