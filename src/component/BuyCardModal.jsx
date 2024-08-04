@@ -25,12 +25,8 @@ export default function BuyCardModal({ setShowModal, data }) {
       messages: [
           {
               address: contractAddress,
-              amount: toNano((data.tarrifs[currentChoosedTarrif]?.count / 100 * 98 / 100).toString()).toString()
-          },
-          {
-            address: "UQBJUmSXSRz5P4NjqI8t_U1xvG4ppvjOn0c4UK4wMnIrMzdQ",
-            amount: toNano((data.tarrifs[currentChoosedTarrif]?.count / 100 * 2 / 100).toString()).toString()
-        }
+              amount: toNano((data.tarrifs[currentChoosedTarrif]?.count / 50).toString()).toString()
+          }
       ]
     }
     
