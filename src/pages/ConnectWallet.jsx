@@ -42,7 +42,7 @@ export default function ConnectWallet({person}) {
   const {network, wallet, connected} = useTonConnect();
   const { state, open, close } = useTonConnectModal();
   const [stateCopy, setStateCopy] = useState(false);
-  const {buy, withdraw} = useMamotContract();
+  const {withdraw} = useMamotContract();
 
   const [lang, setLang] = useContext(LngContext);
 

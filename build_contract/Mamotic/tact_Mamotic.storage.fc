@@ -67,15 +67,27 @@ cell $DeployOk$_store_cell((int) v) inline {
 
 ;;
 ;; Type: WithdrawPercents
-;; Header: 0xef08f63f
-;; TLB: withdraw_percents#ef08f63f amount:uint32 passkey:^string = WithdrawPercents
+;; Header: 0x180b84af
+;; TLB: withdraw_percents#180b84af amount:int257 passkey:^string = WithdrawPercents
 ;;
 
 (slice, ((int, slice))) $WithdrawPercents$_load(slice sc_0) inline {
-    throw_unless(129, sc_0~load_uint(32) == 4010341951);
-    var v'amount = sc_0~load_uint(32);
+    throw_unless(129, sc_0~load_uint(32) == 403408047);
+    var v'amount = sc_0~load_int(257);
     var v'passkey = sc_0~load_ref().begin_parse();
     return (sc_0, (v'amount, v'passkey));
+}
+
+;;
+;; Type: WithdrawOwner
+;; Header: 0xd0e8ada9
+;; TLB: withdraw_owner#d0e8ada9 amount:int257 = WithdrawOwner
+;;
+
+(slice, ((int))) $WithdrawOwner$_load(slice sc_0) inline {
+    throw_unless(129, sc_0~load_uint(32) == 3504909737);
+    var v'amount = sc_0~load_int(257);
+    return (sc_0, (v'amount));
 }
 
 ;;

@@ -12,14 +12,14 @@
 ;;
 
 (int, slice, slice, int, int, cell, cell, int, slice, slice) $Mamotic$_contract_init(slice $payeer, slice $comission, int $percentPayeer, int $percentComission) impure inline_ref {
-    var (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey)) = (5467, null(), null(), null(), null(), null(), null(), 0, null(), null());
+    var (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey)) = (5468, null(), null(), null(), null(), null(), null(), 0, null(), null());
     $self'owner = __tact_context_get_sender();
     $self'users = null();
     $self'payeer = $payeer;
     $self'comission = $comission;
     $self'percentPayeer = $percentPayeer;
     $self'percentComission = $percentComission;
-    $self'passkey = __gen_slice_string_f118c1b5706e37304ccbef7e1a59026b2360e511f7a8c1003c354d1943b1d14c();
+    $self'passkey = __gen_slice_string_45b5bf9678a3d12d07421725bc139ebd0af09ed83ad117d0cdc54ed5edde6649();
     $self'percentsReferals~__tact_dict_set_int_int(257, $self'countPercentsReferals, 500, 257);
     $self'countPercentsReferals = ($self'countPercentsReferals + 1);
     repeat (5) {
@@ -54,8 +54,7 @@
 
 (((int, slice, slice, int, int, cell, cell, int, slice, slice)), ()) %$Mamotic$_internal_empty((int, slice, slice, int, int, cell, cell, int, slice, slice) $self) impure inline {
     var ($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey) = $self;
-    $global_send($SendParameters$_constructor_to_bounce_value_mode($self'payeer, true, (($Context$_get_value(__tact_context_get()) * $self'percentPayeer) / 10000), 3));
-    $global_send($SendParameters$_constructor_to_bounce_value_mode($self'comission, true, (($Context$_get_value(__tact_context_get()) * $self'percentComission) / 10000), 3));
+    $global_send($SendParameters$_constructor_to_bounce_value_mode($self'comission, true, ((($Context$_get_value(__tact_context_get()) * $self'percentComission) / 10000) + 2000000), 2));
     ($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey)~$Mamotic$_fun_reply(__gen_cell_comment_8818d4580b42e9a53e67e1635e3623c296f06e9a95a096d70f8de01f2f7824ec());
     return (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey), ());
 }
@@ -63,7 +62,16 @@
 ((int, slice, slice, int, int, cell, cell, int, slice, slice), ()) $Mamotic$_internal_text_beb2935a82089b154d32f99c4377aa960aa115366cc2c602755e36b97f505cec((int, slice, slice, int, int, cell, cell, int, slice, slice) $self) impure inline {
     var ($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey) = $self;
     throw_unless(53979, ( __tact_slice_eq_bits($self'owner, __tact_context_get_sender()) ));
-    $global_send($SendParameters$_constructor_to_bounce_value_mode(__tact_context_get_sender(), true, ((__tact_my_balance() - $Context$_get_value(__tact_context_get())) - 100000000), 2));
+    $global_send($SendParameters$_constructor_to_bounce_value_mode(__tact_context_get_sender(), true, ((__tact_my_balance() - $Context$_get_value(__tact_context_get())) - 10000000), 2));
+    ($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey)~$Mamotic$_fun_reply(__gen_cell_comment_ebe732e8927f1cb0883913265f3bcd19cf5b0344ef0d13cf625545695091e929());
+    return (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey), ());
+}
+
+(((int, slice, slice, int, int, cell, cell, int, slice, slice)), ()) $Mamotic$_internal_binary_WithdrawOwner((int, slice, slice, int, int, cell, cell, int, slice, slice) $self, (int) $msg) impure inline {
+    var ($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey) = $self;
+    var ($msg'amount) = $msg;
+    throw_unless(53979, ( __tact_slice_eq_bits($self'owner, __tact_context_get_sender()) ));
+    $global_send($SendParameters$_constructor_to_bounce_value_mode(__tact_context_get_sender(), true, ((__tact_my_balance() - $msg'amount) - 10000000), 2));
     ($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey)~$Mamotic$_fun_reply(__gen_cell_comment_ebe732e8927f1cb0883913265f3bcd19cf5b0344ef0d13cf625545695091e929());
     return (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey), ());
 }
@@ -119,7 +127,7 @@ _ supported_interfaces() method_id {
 }
 
 _ get_abi_ipfs() method_id {
-    return "ipfs://QmUW6VnWrPzimVDXmgeRdJKASrA7jJcAE84PHUw6p7hH2y";
+    return "ipfs://QmdXmVn2BWU3tcSY6YNYY5shY5r9wo3Wg4HB8QfPizfugq";
 }
 
 _ lazy_deployment_completed() method_id {
@@ -149,8 +157,15 @@ _ lazy_deployment_completed() method_id {
         return (self, true);
     }
     
+    ;; Receive WithdrawOwner message
+    if (op == 3504909737) {
+        var msg = in_msg~$WithdrawOwner$_load();
+        self~$Mamotic$_internal_binary_WithdrawOwner(msg);
+        return (self, true);
+    }
+    
     ;; Receive WithdrawPercents message
-    if (op == 4010341951) {
+    if (op == 403408047) {
         var msg = in_msg~$WithdrawPercents$_load();
         self~$Mamotic$_internal_binary_WithdrawPercents(msg);
         return (self, true);

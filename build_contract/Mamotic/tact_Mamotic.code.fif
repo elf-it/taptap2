@@ -15,6 +15,7 @@ PROGRAM{
   DECLPROC $DeployOk$_store
   DECLPROC $DeployOk$_store_cell
   DECLPROC $WithdrawPercents$_load
+  DECLPROC $WithdrawOwner$_load
   DECLPROC $Mamotic$_store
   DECLPROC $Mamotic$_load
   DECLPROC $StateInit$_not_null
@@ -35,6 +36,7 @@ PROGRAM{
   DECLPROC $DeployOk$_constructor_queryId
   DECLPROC %$Mamotic$_internal_empty
   DECLPROC $Mamotic$_internal_text_beb2935a82089b154d32f99c4377aa960aa115366cc2c602755e36b97f505cec
+  DECLPROC $Mamotic$_internal_binary_WithdrawOwner
   DECLPROC $Mamotic$_internal_binary_WithdrawPercents
   DECLPROC $Mamotic$_internal_binary_Deploy
   104128 DECLMETHOD %balance
@@ -157,14 +159,25 @@ PROGRAM{
   $WithdrawPercents$_load PROCINLINE:<{
     32 LDU
     SWAP
-    4010341951 PUSHINT
+    403408047 PUSHINT
     EQUAL
     129 THROWIFNOT
-    32 LDU
+    257 PUSHINT
+    LDIX
     LDREF
     SWAP
     CTOS
     s1 s2 XCHG
+  }>
+  $WithdrawOwner$_load PROCINLINE:<{
+    32 LDU
+    SWAP
+    3504909737 PUSHINT
+    EQUAL
+    129 THROWIFNOT
+    257 PUSHINT
+    LDIX
+    SWAP
   }>
   $Mamotic$_store PROCINLINE:<{
     s9 s10 XCHG2
@@ -249,12 +262,12 @@ PROGRAM{
     s3 s3 s0 XCHG3
   }>
   $Mamotic$_contract_init PROCREF:<{
-    5467 PUSHINT
+    5468 PUSHINT
     PUSHNULL
     0 PUSHINT
     __tact_context_get_sender INLINECALLDICT
     PUSHNULL
-    B{b5ee9c7241010101000500000631323318854035} B>boc <s PUSHSLICE
+    B{b5ee9c7241010101004200008038366666646631626361643231666561656435373930646564626437616132336531376464626134323535653534313332346466663261613830633133353437ee1e6360} B>boc <s PUSHSLICE
     257 PUSHINT
     500 PUSHINT
     s1 s5 PUSH2
@@ -493,25 +506,15 @@ PROGRAM{
     TRUE
     __tact_context_get INLINECALLDICT
     $Context$_get_value INLINECALLDICT
-    s8 PUSH
-    MUL
-    10000 PUSHINT
-    DIV
-    s10 PUSH
-    -ROT
-    3 PUSHINT
-    $SendParameters$_constructor_to_bounce_value_mode INLINECALLDICT
-    $global_send INLINECALLDICT
-    TRUE
-    __tact_context_get INLINECALLDICT
-    $Context$_get_value INLINECALLDICT
     s7 PUSH
     MUL
     10000 PUSHINT
     DIV
+    2000000 PUSHINT
+    ADD
     s9 PUSH
     -ROT
-    3 PUSHINT
+    2 PUSHINT
     $SendParameters$_constructor_to_bounce_value_mode INLINECALLDICT
     $global_send INLINECALLDICT
     B{b5ee9c7241010101001400002400000000627579207375636365737366756cc8a3f2c1} B>boc PUSHREF
@@ -529,8 +532,28 @@ PROGRAM{
     __tact_context_get INLINECALLDICT
     $Context$_get_value INLINECALLDICT
     SUB
-    100000000 PUSHINT
+    10000000 PUSHINT
     SUB
+    2 PUSHINT
+    $SendParameters$_constructor_to_bounce_value_mode INLINECALLDICT
+    $global_send INLINECALLDICT
+    B{b5ee9c7241010101001b000032000000007769746864726177616c207375636365737366756c73781620} B>boc PUSHREF
+    $Mamotic$_fun_reply INLINECALLDICT
+  }>
+  $Mamotic$_internal_binary_WithdrawOwner PROCINLINE:<{
+    53979 PUSHINT
+    __tact_context_get_sender INLINECALLDICT
+    s4 s(-1) PUXC
+    __tact_slice_eq_bits INLINECALLDICT
+    THROWANYIFNOT
+    __tact_context_get_sender INLINECALLDICT
+    TRUE
+    __tact_my_balance INLINECALLDICT
+    s0 s3 XCHG2
+    SUB
+    10000000 PUSHINT
+    SUB
+    s1 s2 XCHG
     2 PUSHINT
     $SendParameters$_constructor_to_bounce_value_mode INLINECALLDICT
     $global_send INLINECALLDICT
@@ -586,7 +609,7 @@ PROGRAM{
     209474421377847335869795010607481022628 PUSHINT
   }>
   get_abi_ipfs PROC:<{
-    x{697066733a2f2f516d555736566e5772507a696d5644586d676552644a4b41537241376a4a63414538345048557736703768483279} PUSHSLICE
+    x{697066733a2f2f516d64586d566e32425755337463535936594e595935736859357239776f33576734484238516650697a66756771} PUSHSLICE
   }>
   lazy_deployment_completed PROC:<{
     c4 PUSH
@@ -623,7 +646,17 @@ PROGRAM{
       TRUE
     }>
     DUP
-    4010341951 PUSHINT
+    3504909737 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+      $WithdrawOwner$_load INLINECALLDICT
+      NIP
+      $Mamotic$_internal_binary_WithdrawOwner INLINECALLDICT
+      TRUE
+    }>
+    DUP
+    403408047 PUSHINT
     EQUAL
     IFJMP:<{
       DROP
