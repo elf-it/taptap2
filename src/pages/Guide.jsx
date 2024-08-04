@@ -38,6 +38,7 @@ export default function Guide() {
 
   const auth = async () => {
     if(tg.initDataUnsafe?.user?.id != undefined){
+      alert(tg.initDataUnsafe?.user?.language_code)
       const response = await registration({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username, referrer: tg.initDataUnsafe?.start_param, lang: tg.initDataUnsafe?.user?.language_code})
 
       if(response.error){
