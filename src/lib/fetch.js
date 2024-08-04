@@ -77,7 +77,8 @@ export const registration = async (props) => {
                 key: "123",
                 tid: props.tid,
                 username: props.username,
-                referrer: props?.referrer
+                referrer: props?.referrer,
+                lang: props.lang
             })
         })
 
