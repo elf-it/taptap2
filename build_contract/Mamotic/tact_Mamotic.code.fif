@@ -503,8 +503,6 @@ PROGRAM{
   $DeployOk$_constructor_queryId PROCINLINE:<{
   }>
   %$Mamotic$_internal_empty PROCINLINE:<{
-    B{b5ee9c7241010101001400002400000000627579207375636365737366756cc8a3f2c1} B>boc PUSHREF
-    $Mamotic$_fun_reply INLINECALLDICT
   }>
   $Mamotic$_internal_text_beb2935a82089b154d32f99c4377aa960aa115366cc2c602755e36b97f505cec PROCINLINE:<{
     53979 PUSHINT
