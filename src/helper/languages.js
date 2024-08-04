@@ -1,7 +1,7 @@
 export const allLanguages = {
     ru_lang: {fullName: "Русский", shortName: "Рус"},
     en_lang: {fullName: "English", shortName: "Eng"},
-    ch_lang: {fullName: "Chineses", shortName: ""},
+    ch_lang: {fullName: "中文", shortName: "中文"},
     cr_lang: {fullName: "Croatian", shortName: ""},
     cz_lang: {fullName: "Czech", shortName: ""},
     da_lang: {fullName: "Danish", shortName: ""}
@@ -12,10 +12,9 @@ export const suggestedLanguages = {
     en_lang: allLanguages.en_lang,
 };
 
-export const otherLanguages = {
+export const orLanguages = {
     ch_lang: allLanguages.ch_lang,
     cr_lang: allLanguages.cr_lang,
     cz_lang: allLanguages.cz_lang,
     da_lang: allLanguages.da_lang
 };
-
