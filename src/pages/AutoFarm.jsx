@@ -191,7 +191,7 @@ export default function AutoFarm({setNumPage, person}) {
   };
 
   const fifthCardData = {
-    index: 3,
+    index: 4,
     colorClass: "elem-bg_green",
     title: lang?.autofarm?.title_boost[person.lang],
     descr: lang?.autofarm?.description_boost[person.lang],

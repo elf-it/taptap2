@@ -1,5 +1,6 @@
 
 const ROUTE_URI = "https://srws.ru";
+const key = "123"
 
 export const getPerson = async (props) => {
     try {
@@ -10,7 +11,7 @@ export const getPerson = async (props) => {
                 "Accept": "*/*"
             },
             body: JSON.stringify({
-                key: "123",
+                key,
                 tid: props.tid,
                 username: props.username
             })
@@ -32,7 +33,7 @@ export const getReferals = async (props) => {
                 "Accept": "*/*"
             },
             body: JSON.stringify({
-                key: "123",
+                key,
                 tid: props.tid
             })
         })
@@ -53,7 +54,7 @@ export const getAutoclick = async (props) => {
                 "Accept": "*/*"
             },
             body: JSON.stringify({
-                key: "123",
+                key,
                 tid: props.tid
             })
         })
@@ -74,7 +75,7 @@ export const registration = async (props) => {
                 "Accept": "*/*"
             },
             body: JSON.stringify({
-                key: "123",
+                key,
                 tid: props.tid,
                 username: props.username,
                 referrer: props?.referrer,
@@ -98,11 +99,12 @@ export const createTX = async (props) => {
                 "Accept": "*/*"
             },
             body: JSON.stringify({
-                key: "123",
+                key,
                 tid: props.tid,
                 txhash: props.txhash,
                 package_index: props.package_index,
-                amount: props.amount
+                amount: props.amount,
+                package: props.package
             })
         })
         return await request.json()
@@ -121,7 +123,7 @@ export const setMyCoins = async (props) => {
                 "Accept": "*/*"
             },
             body: JSON.stringify({
-                key: "123",
+                key,
                 tid: props.tid,
                 amount: props.amount,
                 max_amount: props.max_amount,
@@ -144,7 +146,7 @@ export const getSteps = async () => {
                 "Accept": "*/*"
             },
             body: JSON.stringify({
-                key: "123"
+                key
             })
         })
         return await request.json()
@@ -163,7 +165,7 @@ export const setLangR = async (props) => {
                 "Accept": "*/*"
             },
             body: JSON.stringify({
-                key: "123",
+                key,
                 tid: props.tid,
                 lang: props.langr
             })
