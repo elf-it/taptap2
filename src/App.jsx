@@ -59,6 +59,8 @@ function App() {
 
   const [person, setPerson] = useState(null);
 
+  const [load, setLoad] = useState(true);
+
   const [touchCoins, setTouchCoins] = useState(0)
   const [allSteps, setAllSteps] = useState(0)
   const [count, setCount] = useState(0)
@@ -158,15 +160,16 @@ function App() {
 
     if(response.error){
       console.log(response.error)
+      setPerson(false)
     }else{
       setPerson({tid: response.tid, username: response.username, status: response.status, bonuses: response.bonuses, myCoins: response.my_coins, autoCoins: response.auto_coins, Notcoin: response.Notcoin, Pepe: response.Pepe, Shiba: response.Shiba, Dogecoin: response.Dogecoin, Dogwifhat: response.Dogwifhat, Popcat: response.Popcat, Mog: response.Mog, Floki: response.Floki, Ponke: response.Ponke, Mew: response.Mew, Bome: response.Bome, autoclick: response.autoclick, status_autoclick: response.status_autoclick, status_unlimit: response.status_unlimit, status_boost: response.status_boost, level: response.level, timer: response.timer, lang: response.lang})
       setCount(response.my_coins + response.auto_coins)
       setAllSteps(response.my_coins_max)
       setLevel(response.level)
     }
+    //setLoad(false)
+    setTimeout(() => { setLoad(false); }, 2000);
   };
-
-  const [fnState, fnCallback] = useAsyncCallback(auth)
 
   const auth2 = async () => {
     const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
@@ -174,10 +177,12 @@ function App() {
 
     if(response.error){
       console.log(response.error)
+      setPerson(false)
     }else{
       setPerson({tid: response.tid, username: response.username, status: response.status, bonuses: response.bonuses, myCoins: response.my_coins, autoCoins: response.auto_coins, Notcoin: response.Notcoin, Pepe: response.Pepe, Shiba: response.Shiba, Dogecoin: response.Dogecoin, Dogwifhat: response.Dogwifhat, Popcat: response.Popcat, Mog: response.Mog, Floki: response.Floki, Ponke: response.Ponke, Mew: response.Mew, Bome: response.Bome, autoclick: response.autoclick, status_autoclick: response.status_autoclick, status_unlimit: response.status_unlimit, status_boost: response.status_boost, level: response.level, timer: response.timer, lang: response.lang})
       setLevel(response.level)
     }
+    //setLoad(false)
   };
 
   const setCoins = async () => {
@@ -229,7 +234,7 @@ function App() {
   useEffect(() => {
     tg.ready()
     tg.enableClosingConfirmation()
-    fnCallback()
+    auth()
     getStepss()
     getLng()
   }, []);
@@ -249,10 +254,11 @@ function App() {
     <>
     {"358929635" != "undefined" ?
       <>
-      {(load && loading && fnState.isLoading) ??
+      {load && loading && person == null ?
         <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}><Loading /></div>
-      }
-      { fnState.data ??
+      :
+      <>
+      {person != false ?
         <TonConnectUIProvider manifestUrl='https://hammerhead-app-lqwus.ondigitalocean.app/tonconnect-manifest.json'>
 
           {numPage == 5 ?
@@ -333,9 +339,10 @@ function App() {
           </>
           }
         </TonConnectUIProvider>
+      :
+      <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}><Guide /></div>
       }
-      {fnState.error ??
-        <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}><Guide /></div>
+      </>
       }
       </>
       :
