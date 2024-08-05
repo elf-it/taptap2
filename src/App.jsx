@@ -30,6 +30,7 @@ import bgMain6 from './assets/images/bg-main-6.png'
 
 import { imagesList } from "./image-list";
 import { LngContext } from './store/langContext';
+import { useAsyncCallback } from '@react-hooks-library/core';
 
 const tg = window.Telegram.WebApp;
 
@@ -57,9 +58,6 @@ function App() {
   const [numPage, setNumPage] = useState(0);
 
   const [person, setPerson] = useState(null);
-
-  const [load, setLoad] = useState(true);
-  const [loadPerson, setLoadPerson] = useState(true);
 
   const [touchCoins, setTouchCoins] = useState(0)
   const [allSteps, setAllSteps] = useState(0)
@@ -160,16 +158,15 @@ function App() {
 
     if(response.error){
       console.log(response.error)
-      setLoadPerson(false)
     }else{
       setPerson({tid: response.tid, username: response.username, status: response.status, bonuses: response.bonuses, myCoins: response.my_coins, autoCoins: response.auto_coins, Notcoin: response.Notcoin, Pepe: response.Pepe, Shiba: response.Shiba, Dogecoin: response.Dogecoin, Dogwifhat: response.Dogwifhat, Popcat: response.Popcat, Mog: response.Mog, Floki: response.Floki, Ponke: response.Ponke, Mew: response.Mew, Bome: response.Bome, autoclick: response.autoclick, status_autoclick: response.status_autoclick, status_unlimit: response.status_unlimit, status_boost: response.status_boost, level: response.level, timer: response.timer, lang: response.lang})
       setCount(response.my_coins + response.auto_coins)
       setAllSteps(response.my_coins_max)
       setLevel(response.level)
     }
-    //setLoad(false)
-    setTimeout(() => { setLoad(false); }, 2000);
   };
+
+  const [fnState, fnCallback] = useAsyncCallback(auth)
 
   const auth2 = async () => {
     const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
@@ -181,7 +178,6 @@ function App() {
       setPerson({tid: response.tid, username: response.username, status: response.status, bonuses: response.bonuses, myCoins: response.my_coins, autoCoins: response.auto_coins, Notcoin: response.Notcoin, Pepe: response.Pepe, Shiba: response.Shiba, Dogecoin: response.Dogecoin, Dogwifhat: response.Dogwifhat, Popcat: response.Popcat, Mog: response.Mog, Floki: response.Floki, Ponke: response.Ponke, Mew: response.Mew, Bome: response.Bome, autoclick: response.autoclick, status_autoclick: response.status_autoclick, status_unlimit: response.status_unlimit, status_boost: response.status_boost, level: response.level, timer: response.timer, lang: response.lang})
       setLevel(response.level)
     }
-    //setLoad(false)
   };
 
   const setCoins = async () => {
@@ -233,7 +229,7 @@ function App() {
   useEffect(() => {
     tg.ready()
     tg.enableClosingConfirmation()
-    auth()
+    fnCallback()
     getStepss()
     getLng()
   }, []);
@@ -249,21 +245,14 @@ function App() {
     };
   });
 
-  useEffect(() => {
-    if(person != null){
-      setLoadPerson(false)
-    }
-  }, [person])
-
   return (
     <>
     {"358929635" != "undefined" ?
       <>
-      {load && loading && loadPerson ?
+      {(load && loading && fnState.isLoading) ??
         <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}><Loading /></div>
-      :
-      <>
-      { person != null ?
+      }
+      { fnState.data ??
         <TonConnectUIProvider manifestUrl='https://hammerhead-app-lqwus.ondigitalocean.app/tonconnect-manifest.json'>
 
           {numPage == 5 ?
@@ -344,10 +333,9 @@ function App() {
           </>
           }
         </TonConnectUIProvider>
-      :
-      <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}><Guide /></div>
       }
-      </>
+      {fnState.error ??
+        <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}><Guide /></div>
       }
       </>
       :
