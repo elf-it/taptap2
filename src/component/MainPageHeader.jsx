@@ -18,7 +18,7 @@ function MainPageHeader({setNumPage, person, setLangSelectOpen}) {
         <Icon name={'info'} size={24}/>
       </button>
       <button onClick={() => setLangSelectOpen(true)} className="flex flex-row items-center justify-between gap-[10px] mb-[25px] elem-bg_green py-[7px] px-[10px] rounded-[10px] font-comic text-white">
-        {allLanguages[person.lang].shortName}
+        {allLanguages[person?.lang].shortName}
       </button>
     </div>
   );

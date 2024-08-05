@@ -30,7 +30,6 @@ import bgMain6 from './assets/images/bg-main-6.png'
 
 import { imagesList } from "./image-list";
 import { LngContext } from './store/langContext';
-import { useAsyncCallback } from '@react-hooks-library/core';
 
 const tg = window.Telegram.WebApp;
 
@@ -155,12 +154,11 @@ function App() {
   const activeNavElemWidth = 100 / routesVisibleElemCount;
 
   const auth = async () => {
-    const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
-    //const response = await getPerson({tid: "358929635", username: "Fourpro"})
+    //const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
+    const response = await getPerson({tid: "358929635", username: "Fourpro"})
 
     if(response.error){
       console.log(response.error)
-      setPerson(false)
     }else{
       setPerson({tid: response.tid, username: response.username, status: response.status, bonuses: response.bonuses, myCoins: response.my_coins, autoCoins: response.auto_coins, Notcoin: response.Notcoin, Pepe: response.Pepe, Shiba: response.Shiba, Dogecoin: response.Dogecoin, Dogwifhat: response.Dogwifhat, Popcat: response.Popcat, Mog: response.Mog, Floki: response.Floki, Ponke: response.Ponke, Mew: response.Mew, Bome: response.Bome, autoclick: response.autoclick, status_autoclick: response.status_autoclick, status_unlimit: response.status_unlimit, status_boost: response.status_boost, level: response.level, timer: response.timer, lang: response.lang})
       setCount(response.my_coins + response.auto_coins)
@@ -172,22 +170,20 @@ function App() {
   };
 
   const auth2 = async () => {
-    const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
-    //const response = await getPerson({tid: "358929635", username: "Fourpro"})
+    //const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
+    const response = await getPerson({tid: "358929635", username: "Fourpro"})
 
     if(response.error){
       console.log(response.error)
-      setPerson(false)
     }else{
       setPerson({tid: response.tid, username: response.username, status: response.status, bonuses: response.bonuses, myCoins: response.my_coins, autoCoins: response.auto_coins, Notcoin: response.Notcoin, Pepe: response.Pepe, Shiba: response.Shiba, Dogecoin: response.Dogecoin, Dogwifhat: response.Dogwifhat, Popcat: response.Popcat, Mog: response.Mog, Floki: response.Floki, Ponke: response.Ponke, Mew: response.Mew, Bome: response.Bome, autoclick: response.autoclick, status_autoclick: response.status_autoclick, status_unlimit: response.status_unlimit, status_boost: response.status_boost, level: response.level, timer: response.timer, lang: response.lang})
       setLevel(response.level)
     }
-    //setLoad(false)
   };
 
   const setCoins = async () => {
     if(allSteps > 0){
-      const response = await setMyCoins({tid: tg.initDataUnsafe?.user?.id, amount: touchCoins, max_amount: allSteps, coins: otherCoins})
+      const response = await setMyCoins({tid: "358929635", amount: touchCoins, max_amount: allSteps, coins: otherCoins})
       if(response.error){
         console.log(response.error)
       }else{
@@ -258,7 +254,7 @@ function App() {
         <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}><Loading /></div>
       :
       <>
-      {person != false ?
+      {person != null ?
         <TonConnectUIProvider manifestUrl='https://hammerhead-app-lqwus.ondigitalocean.app/tonconnect-manifest.json'>
 
           {numPage == 5 ?
