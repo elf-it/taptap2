@@ -250,7 +250,7 @@ function App() {
     <>
     {"358929635" != "undefined" ?
       <>
-      {load && loading ?
+      {load || loading ?
         <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}><Loading /></div>
       :
       <>
