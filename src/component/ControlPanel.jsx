@@ -8,7 +8,7 @@ import crownSvg from "../assets/icons/icon__crown.svg";
 import Timer from "./Timer";
 import { LngContext } from "../store/langContext";
 
-export default function ControlPanel({ count, allSteps, person }) {
+export default function ControlPanel({ count, allSteps, person, setNumPage }) {
   const [unlimited, setUnlimited] = useState(false);
   const [autoFarm, setAutoFarm] = useState(false);
   const [bust, setBust] = useState(false);
@@ -40,6 +40,13 @@ export default function ControlPanel({ count, allSteps, person }) {
       <div className="flex flex-col gap-[10px]">
         <button
           className="elem-bg_green text-[10px]  font-comic rounded-[13px] flex flex-col items-center justify-center p-[8px]"
+          onClick={() => {
+            if(unlimited){
+              console.log("te")
+            }else{
+              setNumPage(5)
+            }
+          }}
         >
           <span
             className={`font-bold text-[22px] ${
@@ -52,6 +59,13 @@ export default function ControlPanel({ count, allSteps, person }) {
         </button>
         <button
           className="elem-bg_green text-[10px]  font-comic rounded-[13px] flex flex-col items-center justify-center p-[8px]"
+            onClick={() => {
+              if(autoFarm){
+                console.log("te")
+              }else{
+                setNumPage(5)
+              }
+            }}
         >
           <span
             className={`font-bold text-[22px] ${
@@ -64,6 +78,14 @@ export default function ControlPanel({ count, allSteps, person }) {
         </button>
         <button
           className="elem-bg_green text-[10px]  font-comic rounded-[13px] flex flex-col items-center justify-center p-[8px]"
+            onClick={() => {
+              if(bust){
+                console.log("te")
+              }else{
+                setNumPage(5)
+              }
+
+            }}
         >
           <span
             className={`font-bold text-[22px] ${
@@ -110,7 +132,7 @@ export default function ControlPanel({ count, allSteps, person }) {
           <img className="relative top-[-18px] mb-[-15px]" src={tasksIcon} alt="" />
           <span className="text-gradient">{lang?.main?.button_tasks[person.lang]}</span>
         </button>
-        <button className="elem-bg_green text-[10px]  font-comic rounded-[13px] flex flex-col items-center justify-center p-[8px]">
+        <button onClick={() => setNumPage(5)} className="elem-bg_green text-[10px]  font-comic rounded-[13px] flex flex-col items-center justify-center p-[8px]">
           <img className="relative top-[-18px] mb-[-15px]" src={walletIcon} alt="" />
           <span className="text-gradient">{lang?.main?.button_wallet[person.lang]}</span>
         </button>
