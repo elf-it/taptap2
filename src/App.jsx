@@ -182,7 +182,7 @@ function App() {
   };
 
   const setCoins = async () => {
-    if(allSteps > 0){
+    //if(allSteps > 0){
       const response = await setMyCoins({tid: tg.initDataUnsafe?.user?.id, amount: touchCoins, max_amount: allSteps, coins: otherCoins})
       if(response.error){
         console.log(response.error)
@@ -204,7 +204,7 @@ function App() {
           Bome: 0
         })
       }
-    }
+    //}
   };
 
   const getStepss = async () => {
