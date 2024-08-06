@@ -154,8 +154,8 @@ function App() {
   const activeNavElemWidth = 100 / routesVisibleElemCount;
 
   const auth = async () => {
-    //const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
-    const response = await getPerson({tid: "358929635", username: "Fourpro"})
+    const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
+    //const response = await getPerson({tid: "358929635", username: "Fourpro"})
 
     if(response.error){
       console.log(response.error)
@@ -170,8 +170,8 @@ function App() {
   };
 
   const auth2 = async () => {
-    //const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
-    const response = await getPerson({tid: "358929635", username: "Fourpro"})
+    const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
+    //const response = await getPerson({tid: "358929635", username: "Fourpro"})
 
     if(response.error){
       console.log(response.error)
@@ -183,7 +183,7 @@ function App() {
 
   const setCoins = async () => {
     if(allSteps > 0){
-      const response = await setMyCoins({tid: "358929635", amount: touchCoins, max_amount: allSteps, coins: otherCoins})
+      const response = await setMyCoins({tid: tg.initDataUnsafe?.user?.id, amount: touchCoins, max_amount: allSteps, coins: otherCoins})
       if(response.error){
         console.log(response.error)
       }else{
@@ -250,13 +250,12 @@ function App() {
     <>
     {"358929635" != "undefined" ?
       <>
-      {load && loading && person == null ?
+      {load && loading ?
         <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}><Loading /></div>
       :
       <>
       {person != null ?
         <TonConnectUIProvider manifestUrl='https://hammerhead-app-lqwus.ondigitalocean.app/tonconnect-manifest.json'>
-
           {numPage == 5 ?
           <>
             <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}><ConnectWallet person={person} />
