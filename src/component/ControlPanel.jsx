@@ -44,7 +44,7 @@ export default function ControlPanel({ count, allSteps, person, setNumPage }) {
             if(unlimited){
               console.log("te")
             }else{
-              setNumPage(5)
+              setNumPage(2)
             }
           }}
         >
@@ -63,7 +63,7 @@ export default function ControlPanel({ count, allSteps, person, setNumPage }) {
               if(autoFarm){
                 console.log("te")
               }else{
-                setNumPage(5)
+                setNumPage(2)
               }
             }}
         >
@@ -82,7 +82,7 @@ export default function ControlPanel({ count, allSteps, person, setNumPage }) {
               if(bust){
                 console.log("te")
               }else{
-                setNumPage(5)
+                setNumPage(2)
               }
 
             }}
