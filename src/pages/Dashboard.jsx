@@ -129,7 +129,7 @@ export default function Dashboard({person, count}) {
         <div className="flex flex-row items-center gap-[8px]">
           <img src={ticketSvg} alt="" />
           <p className="font-comic text-sm">
-            <span className="text-[#FFCC48]">23</span>
+            <span className="text-[#FFCC48]">{person ? person.tickets : "0"}</span>
             <span className="text-[#9B9B9B]">/{lang?.dashboard?.text_ticket[person.lang]}</span>
           </p>
         </div>
