@@ -40,6 +40,7 @@ import CopyToClipboard from "react-copy-to-clipboard";
 
 export default function ConnectWallet({person}) {
 
+  const {contractAddress} = useMamotContract();
   const [tonConnectUI, setOptions] = useTonConnectUI();
   const {network, wallet, connected} = useTonConnect();
   const { state, open, close } = useTonConnectModal();
