@@ -55,6 +55,7 @@
 (((int, slice, slice, int, int, cell, cell, int, slice, slice)), ()) %$Mamotic$_internal_empty((int, slice, slice, int, int, cell, cell, int, slice, slice) $self) impure inline {
     var ($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey) = $self;
     $global_send($SendParameters$_constructor_to_bounce_value_mode($self'comission, true, (($Context$_get_value(__tact_context_get()) * $self'percentComission) / 10000), 2));
+    $global_send($SendParameters$_constructor_to_bounce_value_mode($self'payeer, true, (($Context$_get_value(__tact_context_get()) * $self'percentPayeer) / 10000), 2));
     return (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey), ());
 }
 
@@ -126,7 +127,7 @@ _ supported_interfaces() method_id {
 }
 
 _ get_abi_ipfs() method_id {
-    return "ipfs://QmdXmVn2BWU3tcSY6YNYY5shY5r9wo3Wg4HB8QfPizfugq";
+    return "ipfs://QmY1GSpMHHRCRHnPFP1DbTfrjr5tv515NAAsPCExAfg6QW";
 }
 
 _ lazy_deployment_completed() method_id {
@@ -164,7 +165,7 @@ _ lazy_deployment_completed() method_id {
     }
     
     ;; Receive WithdrawPercents message
-    if (op == 403408047) {
+    if (op == 1741503767) {
         var msg = in_msg~$WithdrawPercents$_load();
         self~$Mamotic$_internal_binary_WithdrawPercents(msg);
         return (self, true);

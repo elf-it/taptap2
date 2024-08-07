@@ -67,13 +67,13 @@ cell $DeployOk$_store_cell((int) v) inline {
 
 ;;
 ;; Type: WithdrawPercents
-;; Header: 0x180b84af
-;; TLB: withdraw_percents#180b84af amount:int257 passkey:^string = WithdrawPercents
+;; Header: 0x67cd3d17
+;; TLB: withdraw_percents#67cd3d17 amount:coins passkey:^string = WithdrawPercents
 ;;
 
 (slice, ((int, slice))) $WithdrawPercents$_load(slice sc_0) inline {
-    throw_unless(129, sc_0~load_uint(32) == 403408047);
-    var v'amount = sc_0~load_int(257);
+    throw_unless(129, sc_0~load_uint(32) == 1741503767);
+    var v'amount = sc_0~load_coins();
     var v'passkey = sc_0~load_ref().begin_parse();
     return (sc_0, (v'amount, v'passkey));
 }
