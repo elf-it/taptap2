@@ -19,6 +19,8 @@ export function useMamotContract(){
         return client.open(contract) as OpenedContract<Mamotic>;
     }, [client]);
 
+    
+
     useEffect(() => {
         async function getUser() {
             if(!mamotContract || sender.address == undefined) return;

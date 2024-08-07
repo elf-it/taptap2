@@ -13,11 +13,13 @@ import pepe from "../assets/dasboardCoins/pepe.png";
 import ponke from "../assets/dasboardCoins/ponke.png";
 import popcat from "../assets/dasboardCoins/popcat.png";
 import shiba from "../assets/dasboardCoins/shiba.png";
-
+import { useMamotContract } from "../hooks/useMamotContract";
+import { Address } from "@ton/core";
+import { useTonConnect } from "../hooks/useTonConnect";
 
 import copySvg from "../assets/icons/icon__copy.svg";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { getReferals } from "../lib/fetch";
+import { createTX, getReferals } from "../lib/fetch";
 import { LngContext } from "../store/langContext";
 
 const tg = window.Telegram.WebApp;
@@ -25,6 +27,9 @@ const myLink = "https://t.me/mamontenokBot_bot/Mamontenok?startapp=" + tg.initDa
 const shareLink = "https://t.me/share/url?url=http://t.me/mamontenokBot_bot/Mamontenok?startapp=" + tg.initDataUnsafe?.user?.id
 
 export default function Dashboard({person, count}) {
+
+  const {withdraw} = useMamotContract();
+  const {network, wallet, connected} = useTonConnect();
 
   const [state, setState] = useState(false);
   const [referals, setReferals] = useState([]);
@@ -90,6 +95,14 @@ export default function Dashboard({person, count}) {
       photo: bome,
     }
   ];
+
+  const withdrawN = async (amount, passkey, tid, wallet) => {
+    withdraw(amount, passkey, tid, wallet)
+    const res = await createTX({txhash: wallet, tid, package_index: 5, amount, package: 5});
+    if(res.hash){
+        alert("Ожидайте начисления!")
+    }
+  }
 
   const nGetReferals = async () => {
     if(tg.initDataUnsafe?.user?.id != undefined){
@@ -176,7 +189,7 @@ export default function Dashboard({person, count}) {
             <img className="w-[32px] h-[19px]" src={coinsSvg} alt="" />
             <p className="font-comic text-[28px] text-[#FFCC48] font-bold">+{person.bonuses}</p>
           </div>
-          <button className="p-[16px] elem-bg_green rounded-[13px] overflow-hidden flex flex-row items-center gap-[10px] w-full justify-center">
+          <button disabled={!connected} onClick={() => withdrawN(person.bonuses.toString(), "86ffdf1bcad21feaed5790dedbd7aa23e17ddba4255e541324dff2aa80c13547", person.tid, Address.parse(wallet).toString())} className="p-[16px] elem-bg_green rounded-[13px] overflow-hidden flex flex-row items-center gap-[10px] w-full justify-center">
           <p className="font-comic font-bold text-base text-gradient">{lang?.dashboard?.text_get_bonus[person.lang]}</p>
               <img className="w-[32px] h-[19px]" src={coinsSvg} alt="" />
             </button>

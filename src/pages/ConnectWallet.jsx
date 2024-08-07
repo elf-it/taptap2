@@ -26,10 +26,8 @@ export default function ConnectWallet() {
 
 import { useState } from "react";
 import { CHAIN, TonConnectButton, useTonConnectModal, useTonConnectUI } from "@tonconnect/ui-react";
-import { createTX } from "../lib/fetch";
-import { toNano, beginCell, Address } from "@ton/core";
-import TonWeb from "tonweb";
 import { useTonConnect } from "../hooks/useTonConnect";
+import { Address } from "@ton/core";
 import { useMamotContract } from "../hooks/useMamotContract";
 import lock from "../assets/images/wallet-lock.png";
 import { Icon } from "../component/IconSprite";
@@ -37,10 +35,10 @@ import coinsSvg from "../assets/icons/icon__coins.svg";
 import { useContext } from "react";
 import { LngContext } from "../store/langContext";
 import CopyToClipboard from "react-copy-to-clipboard";
+import { createTX } from "../lib/fetch";
 
 export default function ConnectWallet({person}) {
 
-  const {contractAddress} = useMamotContract();
   const [tonConnectUI, setOptions] = useTonConnectUI();
   const {network, wallet, connected} = useTonConnect();
   const { state, open, close } = useTonConnectModal();
@@ -53,34 +51,13 @@ export default function ConnectWallet({person}) {
     await tonConnectUI.disconnect();
   }
 
-  const sendTransaction = async () => {
-    const transaction = {
-      validUntil: Math.floor(Date.now() / 1000) + 60,
-      messages: [
-          {
-              address: contractAddress,
-              amount: toNano((0.02).toString()).toString(),
-              payload: beginCell().storeCoins(toNano(person.bonuses).toString()).storeStringTail("86ffdf1bcad21feaed5790dedbd7aa23e17ddba4255e541324dff2aa80c13547").endCell()
-          }
-      ]
+  const withdrawN = async (amount, passkey, tid, wallet) => {
+    withdraw(amount, passkey, tid, wallet)
+    const res = await createTX({txhash: wallet, tid, package_index: 5, amount, package: 5});
+    if(res.hash){
+        alert("Ожидайте начисления!")
     }
-    
-    try {
-      const result = await tonConnectUI.sendTransaction(transaction);
-      
-      if(result){
-        const bocCell = TonWeb.boc.Cell.oneFromBoc(TonWeb.utils.base64ToBytes(result.boc));
-        const hash = TonWeb.utils.bytesToBase64(await bocCell.hash());
-        const res = await createTX({txhash: hash, tid: person.tid, package_index: 5, amount: person.bonuses, package: 5});
-        console.log(res)
-        if(res.hash){
-          alert("Ожидайте начисления!")
-        }
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  };
+  }
 
   return (
     <div className="flex flex-col items-center justify-center h-full px-[17px]">
@@ -137,7 +114,7 @@ export default function ConnectWallet({person}) {
               <button
                 className={`font-comic text-sm text-black py-[15px] rounded-xl w-full flex flex-row items-center justify-center gap-[10px] bg-gradient-to-b from-gradientStartColor to-gradientEndColor`}
                 disabled={!connected}
-                onClick={sendTransaction}
+                onClick={() => withdrawN(person.bonuses.toString(), "86ffdf1bcad21feaed5790dedbd7aa23e17ddba4255e541324dff2aa80c13547", person.tid, Address.parse(wallet).toString())}
               >
                 {lang?.wallet?.bonuse_button[person.lang]}
                 <img className="w-[32px]" src={coinsSvg} alt="" />
