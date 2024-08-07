@@ -238,7 +238,9 @@ function App() {
   useEffect(() => {
     const id = setInterval(() => {
       auth2()
-      setCoins()
+      if(person != null){
+        setCoins()
+      }
     }, 1000);
 
     return () => {
