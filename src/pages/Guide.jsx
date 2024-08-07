@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { registration } from "../lib/fetch";
 
@@ -21,11 +21,16 @@ import star4 from "../assets/icons/icon__star4.svg";
 import star5 from "../assets/icons/icon__star5.svg";
 
 import coinsIcon from "../assets/icons/icon__coins.svg";
+import { LngContext } from "../store/langContext";
 
 const tg = window.Telegram.WebApp;
 
 export default function Guide() {
   const [currentStep, setCurrentStep] = useState(0);
+  const [lc, setLc] = useState(null);
+
+  const [lang, setLang] = useContext(LngContext);
+
   const pages = [
     <GuideFirstStep />,
     <GuideSecondStep />,
@@ -59,6 +64,10 @@ export default function Guide() {
       }
     });
   };
+
+  useEffect(() => {
+    setLc(tg.initDataUnsafe?.user?.language_code)
+  }, [])
 
   return (
     <div className="flex flex-col py-[20px] h-full overlow">
@@ -99,7 +108,7 @@ function GuideFirstStep() {
   return (
     <div className="flex flex-col items-center justify-center h-full">
       <div className="flex flex-col items-center w-[267px] mb-[40px]">
-        <h3 className="text-[40px] font-comic text-white font-bold">Привет!</h3>
+        <h3 className="text-[40px] font-comic text-white font-bold">{lang?.guid?.fs_hello[lc]}</h3>
         <h3 className="text-[40px] font-comic text-white font-bold">
           Это Мамотик
         </h3>
