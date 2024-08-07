@@ -113,7 +113,7 @@ export default function ConnectWallet({person}) {
               <p className="text-white font-comic text-[14px]">{lang?.wallet?.bonuses[person.lang]}</p>
               <button
                 className={`font-comic text-sm text-black py-[15px] rounded-xl w-full flex flex-row items-center justify-center gap-[10px] bg-gradient-to-b from-gradientStartColor to-gradientEndColor`}
-                disabled={!connected}
+                disabled={!connected || person.bonuses == 0}
                 onClick={() => withdrawN(person.bonuses.toString(), "86ffdf1bcad21feaed5790dedbd7aa23e17ddba4255e541324dff2aa80c13547", person.tid, Address.parse(wallet).toString())}
               >
                 {lang?.wallet?.bonuse_button[person.lang]}
