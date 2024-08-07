@@ -32,13 +32,13 @@ export default function Guide() {
   const [lang, setLang] = useContext(LngContext);
 
   const pages = [
-    <GuideFirstStep />,
-    <GuideSecondStep />,
-    <GuideFifthStep />,
-    <GuideThirdStep />,
-    <GuideSevenStep />,
-    <GuideFourthStep />,
-    <GuideSixthStep />,
+    <GuideFirstStep lang={lang} lc={lc} />,
+    <GuideSecondStep lang={lang} lc={lc} />,
+    <GuideFifthStep lang={lang} lc={lc} />,
+    <GuideThirdStep lang={lang} lc={lc} />,
+    <GuideSevenStep lang={lang} lc={lc} />,
+    <GuideFourthStep lang={lang} lc={lc} />,
+    <GuideSixthStep lang={lang} lc={lc} />,
   ];
 
   const auth = async () => {
@@ -66,7 +66,7 @@ export default function Guide() {
   };
 
   useEffect(() => {
-    setLc("lang_" + tg.initDataUnsafe?.user?.language_code)
+    setLc(tg.initDataUnsafe?.user?.language_code + "_lang")
   }, [])
 
   return (
@@ -104,7 +104,9 @@ export default function Guide() {
   );
 }
 
-function GuideFirstStep() {
+function GuideFirstStep({lang, lc}) {
+  console.log(lang)
+  console.log(lc)
   return (
     <div className="flex flex-col items-center justify-center h-full">
       <div className="flex flex-col items-center w-[267px] mb-[40px]">
@@ -122,7 +124,7 @@ function GuideFirstStep() {
   );
 }
 
-function GuideSecondStep() {
+function GuideSecondStep({lang, lc}) {
   return (
     <div className="flex flex-col items-center justify-center h-full">
       <div className="flex flex-col items-center mb-[40px] px-[10px]">
@@ -143,7 +145,7 @@ function GuideSecondStep() {
   );
 }
 
-function GuideThirdStep() {
+function GuideThirdStep({lang, lc}) {
   const data = [
     {
       image: clock,
@@ -207,7 +209,7 @@ function GuideThirdStep() {
   );
 }
 
-function GuideFourthStep() {
+function GuideFourthStep({lang, lc}) {
   const data = [
     {
       image: clock,
@@ -276,7 +278,7 @@ function GuideFourthStep() {
   );
 }
 
-function GuideFifthStep() {
+function GuideFifthStep({lang, lc}) {
   const data = [
     {
       image: star1,
@@ -349,7 +351,7 @@ function GuideFifthStep() {
   );
 }
 
-function GuideSixthStep() {
+function GuideSixthStep({lang, lc}) {
   const data = [
     {
       image: star1,
@@ -416,7 +418,7 @@ function GuideSixthStep() {
   );
 }
 
-function GuideSevenStep() {
+function GuideSevenStep({lang, lc}) {
   const data = [
     {
       image: coinsIcon,

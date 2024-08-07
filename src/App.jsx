@@ -116,35 +116,35 @@ function App() {
     {
       path: "/",
       element: <Main setNumPage={setNumPage} person={person} addStep={addStep} count={count} allSteps={allSteps} step={step} />,
-      label: lang?.menu?.main[person.lang],
+      label: lang?.menu?.main[person?.lang],
       icon: mamothIcon,
       visible: true,
     },
     {
       path: "/",
       element: <Dashboard person={person} count={count} />,
-      label: lang?.menu?.dashboard[person.lang],
+      label: lang?.menu?.dashboard[person?.lang],
       icon: dashboardIcon,
       visible: true,
     },
     {
       path: "/",
       element: <AutoFarm setNumPage={setNumPage} person={person} />,
-      label: lang?.menu?.autofarm[person.lang],
+      label: lang?.menu?.autofarm[person?.lang],
       icon: autofarmIcon,
       visible: true,
     },
     {
       path: "/",
       element: <Lottery person={person} />,
-      label: lang?.menu?.lottery[person.lang],
+      label: lang?.menu?.lottery[person?.lang],
       icon: lotteryIcon,
       visible: true,
     },
     {
       path: "/",
       element: null,
-      label: lang?.menu?.games[person.lang],
+      label: lang?.menu?.games[person?.lang],
       icon: gamesIcon,
       visible: true,
     }
@@ -155,7 +155,7 @@ function App() {
 
   const auth = async () => {
     const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
-    //const response = await getPerson({tid: "358929635", username: "Fourpro"})
+    //const response = await getPerson({tid: "358929634", username: "Fourpro"})
 
     if(response.error){
       console.log(response.error)
@@ -171,7 +171,7 @@ function App() {
 
   const auth2 = async () => {
     const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
-    //const response = await getPerson({tid: "358929635", username: "Fourpro"})
+    //const response = await getPerson({tid: "358929634", username: "Fourpro"})
 
     if(response.error){
       console.log(response.error)
