@@ -108,7 +108,7 @@ export default function ConnectWallet({person}) {
             <div className="elem-bg_green p-[24px] rounded-[13px] flex flex-col gap-[10px] items-center">
               <div className="flex flex-row items-center gap-[10px] justify-center">
                 <img className="w-[32px]" src={coinsSvg} alt="" />
-                <p className="text-[#FFCC48] font-comic text-[24px]">+{person.bonuses}</p>
+                <p className="text-[#FFCC48] font-comic text-[24px]">+{person.bonuses.toFixed(2)}</p>
               </div>
               <p className="text-white font-comic text-[14px]">{lang?.wallet?.bonuses[person.lang]}</p>
               <button

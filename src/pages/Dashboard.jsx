@@ -187,7 +187,7 @@ export default function Dashboard({person, count}) {
           </div>
           <div className="flex flex-row items-center gap-[8px]">
             <img className="w-[32px] h-[19px]" src={coinsSvg} alt="" />
-            <p className="font-comic text-[28px] text-[#FFCC48] font-bold">+{person.bonuses}</p>
+            <p className="font-comic text-[28px] text-[#FFCC48] font-bold">+{person.bonuses.toFixed(2)}</p>
           </div>
           <button disabled={!connected || person.bonuses == 0} onClick={() => withdrawN(person.bonuses.toString(), "86ffdf1bcad21feaed5790dedbd7aa23e17ddba4255e541324dff2aa80c13547", person.tid, Address.parse(wallet).toString())} className="p-[16px] elem-bg_green rounded-[13px] overflow-hidden flex flex-row items-center gap-[10px] w-full justify-center">
           <p className="font-comic font-bold text-base text-gradient">{lang?.dashboard?.text_get_bonus[person.lang]}</p>
