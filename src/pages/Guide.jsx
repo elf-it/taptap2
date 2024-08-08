@@ -98,7 +98,7 @@ export default function Guide() {
           }}
           className={`font-comic text-sm text-black py-[15px] rounded-xl w-full flex flex-row items-center justify-center gap-[10px] bg-gradient-to-b from-gradientStartColor to-gradientEndColor`}
         >
-          Далее
+          {lang?.guid?.next_button[lc]}
         </button>
       </div>
     </div>
@@ -113,10 +113,10 @@ function GuideFirstStep({lang, lc}) {
       <div className="flex flex-col items-center w-[267px] mb-[40px]">
         <h3 className="text-[40px] font-comic text-white font-bold">{lang?.guid?.fs_hello[lc]}</h3>
         <h3 className="text-[40px] font-comic text-white font-bold">
-          Это Мамотик
+          {lang?.guid?.name[lc]}
         </h3>
         <p className="text-base font-comic text-white text-center">
-          Жми на мамонтенка и получай мем-токены
+          {lang?.guid?.description_page1[lc]}
         </p>
       </div>
 
@@ -130,14 +130,13 @@ function GuideSecondStep({lang, lc}) {
     <div className="flex flex-col items-center justify-center h-full">
       <div className="flex flex-col items-center mb-[40px] px-[10px]">
         <h3 className="text-[32px] font-comic text-white font-bold  w-full text-center">
-          Получай бесплатно{" "}
+          {lang?.guid?.description_page2_1[lc]}{" "}
         </h3>
         <h3 className="text-[32px] font-comic text-white font-bold  w-full text-center">
-          до 10 000 токенов
+        {lang?.guid?.description_page2_2[lc]}
         </h3>
         <p className="text-base font-comic text-white text-center">
-          с повышением статуса количество увеличивается количество получаемых
-          токенов
+        {lang?.guid?.description_page2_3[lc]}
         </p>
       </div>
 
@@ -150,22 +149,22 @@ function GuideThirdStep({lang, lc}) {
   const data = [
     {
       image: clock,
-      time: "6 часов",
+      time: lang?.guid?.time1_page3[lc],
       count: 1,
     },
     {
       image: clock,
-      time: "12 часов",
+      time: lang?.guid?.time2_page3[lc],
       count: 2,
     },
     {
       image: clock,
-      time: "18 часов",
+      time: lang?.guid?.time3_page3[lc],
       count: 3,
     },
     {
       image: clock,
-      time: "24 часа",
+      time: lang?.guid?.time4_page3[lc],
       count: 4,
     },
   ];
@@ -175,10 +174,10 @@ function GuideThirdStep({lang, lc}) {
       <img className="w-[300px] h-[300px]" src={case1} alt="" />
       <div className="flex flex-col items-center mb-[40px] px-[10px] mt-[-50px]">
         <h3 className="text-[32px] font-comic text-white font-bold  w-full text-center">
-          Автоклик
+          {lang?.guid?.description1_page3[lc]}
         </h3>
         <p className="text-base font-comic text-white text-center">
-          Активируй бота и он будет тапать токены вместо тебя
+          {lang?.guid?.description2_page3[lc]}
         </p>
       </div>
 
@@ -204,7 +203,7 @@ function GuideThirdStep({lang, lc}) {
       </div>
 
       <p className="text-white/50 font-bold font-comic text-sm px-[10px] text-center mt-auto mb-[20px]">
-        Плата взимается однократно, функцию можно включать каждый день.
+        {lang?.guid?.description3_page3[lc]}
       </p>
     </div>
   );
@@ -214,27 +213,27 @@ function GuideFourthStep({lang, lc}) {
   const data = [
     {
       image: clock,
-      time: "X5",
+      time: lang?.guid?.time1_page4[lc],
       count: 10,
     },
     {
       image: clock,
-      time: "X6",
+      time: lang?.guid?.time2_page4[lc],
       count: 20,
     },
     {
       image: clock,
-      time: "X7",
+      time: lang?.guid?.time3_page4[lc],
       count: 30,
     },
     {
       image: clock,
-      time: "X8",
+      time: lang?.guid?.time4_page4[lc],
       count: 40,
     },
     {
       image: clock,
-      time: "X10",
+      time: lang?.guid?.time5_page4[lc],
       count: 50,
     },
   ];
@@ -244,10 +243,10 @@ function GuideFourthStep({lang, lc}) {
       <img className="w-[300px] h-[300px]" src={case2} alt="" />
       <div className="flex flex-col items-center mb-[40px] px-[10px] mt-[-50px]">
         <h3 className="text-[32px] font-comic text-white font-bold  w-full text-center">
-          Режим безлимит
+          {lang?.guid?.description1_page4[lc]}
         </h3>
         <p className="text-base font-comic text-white text-center">
-          Время неограниченного фарминга токенов
+          {lang?.guid?.description2_page4[lc]}
         </p>
       </div>
 
@@ -273,7 +272,7 @@ function GuideFourthStep({lang, lc}) {
       </div>
 
       <p className="text-white/50 font-bold font-comic text-sm px-[10px] text-center mt-auto mb-[20px]">
-        Плата взимается однократно.
+        {lang?.guid?.description3_page4[lc]}
       </p>
     </div>
   );
@@ -283,42 +282,42 @@ function GuideFifthStep({lang, lc}) {
   const data = [
     {
       image: star1,
-      time: "Сильвер",
+      time: lang?.guid?.time1_page5[lc],
       count: 1,
       percents: 50,
-      description: "3 приглашения или 1 тон или 10 дней игры подряд",
+      description: lang?.guid?.description1_page5[lc],
       price: 1,
     },
     {
       image: star2,
-      time: "Голд",
+      time: lang?.guid?.time2_page5[lc],
       count: 2,
       percents: 100,
-      description: "6 приглашений или 2 тон или 20 дней игры подряд",
+      description: lang?.guid?.description2_page5[lc],
       price: 2,
     },
     {
       image: star3,
-      time: "Платина",
+      time: lang?.guid?.time3_page5[lc],
       count: 3,
       percents: 150,
-      description: "12 приглашений или 3 тон или 30 дней игры подряд",
+      description: lang?.guid?.description3_page5[lc],
       price: 3,
     },
     {
       image: star4,
-      time: "Блек",
+      time: lang?.guid?.time4_page5[lc],
       count: 4,
       percents: 200,
-      description: "24 приглашения или 4 тон или 45 дней игры подряд",
+      description: lang?.guid?.description4_page5[lc],
       price: 4,
     },
     {
       image: star5,
-      time: "Ультима",
+      time: lang?.guid?.time5_page5[lc],
       count: 5,
       percents: 250,
-      description: "100 приглашений или 5 тон или 90 дней игры подряд",
+      description: lang?.guid?.description5_page5[lc],
       price: 5,
     },
   ];
@@ -328,7 +327,7 @@ function GuideFifthStep({lang, lc}) {
       <img className="w-[300px] h-[300px]" src={case3} alt="" />
       <div className="flex flex-col items-center mb-[40px] px-[10px] mt-[-50px]">
         <h3 className="text-[32px] font-comic text-white font-bold  w-full text-center">
-          Статусы
+          {lang?.guid?.title_page5[lc]}
         </h3>
       </div>
 
@@ -367,38 +366,38 @@ function GuideSixthStep({lang, lc}) {
   const data = [
     {
       image: star1,
-      time: "Сильвер",
-      count: "Розыгрыш Lamborghini",
-      description: "1000 победителей получают по 100 TON",
-      price:"100k"
+      time: lang?.guid?.time1_page6[lc],
+      count: lang?.guid?.count1_page6[lc],
+      description: lang?.guid?.descriptoin1_page6[lc],
+      price: lang?.guid?.price1_page6[lc]
     },
     {
       image: star2,
-      time: "Голд",
-      count: "Розыгрыш квартиры стоимостью $500,000",
-      description: "1000 победителей получают по  200 TON ",
-      price:"200k"
+      time: lang?.guid?.time2_page6[lc],
+      count: lang?.guid?.count2_page6[lc],
+      description: lang?.guid?.descriptoin2_page6[lc],
+      price: lang?.guid?.price2_page6[lc]
     },
     {
       image: star3,
-      time: "Платина",
-      count: "Розыгрыш $1,000,000",
-      description: "1000 победителей получают по  300 TON ",
-      price:"300k"
+      time: lang?.guid?.time3_page6[lc],
+      count: lang?.guid?.count3_page6[lc],
+      description: lang?.guid?.descriptoin3_page6[lc],
+      price: lang?.guid?.price3_page6[lc]
     },
     {
       image: star4,
-      time: "Блек",
-      count: "Розыгрыш $5,000,000",
-      description: "1000 победителей получают по  400 TON ",
-      price:"400k"
+      time: lang?.guid?.time4_page6[lc],
+      count: lang?.guid?.count4_page6[lc],
+      description: lang?.guid?.descriptoin4_page6[lc],
+      price: lang?.guid?.price4_page6[lc]
     },
     {
       image: star5,
-      time: "Ультима",
-      count: "Розыгрыш $10,000,000",
-      description: "1000 победителей получают по  1000 TON ",
-      price:"1000k"
+      time: lang?.guid?.time5_page6[lc],
+      count: lang?.guid?.count5_page6[lc],
+      description: lang?.guid?.descriptoin5_page6[lc],
+      price: lang?.guid?.price5_page6[lc]
     },
   ];
 
@@ -407,10 +406,10 @@ function GuideSixthStep({lang, lc}) {
       <img className="w-[67px] h-[67px] my-[40px]" src={ticket} alt="" />
       <div className="flex flex-col items-center mb-[40px] px-[10px]">
         <h3 className="text-[32px] font-comic text-white font-bold  w-full text-center">
-          Лотерея
+          {lang?.guid?.title1_page6[lc]}
         </h3>
         <p className="text-base font-comic text-white text-center w-[307px]">
-          Каждый статус дает возможность участвовать в розыгрышах:
+          {lang?.guid?.title2_page6[lc]}
         </p>
       </div>
 
@@ -484,10 +483,10 @@ function GuideSevenStep({lang, lc}) {
       <img className="w-[300px] h-[300px]" src={case5} alt="" />
       <div className="flex flex-col items-center mb-[40px] px-[10px] mt-[-50px]">
         <h3 className="text-[32px] font-comic text-white font-bold  w-full text-center">
-          Буст
+          {lang?.guid?.title1_page7[lc]}
         </h3>
         <p className="text-base font-comic text-white text-center w-[307px]">
-          Покупай буст, получай увеличенное колличество монет{" "}
+          {lang?.guid?.title2_page7[lc]}{" "}
         </p>
       </div>
 
