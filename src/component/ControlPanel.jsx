@@ -16,7 +16,7 @@ export default function ControlPanel({ count, allSteps, person, setNumPage }) {
   const [lang, setLang] = useContext(LngContext);
   const [level, setLevel] = useContext(LvlContext);
 
-  const colors = ['#9B9B9B', '#9B9B9B','#9B9B9B','#9B9B9B','#fff','#9B9B9B','#9B9B9B']
+  const colors = ['#9B9B9B','#9B9B9B','#9B9B9B','#fff','#9B9B9B','#9B9B9B']
 
   const userInfo = {
     name: "Nickname",
