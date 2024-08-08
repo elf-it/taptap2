@@ -124,7 +124,7 @@ export default function ControlPanel({ count, allSteps, person, setNumPage }) {
               {allSteps < 10000000 ? formatMaxCount : "∞"}
             </span>
             <span
-              style={{color:colors[level - 1]}}
+              style={{color:colors[level]}}
               className={`text-sm font-comic font-bold flex flex-row items-center`}
             >
               / <Timer time={person.timer * 1000}/>
