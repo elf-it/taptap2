@@ -14,7 +14,7 @@ import BuyCard from "../component/BuyCard";
 
 import { LngContext } from "../store/langContext";
 
-export default function Lottery({person}) {
+export default function Lottery({person, setNumPage}) {
 
   const [lang, setLang] = useContext(LngContext)
 
@@ -22,35 +22,35 @@ export default function Lottery({person}) {
     {
       title: lang?.stats?.get_silver[person.lang],
       icon: star1,
-      count: 200,
+      count: person.ticketsStatus.silver,
       maxCount: 2000,
       present: lang?.lottery?.present1[person.lang],
     },
     {
-      title: lang?.stats?.get_silver[person.lang],
+      title: lang?.stats?.get_gold[person.lang],
       icon: star2,
-      count: 700,
+      count: person.ticketsStatus.gold,
       maxCount: 2000,
       present: lang?.lottery?.present2[person.lang],
     },
     {
       title: lang?.stats?.get_platinum[person.lang],
       icon: star3,
-      count: 1200,
+      count: person.ticketsStatus.platinum,
       maxCount: 2000,
       present: lang?.lottery?.present3[person.lang],
     },
     {
       title: lang?.stats?.get_black[person.lang],
       icon: star4,
-      count: 100,
+      count: person.ticketsStatus.black,
       maxCount: 2000,
       present: lang?.lottery?.present4[person.lang],
     },
     {
       title: lang?.stats?.get_ultima[person.lang],
       icon: star5,
-      count: 700,
+      count: person.ticketsStatus.ultima,
       maxCount: 2000,
       present: lang?.lottery?.present5[person.lang],
     },
@@ -108,7 +108,7 @@ export default function Lottery({person}) {
         </p>
       </div>
       <p className="font-comic text-gradient text-[50px] font-bold">
-        <span>223</span>
+        <span>{person ? person.tickets : "0"}</span>
         <span className="text-[#9B9B9B] text-sm font-normal">/{lang?.lottery?.ticket[person.lang]}</span>
       </p>
       <BuyCard data={cardData} />
@@ -152,6 +152,7 @@ export default function Lottery({person}) {
             </div>
           ))}
           <button
+            onClick={() => setNumPage(2)}
             className={`font-comic text-sm text-black py-[15px] rounded-xl w-full flex flex-row items-center justify-center gap-[10px] bg-gradient-to-b from-gradientStartColor to-gradientEndColor`}
           >
             {lang?.lottery?.status_button[person.lang]}{" "}

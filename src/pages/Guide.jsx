@@ -67,7 +67,7 @@ export default function Guide() {
   };
 
   useEffect(() => {
-    setLc(tg.initDataUnsafe?.user?.language_code + "_lang")
+    setLc("ru_lang") //tg.initDataUnsafe?.user?.language_code + "_lang")
   }, [])
 
   return (
@@ -286,30 +286,40 @@ function GuideFifthStep({lang, lc}) {
       time: "Сильвер",
       count: 1,
       percents: 50,
+      description: "3 приглашения или 1 тон или 10 дней игры подряд",
+      price: 1,
     },
     {
       image: star2,
       time: "Голд",
       count: 2,
       percents: 100,
+      description: "6 приглашений или 2 тон или 20 дней игры подряд",
+      price: 2,
     },
     {
       image: star3,
       time: "Платина",
       count: 3,
       percents: 150,
+      description: "12 приглашений или 3 тон или 30 дней игры подряд",
+      price: 3,
     },
     {
       image: star4,
       time: "Блек",
       count: 4,
       percents: 200,
+      description: "24 приглашения или 4 тон или 45 дней игры подряд",
+      price: 4,
     },
     {
       image: star5,
       time: "Ультима",
       count: 5,
       percents: 250,
+      description: "100 приглашений или 5 тон или 90 дней игры подряд",
+      price: 5,
     },
   ];
 
@@ -320,12 +330,9 @@ function GuideFifthStep({lang, lc}) {
         <h3 className="text-[32px] font-comic text-white font-bold  w-full text-center">
           Статусы
         </h3>
-        <p className="text-base font-comic text-white text-center">
-          Можно достичь через инвайты или покупки
-        </p>
       </div>
 
-      <div className="w-full flex flex-col gap-[8px] w-[310px]">
+      <div className="w-full flex flex-col gap-[8px] elem-bg_green p-[15px] rounded-[15px]">
         {data.map((tarrif, i) => (
           <div
             key={i}
@@ -333,16 +340,20 @@ function GuideFifthStep({lang, lc}) {
               i !== data.length - 1 ? "border-b" : ""
             } border-white/20`}
           >
-            <div className="flex flex-row items-center gap-[8px]">
-              <img src={tarrif.image} alt="" />
-              <p className="text-white font-bold font-comic text-lg">
-                {tarrif.time}
+            <div className="flex flex-col w-full">
+              <div className="flex flex-row items-center gap-[8px]">
+                <img src={tarrif.image} alt="" />
+                <p className="text-white font-bold font-comic text-lg">
+                  {tarrif.time}
+                </p>
+                <p className="text-gradient font-bold font-comic text-xl ml-auto">
+                  {tarrif.price} TON
+                </p>
+              </div>
+              <p className="text-white font-bold font-comic text-[10px]">
+                {tarrif.description}
               </p>
             </div>
-            <p className="text-[#45E9B8] font-bold font-comic text-xl">
-            {tarrif.percents && <span className="text-white">+ { tarrif.percents}% {" "}</span>}
-              {tarrif.count} TON
-            </p>
           </div>
         ))}
       </div>
@@ -358,33 +369,43 @@ function GuideSixthStep({lang, lc}) {
       image: star1,
       time: "Сильвер",
       count: "Розыгрыш Lamborghini",
+      description: "1000 победителей получают по 100 TON",
+      price:"100k"
     },
     {
       image: star2,
       time: "Голд",
       count: "Розыгрыш квартиры стоимостью $500,000",
+      description: "1000 победителей получают по  200 TON ",
+      price:"200k"
     },
     {
       image: star3,
       time: "Платина",
       count: "Розыгрыш $1,000,000",
+      description: "1000 победителей получают по  300 TON ",
+      price:"300k"
     },
     {
       image: star4,
       time: "Блек",
       count: "Розыгрыш $5,000,000",
+      description: "1000 победителей получают по  400 TON ",
+      price:"400k"
     },
     {
       image: star5,
       time: "Ультима",
       count: "Розыгрыш $10,000,000",
+      description: "1000 победителей получают по  1000 TON ",
+      price:"1000k"
     },
   ];
 
   return (
     <div className="flex flex-col items-center justify-center h-full px-[20px]">
-      <img className="w-[300px] h-[300px]" src={case4} alt="" />
-      <div className="flex flex-col items-center mb-[40px] px-[10px] mt-[-50px]">
+      <img className="w-[67px] h-[67px] my-[40px]" src={ticket} alt="" />
+      <div className="flex flex-col items-center mb-[40px] px-[10px]">
         <h3 className="text-[32px] font-comic text-white font-bold  w-full text-center">
           Лотерея
         </h3>
@@ -393,23 +414,28 @@ function GuideSixthStep({lang, lc}) {
         </p>
       </div>
 
-      <div className="flex flex-col items-center elem-bg_green p-[15px] rounded-[15px] w-full mb-[10px] gap-[8px]">
+      <div className="w-full flex flex-col gap-[8px] elem-bg_green p-[15px] rounded-[15px]">
         {data.map((tarrif, i) => (
           <div
             key={i}
-            className={`w-full flex flex-row items-center gap-[8px] justify-between pb-[8px] ${
+            className={`flex flex-row items-center gap-[8px] justify-between pb-[8px] ${
               i !== data.length - 1 ? "border-b" : ""
             } border-white/20`}
           >
-            <div className="flex flex-row items-center  gap-[8px]">
-              <img src={tarrif.image} alt="" />
-              <p className="text-white font-bold font-comic text-lg">
-                {tarrif.time}
+            <div className="flex flex-col w-full">
+              <div className="flex flex-row items-center gap-[8px]">
+                <img src={tarrif.image} alt="" />
+                <p className="text-white font-bold font-comic text-lg">
+                  {tarrif.time}
+                </p>
+                <p className="text-gradient font-bold font-comic text-xl ml-auto">
+                  {tarrif.price} TON
+                </p>
+              </div>
+              <p className="text-white font-bold font-comic text-[10px]">
+                {tarrif.description}
               </p>
             </div>
-            <p className="text-white font-bold font-comic text-xs text-end">
-              {tarrif.count}
-            </p>
           </div>
         ))}
       </div>
@@ -479,8 +505,12 @@ function GuideSevenStep({lang, lc}) {
                 +{tarrif.time}
               </p>
             </div>
+            {tarrif.percents && (
+              <span className="text-white font-bold font-comic text-xl">
+                + {tarrif.percents}%
+              </span>
+            )}
             <p className="text-[#45E9B8] font-bold font-comic text-xl">
-              {tarrif.percents && <span className="text-white">+ { tarrif.percents}% {" "}</span>}
               {tarrif.count} TON
             </p>
           </div>
