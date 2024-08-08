@@ -20,6 +20,7 @@ import BuyCardModal from "../component/BuyCardModal";
 import { createPortal } from "react-dom";
 import { useTonAddress } from "@tonconnect/ui-react";
 import { LngContext } from "../store/langContext";
+import ticketIcon from "../assets/icons/icon__ticket.svg";
 
 export default function AutoFarm({setNumPage, person}) {
   const [showModal, setShowModal] = useState(false);
@@ -131,7 +132,33 @@ export default function AutoFarm({setNumPage, person}) {
     title: lang?.autofarm?.title_lottery[person.lang],
     descr: lang?.autofarm?.description_lottery[person.lang],
     image: case3,
-    tarrifs: [],
+    tarrifs: [
+      {
+        image: ticketIcon,
+        time: "1 билет",
+        count: 10,
+      },
+      {
+        image: ticketIcon,
+        time: "12 билетов",
+        count: 20,
+      },
+      {
+        image: ticketIcon,
+        time: "30 билетов",
+        count: 30,
+      },
+      {
+        image: ticketIcon,
+        time: "70 билетов",
+        count: 40,
+      },
+      {
+        image: ticketIcon,
+        time: "20 билетов",
+        count: 50,
+      },
+    ],
     btn: {
       text: lang?.autofarm?.button_lottery[person.lang],
       color: "#FFCD56",
@@ -139,7 +166,7 @@ export default function AutoFarm({setNumPage, person}) {
       icon: key3,
       handler: () => alert('123'),
     },
-    info: null,
+    info: lang?.autofarm?.info_lottery[person.lang],
   };
 
   const fourthCardData = {

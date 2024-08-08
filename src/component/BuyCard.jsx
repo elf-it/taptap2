@@ -27,14 +27,12 @@ export default function BuyCard({ data = [] }) {
                 {tarrif.time}
               </p>
             </div>
+            {tarrif.percents && <span className="font-bold font-comic text-xl text-white">+ { tarrif.percents}% </span>}
             <p
               style={{ color: data.btn.color }}
-              className="text-white font-bold font-comic text-xl"
+              className="text-gradient font-bold font-comic text-xl"
             >
-              <span>
-                {tarrif.percents && <span className="text-white">+ { tarrif.percents}% {" "}</span>}
-                {tarrif.count} TON
-              </span>
+              {tarrif.count} TON
             </p>
           </div>
         ))}

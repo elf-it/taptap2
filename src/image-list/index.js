@@ -54,6 +54,7 @@ import tasksIcon from "../assets/icons/icon__tasks.svg";
 import fermIcon from "../assets/icons/icon__ferm.svg";
 import walletIcon from "../assets/icons/icon__wallet.svg";
 import arrowDownIcon from "../assets/icons/icon__arrow-down.svg";
+import ticket from "../assets/images/ticket.png";
 
 export const imagesList = [
   case1,
@@ -112,4 +113,5 @@ export const imagesList = [
   fermIcon,
   walletIcon,
   arrowDownIcon,
+  ticket,
 ];

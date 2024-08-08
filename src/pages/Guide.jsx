@@ -19,6 +19,7 @@ import star2 from "../assets/icons/icon__star2.svg";
 import star3 from "../assets/icons/icon__star3.svg";
 import star4 from "../assets/icons/icon__star4.svg";
 import star5 from "../assets/icons/icon__star5.svg";
+import ticket from "../assets/images/ticket.png";
 
 import coinsIcon from "../assets/icons/icon__coins.svg";
 import { LngContext } from "../store/langContext";

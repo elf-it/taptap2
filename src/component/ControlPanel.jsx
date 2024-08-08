@@ -7,12 +7,16 @@ import walletIcon from '../assets/icons/icon__wallet.svg'
 import crownSvg from "../assets/icons/icon__crown.svg";
 import Timer from "./Timer";
 import { LngContext } from "../store/langContext";
+import LevelContext from "../store/levelContext";
 
 export default function ControlPanel({ count, allSteps, person, setNumPage }) {
   const [unlimited, setUnlimited] = useState(false);
   const [autoFarm, setAutoFarm] = useState(false);
   const [bust, setBust] = useState(false);
   const [lang, setLang] = useContext(LngContext);
+  const [level, setLevel] = useContext(LevelContext);
+
+  const colors = ['#9B9B9B','#9B9B9B','#9B9B9B','#fff','#9B9B9B','#9B9B9B']
 
   const userInfo = {
     name: "Nickname",
@@ -120,7 +124,8 @@ export default function ControlPanel({ count, allSteps, person, setNumPage }) {
               {allSteps < 10000000 ? formatMaxCount : "∞"}
             </span>
             <span
-              className="text-sm font-comic font-bold text-[#9B9B9B] flex flex-row items-center"
+              style={{color:colors[level - 1]}}
+              className={`text-sm font-comic font-bold flex flex-row items-center`}
             >
               / <Timer time={person.timer * 1000}/>
             </span>
@@ -128,7 +133,7 @@ export default function ControlPanel({ count, allSteps, person, setNumPage }) {
         </div>
       </div>
       <div className="flex flex-col gap-[10px]">
-        <button className="elem-bg_green text-[10px]  font-comic rounded-[13px] flex flex-col items-center justify-center p-[8px]">
+        <button className="pointer-events-none opacity-50 elem-bg_green text-[10px]  font-comic rounded-[13px] flex flex-col items-center justify-center p-[8px]">
           <img className="relative top-[-18px] mb-[-15px]" src={tasksIcon} alt="" />
           <span className="text-gradient">{lang?.main?.button_tasks[person.lang]}</span>
         </button>
@@ -136,7 +141,7 @@ export default function ControlPanel({ count, allSteps, person, setNumPage }) {
           <img className="relative top-[-18px] mb-[-15px]" src={walletIcon} alt="" />
           <span className="text-gradient">{lang?.main?.button_wallet[person.lang]}</span>
         </button>
-        <button className="elem-bg_green text-[10px]  font-comic rounded-[13px] flex flex-col items-center justify-center p-[8px]">
+        <button className="pointer-events-none opacity-50 elem-bg_green text-[10px]  font-comic rounded-[13px] flex flex-col items-center justify-center p-[8px]">
           <img className="relative top-[-18px] mb-[-15px]" src={fermIcon} alt="" />
           <span className="text-gradient">{lang?.main?.button_farm[person.lang]}</span>
         </button>

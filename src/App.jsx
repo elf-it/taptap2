@@ -119,6 +119,7 @@ function App() {
       label: lang?.menu?.main[person?.lang],
       icon: mamothIcon,
       visible: true,
+      disable: false,
     },
     {
       path: "/",
@@ -126,6 +127,7 @@ function App() {
       label: lang?.menu?.dashboard[person?.lang],
       icon: dashboardIcon,
       visible: true,
+      disable: false,
     },
     {
       path: "/",
@@ -133,6 +135,7 @@ function App() {
       label: lang?.menu?.autofarm[person?.lang],
       icon: autofarmIcon,
       visible: true,
+      disable: false,
     },
     {
       path: "/",
@@ -140,6 +143,7 @@ function App() {
       label: lang?.menu?.lottery[person?.lang],
       icon: lotteryIcon,
       visible: true,
+      disable: false,
     },
     {
       path: "/",
@@ -147,6 +151,7 @@ function App() {
       label: lang?.menu?.games[person?.lang],
       icon: gamesIcon,
       visible: true,
+      disable: true,
     }
   ];
 
@@ -276,7 +281,7 @@ function App() {
                           <button
                             key={i}
                             className={
-                              "font-comic text-gradient text-sm flex-1 flex flex-col items-center justify-end gap-[4px] z-10 mb-[8px]"
+                              `font-comic text-gradient text-sm flex-1 flex flex-col items-center justify-end gap-[4px] z-10 mb-[8px] ${link.disable ? 'opacity-30 pointer-events-none' : ''}`
                             }
                             onClick={() => setNumPage(i)}
                           >
@@ -315,7 +320,7 @@ function App() {
                           <button
                             key={i}
                             className={
-                              "font-comic text-gradient text-sm flex-1 flex flex-col items-center justify-end gap-[4px] z-10 mb-[8px]"
+                              `font-comic text-gradient text-sm flex-1 flex flex-col items-center justify-end gap-[4px] z-10 mb-[8px] ${link.disable ? 'opacity-30 pointer-events-none' : ''}`
                             }
                             onClick={() => setNumPage(i)}
                           >
