@@ -9,7 +9,7 @@ import TonWeb from "tonweb";
 
 const tg = window.Telegram.WebApp;
 
-export default function BuyCardModal({ setShowModal, data }) {
+export default function BuyCardModal({ setShowModal, data, text_price, text_button, text_popup }) {
   const {contractAddress} = useMamotContract();
   const [tonConnectUI, setOptions] = useTonConnectUI();
   const [currentChoosedTarrif, setCurrentChoosedTarrif] = useState(0);
@@ -42,7 +42,7 @@ export default function BuyCardModal({ setShowModal, data }) {
         console.log(res)
         if(res.hash){
           setShowModal(false)
-          alert("Ожидайте начисления!")
+          alert(text_popup)
         }
       }
     } catch (e) {
@@ -82,7 +82,7 @@ export default function BuyCardModal({ setShowModal, data }) {
               handler={setCurrentChoosedTarrif}
             />
             <p className="text-sm text-white font-comic flex flex-row items-center gap-[10px]">
-              Цена:{" "}
+              {text_price}{" "}
               <span className="font-bold text-2xl">
                 {data.tarrifs[currentChoosedTarrif]?.count} TON
               </span>
@@ -93,7 +93,7 @@ export default function BuyCardModal({ setShowModal, data }) {
             className={`font-comic text-sm text-black py-[15px] rounded-xl w-full flex flex-row items-center justify-center gap-[10px] bg-gradient-to-b from-gradientStartColor to-gradientEndColor`}
             onClick={sendTransaction}
           >
-            Купить
+            {text_button}
           </button>
         </div>
       </div>
