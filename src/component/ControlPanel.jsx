@@ -37,7 +37,7 @@ export default function ControlPanel({ count, allSteps, person, setNumPage }) {
     setUnlimited(person.status_unlimit);
     setAutoFarm(person.status_autoclick);
     setBust(person.status_boost);
-  }, []);
+  }, [person]);
 
   return (
     <div className="flex flex-row items-center gap-[10px] justify-between w-full">
