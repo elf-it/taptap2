@@ -75,7 +75,7 @@ export default function LanguageSelectModal({ isOpen, setLangSelectOpen, person 
                 setCurrentLang={setCurrentLang}
               />
             ))}
-
+            {/*
             <p className="font-comic text-white/20 text-[14px] mt-[20px] mb-[10px]">
               {lang?.languages?.other[person.lang]}
             </p>
@@ -88,6 +88,7 @@ export default function LanguageSelectModal({ isOpen, setLangSelectOpen, person 
                 setCurrentLang={setCurrentLang}
               />
             ))}
+            */}
           </div>
           <button
             onClick={saveAndClose}

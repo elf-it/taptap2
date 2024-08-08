@@ -1,6 +1,6 @@
 export const allLanguages = {
-    ru_lang: {fullName: "Русский", shortName: "Рус"},
-    en_lang: {fullName: "English", shortName: "Eng"},
+    ru_lang: {fullName: "Русский", shortName: "RU"},
+    en_lang: {fullName: "English", shortName: "EN"},
     ch_lang: {fullName: "中文", shortName: "中文"},
     cr_lang: {fullName: "Croatian", shortName: ""},
     cz_lang: {fullName: "Czech", shortName: ""},
