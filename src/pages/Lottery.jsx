@@ -6,6 +6,12 @@ import star2 from "../assets/icons/icon__star2.svg";
 import star3 from "../assets/icons/icon__star3.svg";
 import star4 from "../assets/icons/icon__star4.svg";
 import star5 from "../assets/icons/icon__star5.svg";
+
+import ticketIcon from "../assets/icons/icon__ticket.svg";
+import key3 from "../assets/icons/key3.svg";
+import case3 from "../assets/icons/case3.svg";
+import BuyCard from "../component/BuyCard";
+
 import { LngContext } from "../store/langContext";
 
 export default function Lottery({person}) {
@@ -50,6 +56,49 @@ export default function Lottery({person}) {
     },
   ];
 
+  const cardData = {
+    index: 2,
+    colorClass: "elem-bg_yellow",
+    title: lang?.lottery?.info_card[person.lang],
+    descr: lang?.lottery?.description_card[person.lang],
+    image: case3,
+    tarrifs: [
+      {
+        image: ticketIcon,
+        time: lang?.lottery?.tarif1[person.lang],
+        count: 10,
+      },
+      {
+        image: ticketIcon,
+        time: lang?.lottery?.tarif2[person.lang],
+        count: 20,
+      },
+      {
+        image: ticketIcon,
+        time: lang?.lottery?.tarif3[person.lang],
+        count: 30,
+      },
+      {
+        image: ticketIcon,
+        time: lang?.lottery?.tarif4[person.lang],
+        count: 40,
+      },
+      {
+        image: ticketIcon,
+        time: lang?.lottery?.tarif5[person.lang],
+        count: 50,
+      },
+    ],
+    btn: {
+      text: lang?.lottery?.button_card[person.lang],
+      color: "#FFCD56",
+      textColor: "#911B00",
+      icon: key3,
+      handler: () => alert("123"),
+    },
+    info: lang?.lottery?.info_card[person.lang],
+  };
+
   return (
     <div className=" py-[24px] px-[17px] flex flex-col items-center gap-[20px] pb-[100px] h-full overflow-auto">
       <div className="elem-bg_green px-[8px] rounded-[40px] w-auto flex flex-row items-center gap-[8px]">
@@ -62,19 +111,7 @@ export default function Lottery({person}) {
         <span>223</span>
         <span className="text-[#9B9B9B] text-sm font-normal">/{lang?.lottery?.ticket[person.lang]}</span>
       </p>
-      <p>
-        <span className="font-comic text-white text-[20px] font-bold">
-          {lang?.lottery?.one_ticket[person.lang]} ={" "}
-        </span>
-        <span className="font-comic text-gradient text-[20px] font-bold">
-          {lang?.lottery?.one_ton[person.lang]}
-        </span>
-      </p>
-      <button
-        className={`font-comic text-sm text-black py-[15px] rounded-xl w-4/5 flex flex-row items-center justify-center gap-[10px] bg-gradient-to-b from-gradientStartColor to-gradientEndColor`}
-      >
-        {lang?.lottery?.buy_button[person.lang]}
-      </button>
+      <BuyCard data={cardData} />
       <div
         className={`elem-bg_green px-[24px] py-[20px] rounded-[15px] w-full flex flex-col items-center gap-[12px]`}
       >

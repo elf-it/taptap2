@@ -7,14 +7,14 @@ import walletIcon from '../assets/icons/icon__wallet.svg'
 import crownSvg from "../assets/icons/icon__crown.svg";
 import Timer from "./Timer";
 import { LngContext } from "../store/langContext";
-import LevelContext from "../store/levelContext";
+import { LvlContext } from "../store/levelContext";
 
 export default function ControlPanel({ count, allSteps, person, setNumPage }) {
   const [unlimited, setUnlimited] = useState(false);
   const [autoFarm, setAutoFarm] = useState(false);
   const [bust, setBust] = useState(false);
   const [lang, setLang] = useContext(LngContext);
-  const [level, setLevel] = useContext(LevelContext);
+  const [level, setLevel] = useContext(LvlContext);
 
   const colors = ['#9B9B9B','#9B9B9B','#9B9B9B','#fff','#9B9B9B','#9B9B9B']
 

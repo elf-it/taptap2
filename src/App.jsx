@@ -151,7 +151,7 @@ function App() {
       label: lang?.menu?.games[person?.lang],
       icon: gamesIcon,
       visible: true,
-      disable: true,
+      disable: false,
     }
   ];
 
