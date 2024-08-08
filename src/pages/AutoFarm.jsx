@@ -228,31 +228,31 @@ export default function AutoFarm({setNumPage, person}) {
         image: coinsIcon,
         time: lang?.autofarm?.tarifs_time1_boost[person.lang],
         count: 1,
-        percents:"50 %"
+        percents:50
       },
       {
         image: coinsIcon,
         time: lang?.autofarm?.tarifs_time2_boost[person.lang],
         count: 2,
-        percents:"100 %"
+        percents:100
       },
       {
         image: coinsIcon,
         time: lang?.autofarm?.tarifs_time3_boost[person.lang],
         count: 3,
-        percents:"150 %"
+        percents:150
       },
       {
         image: coinsIcon,
         time: lang?.autofarm?.tarifs_time4_boost[person.lang],
         count: 4,
-        percents:"200 %"
+        percents:200
       },
       {
         image: coinsIcon,
         time: lang?.autofarm?.tarifs_time5_boost[person.lang],
         count: 5,
-        percents:"250 %"
+        percents:250
       },
     ],
     btn: {
