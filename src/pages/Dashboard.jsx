@@ -14,13 +14,16 @@ import ponke from "../assets/dasboardCoins/ponke.png";
 import popcat from "../assets/dasboardCoins/popcat.png";
 import shiba from "../assets/dasboardCoins/shiba.png";
 import { useMamotContract } from "../hooks/useMamotContract";
-import { Address } from "@ton/core";
+import { Address, toNano, beginCell } from "@ton/core";
 import { useTonConnect } from "../hooks/useTonConnect";
+import { useTonConnectUI } from "@tonconnect/ui-react";
 
 import copySvg from "../assets/icons/icon__copy.svg";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { createTX, getReferals } from "../lib/fetch";
 import { LngContext } from "../store/langContext";
+
+import TonWeb from "tonweb";
 
 const tg = window.Telegram.WebApp;
 const myLink = "https://t.me/mamontenokBot_bot/Mamontenok?startapp=" + tg.initDataUnsafe?.user?.id;
@@ -28,7 +31,9 @@ const shareLink = "https://t.me/share/url?url=http://t.me/mamontenokBot_bot/Mamo
 
 export default function Dashboard({person, count}) {
 
-  const {withdraw} = useMamotContract();
+  const {contractAddress} = useMamotContract();
+  const [tonConnectUI, setOptions] = useTonConnectUI();
+
   const {network, wallet, connected} = useTonConnect();
 
   const [state, setState] = useState(false);
@@ -97,10 +102,38 @@ export default function Dashboard({person, count}) {
   ];
 
   const withdrawN = async (amount, passkey, tid, wallet) => {
-    withdraw(amount, passkey, tid, wallet)
-    const res = await createTX({txhash: wallet, tid, package_index: 5, amount, package: 5});
-    if(res.hash){
-        alert("Ожидайте начисления!")
+    const body = beginCell()
+    .storeUint(1741503767, 32)
+    .storeCoins(toNano(amount))
+    .storeStringRefTail(passkey)
+    .endCell();
+
+    const transaction = {
+      validUntil: Math.floor(Date.now() / 1000) + 60,
+      messages: [
+          {
+              address: contractAddress,
+              amount: toNano((0.02).toString()).toString(),
+              payload: body.toBoc().toString("base64")
+          }
+      ]
+    }
+    
+    try {
+      const result = await tonConnectUI.sendTransaction(transaction);
+      
+      if(result){
+        const bocCell = TonWeb.boc.Cell.oneFromBoc(TonWeb.utils.base64ToBytes(result.boc));
+        const hash = TonWeb.utils.bytesToBase64(await bocCell.hash());
+        const res = await createTX({txhash: hash, tid, package_index: 5, amount, package: 5});
+        console.log(res)
+        if(res.hash){
+          console.log(res)
+          alert("ожидайте начисления")
+        }
+      }
+    } catch (e) {
+      console.error(e);
     }
   }
 
@@ -189,8 +222,8 @@ export default function Dashboard({person, count}) {
             <img className="w-[32px] h-[19px]" src={coinsSvg} alt="" />
             <p className="font-comic text-[28px] text-[#FFCC48] font-bold">+{person.bonuses}</p>
           </div>
-          <button disabled={!connected || person.bonuses == 0} onClick={() => withdrawN(person.bonuses.toString(), "86ffdf1bcad21feaed5790dedbd7aa23e17ddba4255e541324dff2aa80c13547", person.tid, Address.parse(wallet).toString())} className="p-[16px] elem-bg_green rounded-[13px] overflow-hidden flex flex-row items-center gap-[10px] w-full justify-center">
-          <p className="font-comic font-bold text-base text-gradient">{lang?.dashboard?.text_get_bonus[person.lang]}</p>
+          <button disabled={!connected || person.bonuses == 0} onClick={() => withdrawN(person.bonuses.toString(), "86ffdf1bcad21feaed5790dedbd7aa23e17ddba4255e541324dff2aa80c13547", person.tid, Address.parse(wallet).toString())} className={`p-[16px] ${!connected || person.bonuses == 0 ? "elem-bg_green" : "bg-gradient-to-b from-gradientStartColor to-gradientEndColor"} rounded-[13px] overflow-hidden flex flex-row items-center gap-[10px] w-full justify-center`}>
+          <p className={`font-comic ${!connected || person.bonuses == 0 && "font-bold text-base text-gradient"}`}>{lang?.dashboard?.text_get_bonus[person.lang]}</p>
               <img className="w-[32px] h-[19px]" src={coinsSvg} alt="" />
             </button>
           <div className="w-full flex flex-row items-center gap-[8px]">

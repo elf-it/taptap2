@@ -27,7 +27,7 @@ export default function ConnectWallet() {
 import { useState } from "react";
 import { CHAIN, TonConnectButton, useTonConnectModal, useTonConnectUI } from "@tonconnect/ui-react";
 import { useTonConnect } from "../hooks/useTonConnect";
-import { Address } from "@ton/core";
+import { Address, toNano, beginCell } from "@ton/core";
 import { useMamotContract } from "../hooks/useMamotContract";
 import lock from "../assets/images/wallet-lock.png";
 import { Icon } from "../component/IconSprite";
@@ -36,14 +36,15 @@ import { useContext } from "react";
 import { LngContext } from "../store/langContext";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { createTX } from "../lib/fetch";
+import TonWeb from "tonweb";
 
 export default function ConnectWallet({person}) {
 
+  const {contractAddress} = useMamotContract();
   const [tonConnectUI, setOptions] = useTonConnectUI();
   const {network, wallet, connected} = useTonConnect();
   const { state, open, close } = useTonConnectModal();
   const [stateCopy, setStateCopy] = useState(false);
-  const {withdraw} = useMamotContract();
 
   const [lang, setLang] = useContext(LngContext);
 
@@ -52,10 +53,38 @@ export default function ConnectWallet({person}) {
   }
 
   const withdrawN = async (amount, passkey, tid, wallet) => {
-    withdraw(amount, passkey, tid, wallet)
-    const res = await createTX({txhash: wallet, tid, package_index: 5, amount, package: 5});
-    if(res.hash){
-        alert("Ожидайте начисления!")
+    const body = beginCell()
+    .storeUint(1741503767, 32)
+    .storeCoins(toNano(amount))
+    .storeStringRefTail(passkey)
+    .endCell();
+
+    const transaction = {
+      validUntil: Math.floor(Date.now() / 1000) + 60,
+      messages: [
+          {
+              address: contractAddress,
+              amount: toNano((0.02).toString()).toString(),
+              payload: body.toBoc().toString("base64")
+          }
+      ]
+    }
+    
+    try {
+      const result = await tonConnectUI.sendTransaction(transaction);
+      
+      if(result){
+        const bocCell = TonWeb.boc.Cell.oneFromBoc(TonWeb.utils.base64ToBytes(result.boc));
+        const hash = TonWeb.utils.bytesToBase64(await bocCell.hash());
+        const res = await createTX({txhash: hash, tid, package_index: 5, amount, package: 5});
+        console.log(res)
+        if(res.hash){
+          console.log(res)
+          alert("ожидайте начисления")
+        }
+      }
+    } catch (e) {
+      console.error(e);
     }
   }
 
