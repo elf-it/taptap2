@@ -15,6 +15,9 @@ import Main from "./pages/Main";
 
 import usePreloadImage from "./hooks/usePreloadImage";
 
+import BustBottomSheet from "./component/BustBottomSheet";
+import ExchangeSuccessBottomSheet from "./component/ExchangeSuccessBottomSheet";
+
 import mamothIcon from "./assets/icons/icon__nav-mamoth.svg";
 import dashboardIcon from "./assets/icons/icon__nav-dashboard.svg";
 import autofarmIcon from "./assets/icons/icon__nav-autofarm.svg";
@@ -34,6 +37,9 @@ import { LngContext } from './store/langContext';
 const tg = window.Telegram.WebApp;
 
 function App() {
+
+  const [isBottomSheetVisible, toggleBottomSheetVisible] = useState(true);
+  const [isBottomSheetVisible2, toggleBottomSheetVisible2] = useState(true);
 
   const [level, setLevel] = useContext(LvlContext);
   const [loading] = usePreloadImage(imagesList);
@@ -265,7 +271,8 @@ function App() {
         <TonConnectUIProvider manifestUrl='https://hammerhead-app-lqwus.ondigitalocean.app/tonconnect-manifest.json'>
           {numPage == 5 ?
           <>
-            <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}><ConnectWallet person={person} />
+            <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}>
+              <ConnectWallet person={person} />
               <div className="absolute bottom-[10px] left-[17px] right-[17px]">
                 <nav className="bg-bgColorGreen backdrop-blur-xl h-[76px] rounded-[15px] w-full relative">
                   <div
@@ -297,6 +304,14 @@ function App() {
                   </ul>
                 </nav>
               </div>
+              <ExchangeSuccessBottomSheet
+                isBottomSheetVisible={isBottomSheetVisible}
+                toggleBottomSheetVisible={toggleBottomSheetVisible}
+              />
+              <BustBottomSheet
+                isBottomSheetVisible={isBottomSheetVisible2}
+                toggleBottomSheetVisible={toggleBottomSheetVisible2}
+              />
             </div>
           </>
           :
@@ -338,6 +353,14 @@ function App() {
                 </nav>
               </div>
             </div>
+            <ExchangeSuccessBottomSheet
+              isBottomSheetVisible={isBottomSheetVisible}
+              toggleBottomSheetVisible={toggleBottomSheetVisible}
+            />
+            <BustBottomSheet
+              isBottomSheetVisible={isBottomSheetVisible2}
+              toggleBottomSheetVisible={toggleBottomSheetVisible2}
+            />
           </>
           }
           </>

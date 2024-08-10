@@ -21,19 +21,21 @@ export default function BuyCard({ data = [] }) {
               i !== data.tarrifs.length - 1 ? "border-b" : ""
             } border-white/20`}
           >
-            <div className="flex flex-row items-center gap-[8px]">
+            <div className="flex flex-row items-center gap-[8px] flex-1">
               <img src={tarrif.image} alt="" />
               <p className="text-white font-bold font-comic text-lg">
                 {tarrif.time}
               </p>
             </div>
             {tarrif.percents && <span className="font-bold font-comic text-xl text-white">+ { tarrif.percents}% </span>}
-            <p
-              style={{ color: data.btn.color }}
-              className="text-gradient font-bold font-comic text-xl"
-            >
-              {tarrif.count} TON
-            </p>
+            <div className="flex-1 flex flex-row justify-end">
+              <span
+                style={{ color: data.btn.color }}
+                className="text-gradient font-bold font-comic text-xl"
+              >
+                {tarrif.count} TON
+              </span>
+            </div>
           </div>
         ))}
       </div>
@@ -45,7 +47,7 @@ export default function BuyCard({ data = [] }) {
         children={data.btn.text}
       />
       {data.info && (
-        <p className="text-white/50 font-bold font-comic text-sm">
+        <p className="text-white/50 font-bold font-comic text-sm text-center">
           {data.info}
         </p>
       )}

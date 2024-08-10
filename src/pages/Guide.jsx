@@ -98,7 +98,7 @@ export default function Guide() {
           }}
           className={`font-comic text-sm text-black py-[15px] rounded-xl w-full flex flex-row items-center justify-center gap-[10px] bg-gradient-to-b from-gradientStartColor to-gradientEndColor`}
         >
-          {lang?.guid?.next_button[lc]}
+          {currentStep === pages.length - 1 ? lang?.guid?.ingame_button[lc] : lang?.guid?.next_button[lc]}
         </button>
       </div>
     </div>
@@ -202,7 +202,7 @@ function GuideThirdStep({lang, lc}) {
         ))}
       </div>
 
-      <p className="text-white/50 font-bold font-comic text-sm px-[10px] text-center mt-auto mb-[20px]">
+      <p className="text-white/90 font-bold font-comic text-sm px-[10px] text-center mt-auto mb-[20px]">
         {lang?.guid?.description3_page3[lc]}
       </p>
     </div>
@@ -271,7 +271,7 @@ function GuideFourthStep({lang, lc}) {
         ))}
       </div>
 
-      <p className="text-white/50 font-bold font-comic text-sm px-[10px] text-center mt-auto mb-[20px]">
+      <p className="text-white/90 font-bold font-comic text-sm px-[10px] text-center mt-auto mb-[20px]">
         {lang?.guid?.description3_page4[lc]}
       </p>
     </div>
@@ -357,7 +357,9 @@ function GuideFifthStep({lang, lc}) {
         ))}
       </div>
 
-      <p className="text-white/50 font-bold font-comic text-sm px-[10px] text-center mt-auto mb-[20px]"></p>
+      <p className="text-white/90 font-bold font-comic text-sm px-[10px] text-center mt-auto mb-[20px]">
+        {lang?.guid?.description6_page5[lc]}
+      </p>
     </div>
   );
 }
@@ -504,11 +506,11 @@ function GuideSevenStep({lang, lc}) {
                 +{tarrif.time}
               </p>
             </div>
-            {tarrif.percents && (
+            {/*tarrif.percents && (
               <span className="text-white font-bold font-comic text-xl">
                 + {tarrif.percents}%
               </span>
-            )}
+            )*/}
             <p className="text-[#45E9B8] font-bold font-comic text-xl">
               {tarrif.count} TON
             </p>
