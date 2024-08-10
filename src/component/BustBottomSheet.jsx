@@ -9,8 +9,9 @@ import BottomSheet from "./BottomSheet";
 export default function BustBottomSheet({
   isBottomSheetVisible,
   toggleBottomSheetVisible,
+  timestamp
 }) {
-  const { timer } = useTimer(1723459094734, isBottomSheetVisible);
+  const { timer } = useTimer(timestamp, isBottomSheetVisible);
   const secondsIntegers = getIntegers(timer.seconds);
   const minutesIntegers = getIntegers(timer.minutes);
   const hoursIntegers = getIntegers(timer.hours);
@@ -30,7 +31,7 @@ export default function BustBottomSheet({
       toggleBottomSheetVisible={toggleBottomSheetVisible}
     >
       <div className="flex flex-col items-center mb-[20px]">
-        <p className="text-white font-comic text-center">До включения Буста:</p>
+        <p className="text-white font-comic text-center">До включения Автофарма:</p>
         <div className="flex flex-row items-center gap-[10px]">
           <TimerWithAnim integers={hoursIntegers} />
           <span className="text-white text-[32px]">:</span>

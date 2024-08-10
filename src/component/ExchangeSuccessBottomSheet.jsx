@@ -7,6 +7,7 @@ import BottomSheet from "./BottomSheet";
 export default function ExchangeSuccessBottomSheet({
   isBottomSheetVisible,
   toggleBottomSheetVisible,
+  automoney
 }) {
   return createPortal(
     <BottomSheet
@@ -22,7 +23,7 @@ export default function ExchangeSuccessBottomSheet({
         <div className="flex flex-row gap-[10px] items-end">
           <img className="mb-[15px]" src={coinsIcon} alt="" />
           <p className="text-[50px] text-gradient font-comic font-bold">
-            100,000
+            {automoney}
           </p>
         </div>
       </div>

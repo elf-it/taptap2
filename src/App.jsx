@@ -38,8 +38,8 @@ const tg = window.Telegram.WebApp;
 
 function App() {
 
-  const [isBottomSheetVisible, toggleBottomSheetVisible] = useState(true);
-  const [isBottomSheetVisible2, toggleBottomSheetVisible2] = useState(true);
+  const [isBottomSheetVisible, toggleBottomSheetVisible] = useState(false);
+  const [isBottomSheetVisible2, toggleBottomSheetVisible2] = useState(false);
 
   const [level, setLevel] = useContext(LvlContext);
   const [loading] = usePreloadImage(imagesList);
@@ -307,10 +307,12 @@ function App() {
               <ExchangeSuccessBottomSheet
                 isBottomSheetVisible={isBottomSheetVisible}
                 toggleBottomSheetVisible={toggleBottomSheetVisible}
+                automoney={person.my_coins_max_static - person.auto_coins_max}
               />
               <BustBottomSheet
                 isBottomSheetVisible={isBottomSheetVisible2}
                 toggleBottomSheetVisible={toggleBottomSheetVisible2}
+                timestamp={person.timer * 1000}
               />
             </div>
           </>
