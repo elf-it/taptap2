@@ -9,6 +9,7 @@ export default function ExchangeSuccessBottomSheet({
   toggleBottomSheetVisible,
   automoney
 }) {
+  console.log(automoney)
   return createPortal(
     <BottomSheet
       image={mamothIcon}

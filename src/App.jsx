@@ -42,6 +42,7 @@ function App() {
   const [isBottomSheetVisible2, toggleBottomSheetVisible2] = useState(false);
 
   const [timestamp, setTimestamp] = useState(0);
+  const [autocoins, setAutocoins] = useState(0);
 
   const [level, setLevel] = useContext(LvlContext);
   const [loading] = usePreloadImage(imagesList);
@@ -168,7 +169,7 @@ function App() {
 
   const auth = async () => {
     const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
-    //const response = await getPerson({tid: "358929634", username: "Fourpro"})
+    //const response = await getPerson({tid: "358929635", username: "Fourpro"})
 
     if(response.error){
       console.log(response.error)
@@ -178,7 +179,8 @@ function App() {
       setAllSteps(response.my_coins_max)
       setLevel(response.level)
       setTimestamp(response.timer)
-      toggleBottomSheetVisible2(response.autoclick)
+      setAutocoins(response.my_coins_max_static - response.auto_coins_max)
+      toggleBottomSheetVisible2(response.status_autoclick)
     }
     //setLoad(false)
     setTimeout(() => { setLoad(false); }, 2000);
@@ -186,7 +188,7 @@ function App() {
 
   const auth2 = async () => {
     const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
-    //const response = await getPerson({tid: "358929634", username: "Fourpro"})
+    //const response = await getPerson({tid: "358929635", username: "Fourpro"})
 
     if(response.error){
       console.log(response.error)
@@ -308,16 +310,6 @@ function App() {
                   </ul>
                 </nav>
               </div>
-              <ExchangeSuccessBottomSheet
-                isBottomSheetVisible={isBottomSheetVisible}
-                toggleBottomSheetVisible={toggleBottomSheetVisible}
-                automoney={person.my_coins_max_static - person.auto_coins_max}
-              />
-              <BustBottomSheet
-                isBottomSheetVisible={isBottomSheetVisible2}
-                toggleBottomSheetVisible={toggleBottomSheetVisible2}
-                timestamp={timestamp * 1000}
-              />
             </div>
           </>
           :
@@ -362,10 +354,12 @@ function App() {
             <ExchangeSuccessBottomSheet
               isBottomSheetVisible={isBottomSheetVisible}
               toggleBottomSheetVisible={toggleBottomSheetVisible}
+              automoney={autocoins}
             />
             <BustBottomSheet
               isBottomSheetVisible={isBottomSheetVisible2}
               toggleBottomSheetVisible={toggleBottomSheetVisible2}
+              timestamp={timestamp * 1000}
             />
           </>
           }
