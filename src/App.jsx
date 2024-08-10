@@ -39,7 +39,7 @@ const tg = window.Telegram.WebApp;
 function App() {
 
   const [isBottomSheetVisible, toggleBottomSheetVisible] = useState(false);
-  const [isBottomSheetVisible2, toggleBottomSheetVisible2] = useState(false);
+  const [isBottomSheetVisible2, toggleBottomSheetVisible2] = useState(true);
 
   const [level, setLevel] = useContext(LvlContext);
   const [loading] = usePreloadImage(imagesList);
@@ -121,7 +121,7 @@ function App() {
   const routes = [
     {
       path: "/",
-      element: <Main setNumPage={setNumPage} person={person} addStep={addStep} count={count} allSteps={allSteps} step={step} />,
+      element: <Main setNumPage={setNumPage} person={person} addStep={addStep} count={count} allSteps={allSteps} step={step} toggleBottomSheetVisible={toggleBottomSheetVisible} />,
       label: lang?.menu?.main[person?.lang],
       icon: mamothIcon,
       visible: true,
