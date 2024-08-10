@@ -151,7 +151,7 @@ function App() {
       label: lang?.menu?.games[person?.lang],
       icon: gamesIcon,
       visible: true,
-      disable: false,
+      disable: true,
     }
   ];
 
@@ -280,6 +280,7 @@ function App() {
                         link.visible && (
                           <button
                             key={i}
+                            disabled={link.disable}
                             className={
                               `font-comic text-gradient text-sm flex-1 flex flex-col items-center justify-end gap-[4px] z-10 mb-[8px] ${link.disable ? 'opacity-30 pointer-events-none' : ''}`
                             }
@@ -319,6 +320,7 @@ function App() {
                         link.visible && (
                           <button
                             key={i}
+                            disabled={link.disable}
                             className={
                               `font-comic text-gradient text-sm flex-1 flex flex-col items-center justify-end gap-[4px] z-10 mb-[8px] ${link.disable ? 'opacity-30 pointer-events-none' : ''}`
                             }
