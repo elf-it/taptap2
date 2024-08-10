@@ -39,7 +39,9 @@ const tg = window.Telegram.WebApp;
 function App() {
 
   const [isBottomSheetVisible, toggleBottomSheetVisible] = useState(false);
-  const [isBottomSheetVisible2, toggleBottomSheetVisible2] = useState(true);
+  const [isBottomSheetVisible2, toggleBottomSheetVisible2] = useState(false);
+
+  const [timestamp, setTimestamp] = useState(0);
 
   const [level, setLevel] = useContext(LvlContext);
   const [loading] = usePreloadImage(imagesList);
@@ -175,6 +177,8 @@ function App() {
       setCount(response.my_coins + response.auto_coins)
       setAllSteps(response.my_coins_max)
       setLevel(response.level)
+      setTimestamp(response.timer)
+      toggleBottomSheetVisible2(response.autoclick)
     }
     //setLoad(false)
     setTimeout(() => { setLoad(false); }, 2000);
@@ -312,7 +316,7 @@ function App() {
               <BustBottomSheet
                 isBottomSheetVisible={isBottomSheetVisible2}
                 toggleBottomSheetVisible={toggleBottomSheetVisible2}
-                timestamp={person.timer * 1000}
+                timestamp={timestamp * 1000}
               />
             </div>
           </>
