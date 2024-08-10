@@ -135,27 +135,27 @@ export default function AutoFarm({setNumPage, person}) {
     tarrifs: [
       {
         image: ticketIcon,
-        time: "1 билет",
+        time: lang?.autofarm?.tickets1_lottery[person.lang],
         count: 10,
       },
       {
         image: ticketIcon,
-        time: "12 билетов",
+        time: lang?.autofarm?.tickets2_lottery[person.lang],
         count: 20,
       },
       {
         image: ticketIcon,
-        time: "30 билетов",
+        time: lang?.autofarm?.tickets3_lottery[person.lang],
         count: 30,
       },
       {
         image: ticketIcon,
-        time: "70 билетов",
+        time: lang?.autofarm?.tickets4_lottery[person.lang],
         count: 40,
       },
       {
         image: ticketIcon,
-        time: "20 билетов",
+        time: lang?.autofarm?.tickets5_lottery[person.lang],
         count: 50,
       },
     ],
