@@ -30,11 +30,12 @@ if(!tg.initDataUnsafe?.start_param){
   //tg.close()
 }
 
-export default function Guide({setNumPage}) {
+export default function Guide() {
   const [currentStep, setCurrentStep] = useState(0);
   const [lc, setLc] = useState(null);
 
   const [lang, setLang] = useContext(LngContext);
+  const [load, setLoad] = useState(false);
 
   const pages = [
     <GuideFirstStep lang={lang} lc={lc} />,
@@ -47,14 +48,15 @@ export default function Guide({setNumPage}) {
   ];
 
   const auth = async () => {
+    setLoad(true)
     if(tg.initDataUnsafe?.user?.id != undefined){
       const response = await registration({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username, referrer: tg.initDataUnsafe?.start_param, lang: tg.initDataUnsafe?.user?.language_code})
 
       if(response.error){
         tg.close()
       }else{
-        setNumPage(0)
-        //window.location.reload();
+        setLoad(false)
+        window.location.reload();
       }
     }else{
       console.log("no tg app")
@@ -76,6 +78,10 @@ export default function Guide({setNumPage}) {
   }, [])
 
   return (
+    <>
+    {load ?
+    <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}><Loading /></div>
+    :
     <div className="flex flex-col py-[20px] h-full overlow">
       <div className="flex flex-row items-center gap-[5px] px-[10px]">
         {pages.map((page, i) => {
@@ -107,6 +113,8 @@ export default function Guide({setNumPage}) {
         </button>
       </div>
     </div>
+    }
+    </>
   );
 }
 
