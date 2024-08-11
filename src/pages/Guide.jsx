@@ -26,7 +26,11 @@ import { LngContext } from "../store/langContext";
 
 const tg = window.Telegram.WebApp;
 
-export default function Guide() {
+if(!tg.initDataUnsafe?.start_param){
+  tg.close()
+}
+
+export default function Guide({setNumPage}) {
   const [currentStep, setCurrentStep] = useState(0);
   const [lc, setLc] = useState(null);
 
@@ -47,9 +51,10 @@ export default function Guide() {
       const response = await registration({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username, referrer: tg.initDataUnsafe?.start_param, lang: tg.initDataUnsafe?.user?.language_code})
 
       if(response.error){
-        console.log(response.error)
+        tg.close()
       }else{
-        window.location.reload();
+        setNumPage(0)
+        //window.location.reload();
       }
     }else{
       console.log("no tg app")

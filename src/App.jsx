@@ -320,7 +320,7 @@ function App() {
           :
           <>
           {numPage == 6 ?
-            <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}><Guide /></div>
+            <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}><Guide setNumPage={setNumPage} /></div>
           :
           <>
             <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}>{routes[numPage].element}
@@ -376,7 +376,7 @@ function App() {
           }
         </TonConnectUIProvider>
       :
-      <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}><Guide /></div>
+      <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}><Guide setNumPage={setNumPage} /></div>
       }
       </>
       }
