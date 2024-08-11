@@ -126,13 +126,14 @@ builder $Mamotic$_store(builder build_0, (int, slice, slice, int, int, cell, cel
     return (sc_0, (v'id, v'payeer, v'comission, v'percentPayeer, v'percentComission, v'users, v'percentsReferals, v'countPercentsReferals, v'owner, v'passkey));
 }
 
-(slice, ((slice, slice, int, int))) $Mamotic$init$_load(slice sc_0) inline {
+(slice, ((slice, slice, slice, int, int))) $Mamotic$init$_load(slice sc_0) inline {
+    var v'owner = sc_0~__tact_load_address();
     var v'payeer = sc_0~__tact_load_address();
     var v'comission = sc_0~__tact_load_address();
-    var v'percentPayeer = sc_0~load_int(257);
     slice sc_1 = sc_0~load_ref().begin_parse();
+    var v'percentPayeer = sc_1~load_int(257);
     var v'percentComission = sc_1~load_int(257);
-    return (sc_0, (v'payeer, v'comission, v'percentPayeer, v'percentComission));
+    return (sc_0, (v'owner, v'payeer, v'comission, v'percentPayeer, v'percentComission));
 }
 
 (int, slice, slice, int, int, cell, cell, int, slice, slice) $Mamotic$_contract_load() impure inline_ref {
@@ -144,9 +145,9 @@ builder $Mamotic$_store(builder build_0, (int, slice, slice, int, int, cell, cel
     } else {
         ;; Allow only workchain deployments
         throw_unless(137, my_address().preload_uint(11) == 1024);
-        (slice payeer, slice comission, int percentPayeer, int percentComission) = $sc~$Mamotic$init$_load();
+        (slice owner, slice payeer, slice comission, int percentPayeer, int percentComission) = $sc~$Mamotic$init$_load();
         $sc.end_parse();
-        return $Mamotic$_contract_init(payeer, comission, percentPayeer, percentComission);
+        return $Mamotic$_contract_init(owner, payeer, comission, percentPayeer, percentComission);
     }
 }
 

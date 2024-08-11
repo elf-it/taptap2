@@ -67,10 +67,10 @@ builder $Mamotic$_store(builder build_0, (int, slice, slice, int, int, cell, cel
 _ $Context$_get_value((int, slice, int, slice) v) inline;
 
 ;; $Mamotic$init$_load
-(slice, ((slice, slice, int, int))) $Mamotic$init$_load(slice sc_0) inline;
+(slice, ((slice, slice, slice, int, int))) $Mamotic$init$_load(slice sc_0) inline;
 
 ;; $Mamotic$_contract_init
-(int, slice, slice, int, int, cell, cell, int, slice, slice) $Mamotic$_contract_init(slice $payeer, slice $comission, int $percentPayeer, int $percentComission) impure inline_ref;
+(int, slice, slice, int, int, cell, cell, int, slice, slice) $Mamotic$_contract_init(slice $owner, slice $payeer, slice $comission, int $percentPayeer, int $percentComission) impure inline_ref;
 
 ;; $Mamotic$_contract_load
 (int, slice, slice, int, int, cell, cell, int, slice, slice) $Mamotic$_contract_load() impure inline_ref;

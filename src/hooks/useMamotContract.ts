@@ -9,7 +9,7 @@ export function useMamotContract(){
     const {client} = useTonClient();
     const {sender} = useTonConnect();
     const [user, setUser] = useState<string>("");
-    const ca = "EQBwI4pEcKHrzPwKoLmQy0j-O6sJBl5LqPfpB9CEcF7PkEZD";
+    const ca = "EQCIJjt_uaXHX7R_kwxvbSKS2Ec6QCaoBXzGk8BIAo0MYW1U";
 
     const mamotContract = useAsyncInitialize(async () => {
         if(!client) return;
