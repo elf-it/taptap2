@@ -133,15 +133,15 @@ export default function ControlPanel({ count, allSteps, person, setNumPage, togg
         </div>
       </div>
       <div className="flex flex-col gap-[10px]">
-        <button className="pointer-events-none opacity-50 elem-bg_green text-[10px]  font-comic rounded-[13px] flex flex-col items-center justify-center p-[8px]">
+      <button className="pointer-events-none opacity-50 elem-bg_green text-[10px]  font-comic rounded-[13px] flex flex-col items-center justify-center px-[8px] py-[7px]">
           <img className="relative top-[-18px] mb-[-15px]" src={tasksIcon} alt="" />
           <span className="text-gradient">{lang?.main?.button_tasks[person.lang]}</span>
         </button>
-        <button onClick={() => setNumPage(5)} className="elem-bg_green text-[10px]  font-comic rounded-[13px] flex flex-col items-center justify-center p-[8px]">
+        <button onClick={() => setNumPage(5)} className="elem-bg_green text-[10px]  font-comic rounded-[13px] flex flex-col items-center justify-center px-[8px] py-[7px]">
           <img className="relative top-[-18px] mb-[-15px]" src={walletIcon} alt="" />
           <span className="text-gradient">{lang?.main?.button_wallet[person.lang]}</span>
         </button>
-        <button className="pointer-events-none opacity-50 elem-bg_green text-[10px]  font-comic rounded-[13px] flex flex-col items-center justify-center p-[8px]">
+        <button className="pointer-events-none opacity-50 elem-bg_green text-[10px]  font-comic rounded-[13px] flex flex-col items-center justify-center px-[8px] py-[7px]">
           <img className="relative top-[-18px] mb-[-15px]" src={fermIcon} alt="" />
           <span className="text-gradient">{lang?.main?.button_farm[person.lang]}</span>
         </button>
