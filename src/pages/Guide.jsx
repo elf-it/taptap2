@@ -26,6 +26,11 @@ import { LngContext } from "../store/langContext";
 
 const tg = window.Telegram.WebApp;
 
+if(!tg.initDataUnsafe?.start_param){
+  tg.close()
+}
+
+
 export default function Guide() {
   const [currentStep, setCurrentStep] = useState(0);
   const [lc, setLc] = useState(null);
