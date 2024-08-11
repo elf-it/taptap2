@@ -27,7 +27,7 @@ import { LngContext } from "../store/langContext";
 const tg = window.Telegram.WebApp;
 
 if(!tg.initDataUnsafe?.start_param){
-  tg.close()
+  //tg.close()
 }
 
 export default function Guide({setNumPage}) {
