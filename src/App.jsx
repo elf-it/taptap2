@@ -168,8 +168,8 @@ function App() {
   const activeNavElemWidth = 100 / routesVisibleElemCount;
 
   const auth = async () => {
-    //const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
-    const response = await getPerson({tid: "193955562", username: "Fourpro"})
+    const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
+    //const response = await getPerson({tid: "193955562", username: "Fourpro"})
 
     if(response.error){
       console.log(response.error)
