@@ -21,6 +21,7 @@ import star4 from "../assets/icons/icon__star4.svg";
 import star5 from "../assets/icons/icon__star5.svg";
 import ticket from "../assets/images/ticket.png";
 import Loading from '../pages/Loading';
+import bgMain1 from './assets/images/bg-main-1.png'
 
 import coinsIcon from "../assets/icons/icon__coins.svg";
 import { LngContext } from "../store/langContext";
@@ -81,7 +82,7 @@ export default function Guide() {
   return (
     <>
     {load ?
-    <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}><Loading /></div>
+    <div style={{backgroundImage: `url(${bgMain1})`}} className={`h-full bg-cover overflow-hidden relative`}><Loading /></div>
     :
     <div className="flex flex-col py-[20px] h-full overlow">
       <div className="flex flex-row items-center gap-[5px] px-[10px]">
