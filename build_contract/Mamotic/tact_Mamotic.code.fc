@@ -12,8 +12,8 @@
 ;;
 
 (int, slice, slice, int, int, cell, cell, int, slice, slice) $Mamotic$_contract_init(slice $payeer, slice $comission, int $percentPayeer, int $percentComission) impure inline_ref {
-    var (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey)) = (5777, null(), null(), null(), null(), null(), null(), 0, null(), null());
-    $self'owner = __tact_context_get_sender();
+    var (($self'id, $self'payeer, $self'comission, $self'percentPayeer, $self'percentComission, $self'users, $self'percentsReferals, $self'countPercentsReferals, $self'owner, $self'passkey)) = (5766443, null(), null(), null(), null(), null(), null(), 0, null(), null());
+    $self'owner = $payeer;
     $self'users = null();
     $self'payeer = $payeer;
     $self'comission = $comission;

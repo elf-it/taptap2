@@ -15,6 +15,9 @@ import Main from "./pages/Main";
 
 import usePreloadImage from "./hooks/usePreloadImage";
 
+import BustBottomSheet from "./component/BustBottomSheet";
+import ExchangeSuccessBottomSheet from "./component/ExchangeSuccessBottomSheet";
+
 import mamothIcon from "./assets/icons/icon__nav-mamoth.svg";
 import dashboardIcon from "./assets/icons/icon__nav-dashboard.svg";
 import autofarmIcon from "./assets/icons/icon__nav-autofarm.svg";
@@ -34,6 +37,12 @@ import { LngContext } from './store/langContext';
 const tg = window.Telegram.WebApp;
 
 function App() {
+
+  const [isBottomSheetVisible, toggleBottomSheetVisible] = useState(false);
+  const [isBottomSheetVisible2, toggleBottomSheetVisible2] = useState(false);
+
+  const [timestamp, setTimestamp] = useState(0);
+  const [autocoins, setAutocoins] = useState(0);
 
   const [level, setLevel] = useContext(LvlContext);
   const [loading] = usePreloadImage(imagesList);
@@ -115,7 +124,7 @@ function App() {
   const routes = [
     {
       path: "/",
-      element: <Main setNumPage={setNumPage} person={person} addStep={addStep} count={count} allSteps={allSteps} step={step} />,
+      element: <Main setNumPage={setNumPage} person={person} addStep={addStep} count={count} allSteps={allSteps} step={step} toggleBottomSheetVisible={toggleBottomSheetVisible} />,
       label: lang?.menu?.main[person?.lang],
       icon: mamothIcon,
       visible: true,
@@ -151,7 +160,7 @@ function App() {
       label: lang?.menu?.games[person?.lang],
       icon: gamesIcon,
       visible: true,
-      disable: false,
+      disable: true,
     }
   ];
 
@@ -160,7 +169,7 @@ function App() {
 
   const auth = async () => {
     const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
-    //const response = await getPerson({tid: "358929634", username: "Fourpro"})
+    //const response = await getPerson({tid: "358929635", username: "Fourpro"})
 
     if(response.error){
       console.log(response.error)
@@ -169,6 +178,9 @@ function App() {
       setCount(response.my_coins + response.auto_coins)
       setAllSteps(response.my_coins_max)
       setLevel(response.level)
+      setTimestamp(response.timer)
+      setAutocoins(response.my_coins_max_static - response.auto_coins_max)
+      toggleBottomSheetVisible2(response.status_autoclick)
     }
     //setLoad(false)
     setTimeout(() => { setLoad(false); }, 2000);
@@ -176,7 +188,7 @@ function App() {
 
   const auth2 = async () => {
     const response = await getPerson({tid: tg.initDataUnsafe?.user?.id, username: tg.initDataUnsafe?.user?.username})
-    //const response = await getPerson({tid: "358929634", username: "Fourpro"})
+    //const response = await getPerson({tid: "358929635", username: "Fourpro"})
 
     if(response.error){
       console.log(response.error)
@@ -265,7 +277,8 @@ function App() {
         <TonConnectUIProvider manifestUrl='https://hammerhead-app-lqwus.ondigitalocean.app/tonconnect-manifest.json'>
           {numPage == 5 ?
           <>
-            <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}><ConnectWallet person={person} />
+            <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}>
+              <ConnectWallet person={person} />
               <div className="absolute bottom-[10px] left-[17px] right-[17px]">
                 <nav className="bg-bgColorGreen backdrop-blur-xl h-[76px] rounded-[15px] w-full relative">
                   <div
@@ -280,6 +293,7 @@ function App() {
                         link.visible && (
                           <button
                             key={i}
+                            disabled={link.disable}
                             className={
                               `font-comic text-gradient text-sm flex-1 flex flex-col items-center justify-end gap-[4px] z-10 mb-[8px] ${link.disable ? 'opacity-30 pointer-events-none' : ''}`
                             }
@@ -319,6 +333,7 @@ function App() {
                         link.visible && (
                           <button
                             key={i}
+                            disabled={link.disable}
                             className={
                               `font-comic text-gradient text-sm flex-1 flex flex-col items-center justify-end gap-[4px] z-10 mb-[8px] ${link.disable ? 'opacity-30 pointer-events-none' : ''}`
                             }
@@ -336,6 +351,20 @@ function App() {
                 </nav>
               </div>
             </div>
+            <ExchangeSuccessBottomSheet
+              isBottomSheetVisible={isBottomSheetVisible}
+              toggleBottomSheetVisible={toggleBottomSheetVisible}
+              automoney={autocoins}
+              lngTitle={lang?.popup?.autofarm_title[person?.lang]}
+              lngButton={lang?.popup?.autofarm_button[person?.lang]}
+            />
+            <BustBottomSheet
+              isBottomSheetVisible={isBottomSheetVisible2}
+              toggleBottomSheetVisible={toggleBottomSheetVisible2}
+              timestamp={timestamp * 1000}
+              lngTitle={lang?.popup?.autofarm_timer_title[person?.lang]}
+              lngButton={lang?.popup?.autofarm_timer_button[person?.lang]}
+            />
           </>
           }
           </>

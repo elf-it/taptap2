@@ -8,6 +8,7 @@ import dogwifhat from "../assets/dasboardCoins/dogwifhat.png";
 import floki from "../assets/dasboardCoins/floki.png";
 import mew from "../assets/dasboardCoins/mew.png";
 import mog from "../assets/dasboardCoins/mog.png";
+import mamot from "../assets/dasboardCoins/mamot.png";
 import notcoin from "../assets/dasboardCoins/notcoin.png";
 import pepe from "../assets/dasboardCoins/pepe.png";
 import ponke from "../assets/dasboardCoins/ponke.png";
@@ -44,6 +45,11 @@ export default function Dashboard({person, count}) {
   const formatCount = new Intl.NumberFormat("en-US").format(count);
 
   const fakeData = [
+    {
+      name: "Mamotic",
+      coins: person.tickets.toString(),
+      photo: mamot,
+    },
     {
       name: "Notcoin",
       coins: person.Notcoin.toString(),
@@ -157,7 +163,7 @@ export default function Dashboard({person, count}) {
 
   return (
     
-      <div className=" py-[24px] px-[17px] flex flex-col items-center gap-[8px] pb-[80px] h-full overflow-auto">
+      <div className=" py-[24px] px-[17px] flex flex-col items-center gap-[8px] pb-[100px] h-full overflow-auto">
         <div className="elem-bg_green px-[8px] rounded-[40px] w-auto flex flex-row items-center gap-[8px]">
           <img src={crownSvg} alt="" />
           <p className="font-comic text-gradient font-bold text-sm">
@@ -184,7 +190,9 @@ export default function Dashboard({person, count}) {
           <h3 className="text-lg text-white font-comic font-bold mb-[8px]">
             {lang?.dashboard?.text_meme_coins[person.lang]}
           </h3>
-          {fakeData.map((user, i) => (
+          {fakeData.map((user, i) => {
+            const isFirst = i === 0;
+            return (
             <div
             key={i}
               className={`py-[10px] flex flex-row items-center justify-between w-full ${
@@ -201,11 +209,16 @@ export default function Dashboard({person, count}) {
                   {user.name}
                 </p>
               </div>
-              <p className="text-gradient text-xl font-comic font-bold">
-                +{user.coins}
-              </p>
+              <div
+                className={`${
+                  isFirst ? "text-[#FFCC48]" : "text-gradient"
+                } text-xl font-comic font-bold flex flex-row items-center gap-[5px]`}
+              >
+                {isFirst && <img src={ticketSvg} alt="" />}
+                <span>+{user.coins}</span>
+              </div>
             </div>
-          ))}
+          )})}
         </div>
 
         <div className="flex flex-col items-center elem-bg_green py-[24px] px-[20px] rounded-[15px] w-full gap-[20px]">
@@ -241,25 +254,25 @@ export default function Dashboard({person, count}) {
           <div className="flex flex-col w-full">
             {referals.map((user, i) => (
               <div
-                className={`py-[5px] flex flex-row items-center justify-between w-full ${
-                  i !== referals.length - 1 ? "border-b" : ""
-                } border-white/20`}
-              >
-                <div className="flex flex-col">
-                  <p className="text-lg text-white font-comic font-bold">
-                    {user.name}
-                  </p>
-                  <p className="text-xs text-gradient font-comic">
-                    {user.status}
-                  </p>
-                </div>
-                <p className="text-gradient text-xl font-comic font-bold">
-                  {user.coins}
+              className={`py-[5px] flex flex-row items-center justify-between w-full ${
+                i !== fakeData.length - 1 ? "border-b" : ""
+              } border-white/20`}
+            >
+              <div className="flex flex-col">
+                <p className="text-lg text-white font-comic font-bold">
+                  {user.name}
+                </p>
+                <p className="text-xs text-gradient font-comic">
+                  {user.status}
                 </p>
               </div>
-            ))}
-          </div>
+              <p className="text-gradient text-xl font-comic font-bold">
+                {user.coins}
+              </p>
+            </div>
+          ))}
         </div>
+      </div>
       </div>
   );
 }

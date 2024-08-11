@@ -9,7 +9,7 @@ import Timer from "./Timer";
 import { LngContext } from "../store/langContext";
 import { LvlContext } from "../store/levelContext";
 
-export default function ControlPanel({ count, allSteps, person, setNumPage }) {
+export default function ControlPanel({ count, allSteps, person, setNumPage, toggleBottomSheetVisible }) {
   const [unlimited, setUnlimited] = useState(false);
   const [autoFarm, setAutoFarm] = useState(false);
   const [bust, setBust] = useState(false);
@@ -65,7 +65,7 @@ export default function ControlPanel({ count, allSteps, person, setNumPage }) {
           className="elem-bg_green text-[10px]  font-comic rounded-[13px] flex flex-col items-center justify-center p-[8px]"
             onClick={() => {
               if(autoFarm){
-                console.log("te")
+                toggleBottomSheetVisible(true)
               }else{
                 setNumPage(2)
               }
