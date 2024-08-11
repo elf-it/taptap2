@@ -355,11 +355,15 @@ function App() {
               isBottomSheetVisible={isBottomSheetVisible}
               toggleBottomSheetVisible={toggleBottomSheetVisible}
               automoney={autocoins}
+              lngTitle={lang?.popup?.autofarm_title[person?.lang]}
+              lngButton={lang?.popup?.autofarm_button[person?.lang]}
             />
             <BustBottomSheet
               isBottomSheetVisible={isBottomSheetVisible2}
               toggleBottomSheetVisible={toggleBottomSheetVisible2}
               timestamp={timestamp * 1000}
+              lngTitle={lang?.popup?.autofarm_timer_title[person?.lang]}
+              lngButton={lang?.popup?.autofarm_timer_button[person?.lang]}
             />
           </>
           }

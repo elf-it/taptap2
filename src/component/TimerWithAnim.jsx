@@ -25,7 +25,7 @@ function Integers({ current }) {
     >
       {integers.map((int) => {
         const isActive = int === current
-        return <p className={`${isActive ? 'opacity-100' : 'opacity-0'} transition-all duration-75`}>{int}</p>
+        return <p key={int} className={`${isActive ? 'opacity-100' : 'opacity-0'} transition-all duration-75`}>{int}</p>
       })}
     </div>
   );

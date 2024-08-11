@@ -8,6 +8,7 @@ import dogwifhat from "../assets/dasboardCoins/dogwifhat.png";
 import floki from "../assets/dasboardCoins/floki.png";
 import mew from "../assets/dasboardCoins/mew.png";
 import mog from "../assets/dasboardCoins/mog.png";
+import mamot from "../assets/dasboardCoins/mamot.png";
 import notcoin from "../assets/dasboardCoins/notcoin.png";
 import pepe from "../assets/dasboardCoins/pepe.png";
 import ponke from "../assets/dasboardCoins/ponke.png";
@@ -44,6 +45,11 @@ export default function Dashboard({person, count}) {
   const formatCount = new Intl.NumberFormat("en-US").format(count);
 
   const fakeData = [
+    {
+      name: "Mamotic",
+      coins: person.tickets.toString(),
+      photo: mamot,
+    },
     {
       name: "Notcoin",
       coins: person.Notcoin.toString(),

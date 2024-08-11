@@ -9,7 +9,9 @@ import BottomSheet from "./BottomSheet";
 export default function BustBottomSheet({
   isBottomSheetVisible,
   toggleBottomSheetVisible,
-  timestamp
+  timestamp,
+  lngTitle,
+  lngButton
 }) {
   const { timer } = useTimer(timestamp, isBottomSheetVisible);
   const secondsIntegers = getIntegers(timer.seconds);
@@ -26,12 +28,12 @@ export default function BustBottomSheet({
   return createPortal(
     <BottomSheet
       image={rocketIcon}
-      btnText="Хорошо!"
+      btnText={lngButton}
       isBottomSheetVisible={isBottomSheetVisible}
       toggleBottomSheetVisible={toggleBottomSheetVisible}
     >
       <div className="flex flex-col items-center mb-[20px]">
-        <p className="text-white font-comic text-center">До включения Автофарма:</p>
+        <p className="text-white font-comic text-center">{lngTitle}</p>
         <div className="flex flex-row items-center gap-[10px]">
           <TimerWithAnim integers={hoursIntegers} />
           <span className="text-white text-[32px]">:</span>

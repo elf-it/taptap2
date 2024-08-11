@@ -28,7 +28,7 @@ export default function BuyCard({ data = [] }) {
               </p>
             </div>
             {tarrif.percents && <span className="font-bold font-comic text-xl text-white">+ { tarrif.percents}% </span>}
-            <div className="flex-1 flex flex-row justify-end">
+            <div className="flex flex-row justify-end">
               <span
                 style={{ color: data.btn.color }}
                 className="text-gradient font-bold font-comic text-xl"
@@ -47,7 +47,7 @@ export default function BuyCard({ data = [] }) {
         children={data.btn.text}
       />
       {data.info && (
-        <p className="text-white/50 font-bold font-comic text-sm text-center">
+        <p className="text-white/90 font-bold font-comic text-sm text-center">
           {data.info}
         </p>
       )}
