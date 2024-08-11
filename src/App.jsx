@@ -179,7 +179,7 @@ function App() {
       setAllSteps(response.my_coins_max)
       setLevel(response.level)
       setTimestamp(response.timer)
-      setAutocoins(((response.my_coins_max_static * coins_unlimit)+(response.my_coins_max_static * coins_unlimit) / 100 * coins_boost) - response.auto_coins_max)
+      setAutocoins(((response.my_coins_max_static * response.coins_unlimit)+(response.my_coins_max_static * response.coins_unlimit) / 100 * response.coins_boost) - response.auto_coins_max)
       toggleBottomSheetVisible2(response.status_autoclick)
     }
     //setLoad(false)
