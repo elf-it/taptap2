@@ -1,6 +1,6 @@
 
-const ROUTE_URI = "https://api.mamotik.com";
-const key = "pmVXd8gMUZAKqix"
+const ROUTE_URI = "https://srws.ru";
+const key = "123"
 
 export const getPerson = async (props) => {
     try {
