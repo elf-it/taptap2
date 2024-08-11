@@ -174,12 +174,12 @@ function App() {
     if(response.error){
       console.log(response.error)
     }else{
-      setPerson({tid: response.tid, username: response.username, status: response.status, bonuses: response.bonuses, myCoins: response.my_coins, autoCoins: response.auto_coins, Notcoin: response.Notcoin, Pepe: response.Pepe, Shiba: response.Shiba, Dogecoin: response.Dogecoin, Dogwifhat: response.Dogwifhat, Popcat: response.Popcat, Mog: response.Mog, Floki: response.Floki, Ponke: response.Ponke, Mew: response.Mew, Bome: response.Bome, autoclick: response.autoclick, status_autoclick: response.status_autoclick, status_unlimit: response.status_unlimit, status_boost: response.status_boost, level: response.level, timer: response.timer, lang: response.lang, tickets: response.tickets, ticketsStatus: response.ticketsStatus})
+      setPerson({tid: response.tid, username: response.username, status: response.status, bonuses: response.bonuses, myCoins: response.my_coins, autoCoins: response.auto_coins, Notcoin: response.Notcoin, Pepe: response.Pepe, Shiba: response.Shiba, Dogecoin: response.Dogecoin, Dogwifhat: response.Dogwifhat, Popcat: response.Popcat, Mog: response.Mog, Floki: response.Floki, Ponke: response.Ponke, Mew: response.Mew, Bome: response.Bome, autoclick: response.autoclick, status_autoclick: response.status_autoclick, status_unlimit: response.status_unlimit, status_boost: response.status_boost, level: response.level, timer: response.timer, lang: response.lang, tickets: response.tickets, ticketsStatus: response.ticketsStatus, coins_unlimit: response.coins_unlimit, coins_boost: response.coins_boost})
       setCount(response.my_coins + response.auto_coins)
       setAllSteps(response.my_coins_max)
       setLevel(response.level)
       setTimestamp(response.timer)
-      setAutocoins(response.my_coins_max_static - response.auto_coins_max)
+      setAutocoins(((response.my_coins_max_static * coins_unlimit)+(response.my_coins_max_static * coins_unlimit) / 100 * coins_boost) - response.auto_coins_max)
       toggleBottomSheetVisible2(response.status_autoclick)
     }
     //setLoad(false)
@@ -193,7 +193,7 @@ function App() {
     if(response.error){
       console.log(response.error)
     }else{
-      setPerson({tid: response.tid, username: response.username, status: response.status, bonuses: response.bonuses, myCoins: response.my_coins, autoCoins: response.auto_coins, Notcoin: response.Notcoin, Pepe: response.Pepe, Shiba: response.Shiba, Dogecoin: response.Dogecoin, Dogwifhat: response.Dogwifhat, Popcat: response.Popcat, Mog: response.Mog, Floki: response.Floki, Ponke: response.Ponke, Mew: response.Mew, Bome: response.Bome, autoclick: response.autoclick, status_autoclick: response.status_autoclick, status_unlimit: response.status_unlimit, status_boost: response.status_boost, level: response.level, timer: response.timer, lang: response.lang, tickets: response.tickets, ticketsStatus: response.ticketsStatus})
+      setPerson({tid: response.tid, username: response.username, status: response.status, bonuses: response.bonuses, myCoins: response.my_coins, autoCoins: response.auto_coins, Notcoin: response.Notcoin, Pepe: response.Pepe, Shiba: response.Shiba, Dogecoin: response.Dogecoin, Dogwifhat: response.Dogwifhat, Popcat: response.Popcat, Mog: response.Mog, Floki: response.Floki, Ponke: response.Ponke, Mew: response.Mew, Bome: response.Bome, autoclick: response.autoclick, status_autoclick: response.status_autoclick, status_unlimit: response.status_unlimit, status_boost: response.status_boost, level: response.level, timer: response.timer, lang: response.lang, tickets: response.tickets, ticketsStatus: response.ticketsStatus, coins_unlimit: response.coins_unlimit, coins_boost: response.coins_boost})
       setLevel(response.level)
     }
   };
