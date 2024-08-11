@@ -124,7 +124,7 @@ function App() {
   const routes = [
     {
       path: "/",
-      element: <Main setNumPage={setNumPage} person={person} addStep={addStep} count={count} allSteps={allSteps} step={step} toggleBottomSheetVisible={toggleBottomSheetVisible} />,
+      element: <Main setNumPage={setNumPage} person={person} addStep={addStep} count={count} allSteps={allSteps} step={step} toggleBottomSheetVisible={toggleBottomSheetVisible2} />,
       label: lang?.menu?.main[person?.lang],
       icon: mamothIcon,
       visible: true,
@@ -180,7 +180,7 @@ function App() {
       setLevel(response.level)
       setTimestamp(response.timer)
       setAutocoins(((response.my_coins_max_static * response.coins_unlimit)+(response.my_coins_max_static * response.coins_unlimit) / 100 * response.coins_boost) - response.auto_coins_max)
-      toggleBottomSheetVisible2(response.status_autoclick)
+      toggleBottomSheetVisible(response.status_autoclick)
     }
     //setLoad(false)
     setTimeout(() => { setLoad(false); }, 2000);
