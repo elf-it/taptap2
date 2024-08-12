@@ -70,7 +70,7 @@ export default function Guide() {
 
   useEffect(() => {
     setLc(tg.initDataUnsafe?.user?.language_code + "_lang")
-    alert(lc)
+    alert(tg.initDataUnsafe?.user?.language_code)
   }, [])
 
   return (
