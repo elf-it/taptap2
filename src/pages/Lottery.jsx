@@ -18,6 +18,18 @@ export default function Lottery({person, setNumPage}) {
 
   const [lang, setLang] = useContext(LngContext)
 
+  const [showModal, setShowModal] = useState(false);
+  const [modalInfo, setModalInfo] = useState(null);
+
+  const firstCardClick = (data) => {
+    if(userFriendlyAddress != ""){
+      setModalInfo(data)
+      setShowModal(true)
+    }else{
+      setNumPage(5)
+    }
+  };
+
   const data = [
     {
       title: lang?.stats?.get_silver[person.lang],
@@ -66,22 +78,22 @@ export default function Lottery({person, setNumPage}) {
       {
         image: ticketIcon,
         time: lang?.lottery?.tarif1[person.lang],
-        count: 10,
+        count: 1,
       },
       {
         image: ticketIcon,
         time: lang?.lottery?.tarif2[person.lang],
-        count: 20,
+        count: 5,
       },
       {
         image: ticketIcon,
         time: lang?.lottery?.tarif3[person.lang],
-        count: 30,
+        count: 10,
       },
       {
         image: ticketIcon,
         time: lang?.lottery?.tarif4[person.lang],
-        count: 40,
+        count: 20,
       },
       {
         image: ticketIcon,
@@ -94,7 +106,7 @@ export default function Lottery({person, setNumPage}) {
       color: "#FFCD56",
       textColor: "#911B00",
       icon: key3,
-      handler: () => alert("123"),
+      handler: firstCardClick,
     },
     info: lang?.lottery?.info_card[person.lang],
   };

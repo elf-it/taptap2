@@ -136,22 +136,22 @@ export default function AutoFarm({setNumPage, person}) {
       {
         image: ticketIcon,
         time: lang?.autofarm?.tickets1_lottery[person.lang],
-        count: 10,
+        count: 1,
       },
       {
         image: ticketIcon,
         time: lang?.autofarm?.tickets2_lottery[person.lang],
-        count: 20,
+        count: 5,
       },
       {
         image: ticketIcon,
         time: lang?.autofarm?.tickets3_lottery[person.lang],
-        count: 30,
+        count: 10,
       },
       {
         image: ticketIcon,
         time: lang?.autofarm?.tickets4_lottery[person.lang],
-        count: 40,
+        count: 20,
       },
       {
         image: ticketIcon,
@@ -164,7 +164,7 @@ export default function AutoFarm({setNumPage, person}) {
       color: "#FFCD56",
       textColor: "#911B00",
       icon: key3,
-      handler: () => alert('123'),
+      handler: () => firstCardClick,
     },
     info: lang?.autofarm?.info_lottery[person.lang],
   };
