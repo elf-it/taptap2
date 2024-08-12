@@ -48,6 +48,8 @@ export default function Guide() {
 
       if(response.error){
         console.log(response.error)
+        alert(tg.initDataUnsafe?.user?.language_code ? "Найди ссылку приглашение": "Find the invitation link")
+        tg.close()
       }else{
         window.location.reload();
       }
