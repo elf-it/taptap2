@@ -27,8 +27,8 @@ import { LngContext } from "../store/langContext";
 import TonWeb from "tonweb";
 
 const tg = window.Telegram.WebApp;
-const myLink = "https://t.me/mamontenokBot_bot/Mamontenok?startapp=" + tg.initDataUnsafe?.user?.id;
-const shareLink = "https://t.me/share/url?url=http://t.me/mamontenokBot_bot/Mamontenok?startapp=" + tg.initDataUnsafe?.user?.id
+const myLink = "https://t.me/official_mamotik_bot/app_mamotik?startapp=" + tg.initDataUnsafe?.user?.id;
+const shareLink = "https://t.me/share/url?url=http://t.me/official_mamotik_bot/app_mamotik?startapp=" + tg.initDataUnsafe?.user?.id
 
 export default function Dashboard({person, count}) {
 
