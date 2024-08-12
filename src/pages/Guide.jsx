@@ -33,13 +33,13 @@ export default function Guide() {
   const [lang, setLang] = useContext(LngContext);
 
   const pages = [
-    <GuideFirstStep lang={lang} lc={lc} />,
-    <GuideSecondStep lang={lang} lc={lc} />,
-    <GuideFifthStep lang={lang} lc={lc} />,
-    <GuideThirdStep lang={lang} lc={lc} />,
-    <GuideSevenStep lang={lang} lc={lc} />,
-    <GuideFourthStep lang={lang} lc={lc} />,
-    <GuideSixthStep lang={lang} lc={lc} />,
+    <GuideFirstStep lang={lang} lc={tg.initDataUnsafe?.user?.language_code + "_lang"} />,
+    <GuideSecondStep lang={lang} lc={tg.initDataUnsafe?.user?.language_code + "_lang"} />,
+    <GuideFifthStep lang={lang} lc={tg.initDataUnsafe?.user?.language_code + "_lang"} />,
+    <GuideThirdStep lang={lang} lc={tg.initDataUnsafe?.user?.language_code + "_lang"} />,
+    <GuideSevenStep lang={lang} lc={tg.initDataUnsafe?.user?.language_code + "_lang"} />,
+    <GuideFourthStep lang={lang} lc={tg.initDataUnsafe?.user?.language_code + "_lang"} />,
+    <GuideSixthStep lang={lang} lc={tg.initDataUnsafe?.user?.language_code + "_lang"} />,
   ];
 
   const auth = async () => {
@@ -67,11 +67,6 @@ export default function Guide() {
       }
     });
   };
-
-  useEffect(() => {
-    setLc(tg.initDataUnsafe?.user?.language_code + "_lang")
-    alert(tg.initDataUnsafe?.user?.language_code)
-  }, [])
 
   return (
     <div className="flex flex-col py-[20px] h-full overlow">
@@ -101,7 +96,7 @@ export default function Guide() {
           }}
           className={`font-comic text-sm text-black py-[15px] rounded-xl w-full flex flex-row items-center justify-center gap-[10px] bg-gradient-to-b from-gradientStartColor to-gradientEndColor`}
         >
-          {currentStep === pages.length - 1 ? lang?.guid?.ingame_button[lc] : lang?.guid?.next_button[lc]}
+          {currentStep === pages.length - 1 ? lang?.guid?.ingame_button[tg.initDataUnsafe?.user?.language_code + "_lang"] : lang?.guid?.next_button[tg.initDataUnsafe?.user?.language_code + "_lang"]}
         </button>
       </div>
     </div>
