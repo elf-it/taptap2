@@ -132,7 +132,7 @@ function App() {
     },
     {
       path: "/",
-      element: <Dashboard person={person} count={count} />,
+      element: <Dashboard person={person} count={count} setNumPage={setNumPage} />,
       label: lang?.menu?.dashboard[person?.lang],
       icon: dashboardIcon,
       visible: true,

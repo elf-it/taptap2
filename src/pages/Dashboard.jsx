@@ -30,7 +30,7 @@ const tg = window.Telegram.WebApp;
 const myLink = "https://t.me/official_mamotik_bot/app_mamotik?startapp=" + tg.initDataUnsafe?.user?.id;
 const shareLink = "https://t.me/share/url?url=http://t.me/official_mamotik_bot/app_mamotik?startapp=" + tg.initDataUnsafe?.user?.id
 
-export default function Dashboard({person, count}) {
+export default function Dashboard({person, count, setNumPage}) {
 
   const {contractAddress} = useMamotContract();
   const [tonConnectUI, setOptions] = useTonConnectUI();
@@ -235,7 +235,17 @@ export default function Dashboard({person, count}) {
             <img className="w-[32px] h-[19px]" src={coinsSvg} alt="" />
             <p className="font-comic text-[28px] text-[#FFCC48] font-bold">+{person.bonuses}</p>
           </div>
-          <button disabled={!connected || person.bonuses == 0} onClick={() => withdrawN(person.bonuses.toString(), "86ffdf1bcad21feaed5790dedbd7aa23e17ddba4255e541324dff2aa80c13547", person.tid, Address.parse(wallet).toString())} className={`p-[16px] ${!connected || person.bonuses == 0 ? "elem-bg_green" : "bg-gradient-to-b from-gradientStartColor to-gradientEndColor"} rounded-[13px] overflow-hidden flex flex-row items-center gap-[10px] w-full justify-center`}>
+          <button disabled={person.bonuses == 0}
+          onClick={
+            () => {
+              if(!connected){
+                setNumPage(5)
+              }else{
+                withdrawN(person.bonuses.toString(), "86ffdf1bcad21feaed5790dedbd7aa23e17ddba4255e541324dff2aa80c13547", person.tid, Address.parse(wallet).toString())
+              }
+            }
+          }
+          className={`p-[16px] ${!connected || person.bonuses == 0 ? "elem-bg_green" : "bg-gradient-to-b from-gradientStartColor to-gradientEndColor"} rounded-[13px] overflow-hidden flex flex-row items-center gap-[10px] w-full justify-center`}>
           <p className={`font-comic ${!connected || person.bonuses == 0 && "font-bold text-base text-gradient"}`}>{lang?.dashboard?.text_get_bonus[person.lang]}</p>
               <img className="w-[32px] h-[19px]" src={coinsSvg} alt="" />
             </button>
