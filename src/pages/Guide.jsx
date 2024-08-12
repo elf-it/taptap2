@@ -441,7 +441,7 @@ function GuideSixthStep({lang, lc}) {
         ))}
       </div>
 
-      <p className="text-white/50 font-bold font-comic text-sm px-[10px] text-center mt-auto mb-[20px]">{lang?.guid?.descriptoin6_page6[lc]}</p>
+      <p className="text-white/90 font-bold font-comic text-sm px-[10px] text-center mt-auto mb-[20px]">{lang?.guid?.descriptoin6_page6[lc]}</p>
     </div>
   );
 }
