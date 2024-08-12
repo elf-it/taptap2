@@ -28,7 +28,6 @@ const tg = window.Telegram.WebApp;
 
 export default function Guide() {
   const [currentStep, setCurrentStep] = useState(0);
-  const [lc, setLc] = useState(null);
 
   const [lang, setLang] = useContext(LngContext);
 
