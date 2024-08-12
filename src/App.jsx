@@ -1,5 +1,6 @@
 import './App.css';
 import Guide from './pages/Guide';
+import Guide2 from './pages/Guide2';
 import { TonConnectUIProvider } from '@tonconnect/ui-react';
 import { useEffect, useState, useContext } from 'react';
 import { LvlContext } from "./store/levelContext";
@@ -280,6 +281,10 @@ function App() {
       <>
       {person != null ?
         <TonConnectUIProvider manifestUrl='https://hammerhead-app-lqwus.ondigitalocean.app/tonconnect-manifest.json'>
+          {numPage == 8 ?
+            <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}><Guide2 setNumPage={setNumPage} person={person} /></div>
+          :
+          <>
           {numPage == 5 ?
           <>
             <div style={{backgroundImage: `url(${bgImages[level]})`}} className={`h-full bg-cover overflow-hidden relative`}>
@@ -370,6 +375,8 @@ function App() {
               lngTitle={lang?.popup?.autofarm_timer_title[person?.lang]}
               lngButton={lang?.popup?.autofarm_timer_button[person?.lang]}
             />
+          </>
+          }
           </>
           }
           </>
