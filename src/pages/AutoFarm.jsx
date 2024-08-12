@@ -164,7 +164,7 @@ export default function AutoFarm({setNumPage, person}) {
       color: "#FFCD56",
       textColor: "#911B00",
       icon: key3,
-      handler: () => firstCardClick,
+      handler: firstCardClick,
     },
     info: lang?.autofarm?.info_lottery[person.lang],
   };

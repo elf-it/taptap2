@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import crownSvg from "../assets/icons/icon__crown.svg";
 
 import star1 from "../assets/icons/icon__star1.svg";
@@ -7,10 +7,14 @@ import star3 from "../assets/icons/icon__star3.svg";
 import star4 from "../assets/icons/icon__star4.svg";
 import star5 from "../assets/icons/icon__star5.svg";
 
+import { createPortal } from "react-dom";
+
 import ticketIcon from "../assets/icons/icon__ticket.svg";
 import key3 from "../assets/icons/key3.svg";
 import case3 from "../assets/icons/case3.svg";
 import BuyCard from "../component/BuyCard";
+import BuyCardModal from "../component/BuyCardModal";
+import { useTonAddress } from "@tonconnect/ui-react";
 
 import { LngContext } from "../store/langContext";
 
@@ -18,10 +22,13 @@ export default function Lottery({person, setNumPage}) {
 
   const [lang, setLang] = useContext(LngContext)
 
+  const userFriendlyAddress = useTonAddress();
+
   const [showModal, setShowModal] = useState(false);
   const [modalInfo, setModalInfo] = useState(null);
 
   const firstCardClick = (data) => {
+    console.log(data)
     if(userFriendlyAddress != ""){
       setModalInfo(data)
       setShowModal(true)
@@ -171,6 +178,7 @@ export default function Lottery({person, setNumPage}) {
           </button>
         </div>
       </div>
+      {showModal && createPortal(<BuyCardModal setShowModal={setShowModal} data={modalInfo} text_price={lang?.autofarm?.modal_price[person.lang]} text_button={lang?.autofarm?.modal_button[person.lang]} text_popup={lang?.autofarm?.text_popup[person.lang]} />, document.body)}
     </div>
   );
 }
