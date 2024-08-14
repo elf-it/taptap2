@@ -500,7 +500,7 @@ function GuideSevenStep({lang, lc}) {
             <div className="flex flex-row items-center  gap-[8px]">
               <img src={tarrif.image} alt="" />
               <p className="text-white font-bold font-comic text-lg">
-                +{tarrif.time}
+                +{tarrif.time}%
               </p>
             </div>
             {/*tarrif.percents && (
